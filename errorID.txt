@@ -1,0 +1,12 @@
+53285 --> malformatted from original JSON should be 0053285
+Cruella 3228774 --> accidentally removed from movies JSON file
+"suicide squad" 1386697 --> accidentally removed from movies JSON file
+0377683 ---> genre DNE
+0155711 ---> genre DNE
+0339882 ---> genre DNE
+00293564 --> malformatted from original JSON should be 0293564
+420238 ---> malformatted from original JSON should be 0420238
+4956232 ---> doesnt appear to actually be a  movie (removed)
+001226766 ---> 1226766 
+8079248
+Moana ---> 3521164

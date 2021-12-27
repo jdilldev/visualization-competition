@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&family=Delius&family=Klee+One&family=Neucha&family=Quicksand:wght@500&family=Shadows+Into+Light&family=The+Girl+Next+Door&family=Zen+Tokyo+Zoo&display=swap");
+body {
+	font-family: "Avenir";
+	color: whitesmoke;
+	border: 1em dotted gold;
+	background: #264653e5;
+}
+
+.title-content {
+	margin-left: 2%;
+}
+
+.title-content > * {
+	margin: 0;
+	padding: 0;
+}
+
+.title-content > h3 {
+	font-size: 1.5em;
+	font-family: "Neucha";
+	color: rgb(201, 111, 8);
+}
+
+.title-content > h5 {
+	font-size: 1.5em;
+	font-family: "Neucha";
+	color: rgb(201, 111, 8);
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 98vh;
+	margin: 10;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.chart-row {
+	height: 40vh;
+}
+
+.bechdel-rules {
+	border: 8px solid black;
+	background: whitesmoke;
+	margin-top: -70px;
+	margin-bottom: -70px;
+	min-width: 50%;
+	max-width: 50%;
+	color: #e76f51;
+	display: flex;
+	flex-direction: row;
+	padding: 5px;
+	align-items: flex-start;
+}
+.bechdel-rules > div {
+	margin: 0;
+	text-align: center;
+	font-size: 1.3em;
+	font-family: "Klee One", cursive;
+}
+
+.bechdel-rules > div > h2 {
+	margin: 0;
+	margin-bottom: -10px;
+	text-align: center;
+}

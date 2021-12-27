@@ -1,0 +1,11 @@
+{
+    "include": [
+        "src/*",
+        "svgType.ts"
+    ],
+    "compilerOptions": {
+        "target": "es6",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true
+    }
+}
