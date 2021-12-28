@@ -1,7 +1,12 @@
 export const theme = {
     "textColor": "white",
     'fontFamily': 'Avenir',
-    "fontSize": 11,
+    "fontSize": 15,
+    "labels": {
+        "text": {
+            "fill": 'white'
+        },
+    },
     "axis": {
         "domain": {
             "line": {
@@ -11,14 +16,14 @@ export const theme = {
         },
         "ticks": {
             "line": {
-                "stroke": "#777777",
-                "strokeWidth": 1
+                "stroke": "white",
+                "strokeWidth": 0
             }
         }
     },
     "grid": {
         "line": {
-            "stroke": "#dddddd",
+            "stroke": "white",
             "strokeWidth": 0
         }
     }

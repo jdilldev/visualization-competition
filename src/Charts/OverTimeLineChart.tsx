@@ -1,6 +1,8 @@
 import * as React from "react";
 
 import { ResponsiveLine } from '@nivo/line'
+import { theme } from './theme';
+import { PopcornNote } from ".";
 
 const data = [
     {
@@ -275,9 +277,11 @@ const data = [
     }
 ]
 const OverTimeLineChart = () => (
-    <div style={{ width: '40%' }}>
+    <div style={{ width: '40%', marginTop: '-40px' }}>
+        <PopcornNote text="dummy text" />
         <ResponsiveLine
             data={data}
+            theme={theme}
             margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
             xScale={{ type: 'point' }}
             yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}

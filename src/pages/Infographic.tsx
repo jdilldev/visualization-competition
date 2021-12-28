@@ -6,6 +6,7 @@ import { PassFailSunburst, SingleYearWaffleChart, StackedRatingChart, GenreRadia
 import { removeDefaultValues } from "gatsby-plugin-sharp/plugin-options";
 import VintageCamera from '../svgs/rules-theater.svg'
 import WomenTalking from '../svgs/women-chatting.svg'
+import image from '../images/bechdeltestcartoon.jpeg'
 const Infographic = ({ data }) => {
 	console.log(data);
 	//const passPercentage = (100 * dataObject.moviesThatPass.totalCount / dataObject.total.totalCount).toFixed(2)
@@ -13,32 +14,36 @@ const Infographic = ({ data }) => {
 	const [showRules, toggleRules] = React.useState(false)
 	return (
 		<main>
-			<div style={{ display: 'flex' }}>
-				<svg width={'500px'}>
-					<text>
-						<tspan x={15} y={90} fill="goldenrod" fontFamily="Zen Tokyo Zoo" fontSize={'4.5em'}>The Bechdel Test</tspan>
-					</text>
-				</svg>
-			</div>
-			<div style={{ display: 'flex', alignContent: 'flex-start', marginTop: '-50px' }}>
-				<div className="title-content" >
-					<h3>Data Viz Competition | DataConnect Conference 2021</h3>
-					<h5>Jasmine Dillard, Computer Scientist </h5>
-					<h5> Maryland, USA</h5>
-				</div>
-				<VintageCamera style={{ cursor: 'pointer', pointerEvents: 'stroke', marginTop: '-100px', marginLeft: '10px', marginRight: '10px' }} onMouseEnter={(e) => console.log(e)} onClick={() => toggleRules(!showRules)} />
-				{showRules && <div className="bechdel-rules">
-					<div style={{ width: '90%' }}>
-						<h2>Bechdel Test</h2>
-						<ol>
-							<li>Movie contains at least two women</li>
-							<li>Who talk to each other</li>
-							<li> About something other than men</li>
-						</ol>
+			<div style={{ display: 'flex', margin: '10px' }}>
+				<div >
+					<svg width={'500px'}>
+						<text>
+							<tspan x={10} y={90} fill="goldenrod" fontFamily="Zen Tokyo Zoo" fontSize={'4.5em'}>The Bechdel Test</tspan>
+						</text>
+					</svg>
+					<div style={{ display: 'flex', alignContent: 'flex-start', marginTop: '-50px' }}>
+						<div className="title-content" >
+							<h3>Data Viz Competition | DataConnect Conference 2021</h3>
+							<h5>Jasmine Dillard, Computer Scientist </h5>
+							<h5> Maryland, USA</h5>
+						</div>
 					</div>
-
-					<WomenTalking />
-				</div>}
+				</div>
+				<VintageCamera style={{ cursor: 'pointer', pointerEvents: 'stroke', marginLeft: '10px', marginRight: '20px', minWidth: '170px', maxWidth: '170px', maxHeight: '100%' }} onMouseEnter={(e) => console.log(e)} onClick={() => toggleRules(!showRules)} />
+				<div className="bechdel-rules">
+					{showRules ?
+						<div className="movie-screen">
+							<div>
+								<h2>Bechdel Test</h2>
+								<ol>
+									<li>Movie contains at least two women</li>
+									<li>Who talk to each other</li>
+									<li> About something other than men</li>
+								</ol>
+							</div>
+							<WomenTalking />
+						</div > : <div className="bechdel-test intro-text">Hi, how are you? Two years deep in a pandemic means we spent a lot more time indoors. While indoors, it is likely we've consumed content from many of the streaming services that exist. With access to more digital content than ever before, it is interesting to analyze the role women have in pop cultures storytelling. <br /><br />Coined by a <span className="hover_img"><a href="#" className="link-style">comic<span><img height={700} src={image} alt="image" /></span></a></span> by Amy Bechdel in 1985-- the Bechdel test provides a consistent metric to understand understanding how women are portrayed in movies. Common personas are well described <a className="link-style" target="_blank" rel="noopener noreferrer" href="https://www.sheknows.com/entertainment/slideshow/810/female-stereotypes-in-film-that-make-us-yawn/4/">here</a>. Many personas are tied to a love interest (typically a man). This visualizations aims to objectively assess how women are presented.</div>}
+				</div>
 			</div>
 			<div className="flex-column">
 				<div className="flex-row chart-row">
@@ -46,10 +51,11 @@ const Infographic = ({ data }) => {
 					<StackedRatingChart />
 					<OverTimeLineChart />
 				</div>
+				<div className="film-border" />
 				<div className="flex-row chart-row">
 					<CountryOfOriginChloropleth />
 					<GenreRadialChart />
-					<div style={{ width: '30%' }}>datatable</div>
+					{/*<div style={{ width: '30%' }}>datatable</div>*/}
 				</div>
 			</div>
 

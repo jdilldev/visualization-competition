@@ -5,6 +5,7 @@ import OverTimeLineChart from './OverTimeLineChart';
 import GenreRadialChart from './GenreRadialChart';
 import CountryOfOriginChloropleth from './CountryOfOriginChloropleth';
 import CustomTooltip from './CustomTooltip';
+import PopcornNote from './PopcornNote';
 // without default
 export {
     StackedRatingChart,
@@ -13,5 +14,6 @@ export {
     OverTimeLineChart,
     GenreRadialChart,
     CountryOfOriginChloropleth,
-    CustomTooltip
+    CustomTooltip,
+    PopcornNote
 }

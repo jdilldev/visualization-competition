@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { ResponsiveChoropleth } from '@nivo/geo'
 import featuresData from '../../data/world_countries.json'
+import { PopcornNote } from ".";
 
 const data = [
     {
@@ -690,8 +691,8 @@ const data = [
     }
 ]
 const CountryOfOriginChloropleth = () => (
-    <div style={{ width: '35%' }}>
-        <p>USA is the worst, Space is the best</p>
+    <div style={{ width: '40%', display: 'flex', alignItems: 'center' }}>
+        <PopcornNote text="dummy texy" />
         <ResponsiveChoropleth
             data={data}
             features={featuresData.features}

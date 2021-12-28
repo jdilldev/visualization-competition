@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { ResponsiveRadialBar } from '@nivo/radial-bar'
+import { PopcornNote } from ".";
 
 const data = [
     {
@@ -68,7 +69,7 @@ const data = [
     }
 ]
 const GenreRadialChart = () => (
-    <div style={{ width: '30%' }}>
+    <div style={{ width: '30%', display: 'flex', alignItems: 'center' }}>
         <ResponsiveRadialBar
             data={data}
             valueFormat=">-.2f"
@@ -101,6 +102,7 @@ const GenreRadialChart = () => (
                 }
             ]}
         />
+        <PopcornNote text="dummy test" />
     </div>
 )
 

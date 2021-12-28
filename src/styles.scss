@@ -1,9 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&family=Delius&family=Klee+One&family=Neucha&family=Quicksand:wght@500&family=Shadows+Into+Light&family=The+Girl+Next+Door&family=Zen+Tokyo+Zoo&display=swap");
+
 body {
 	font-family: "Avenir";
 	color: whitesmoke;
-	border: 1em dotted gold;
+	//	border: 0.8em dotted gold;
 	background: #264653e5;
+	padding: "20px";
 }
 
 .title-content {
@@ -18,13 +20,13 @@ body {
 .title-content > h3 {
 	font-size: 1.5em;
 	font-family: "Neucha";
-	color: rgb(201, 111, 8);
+	color: rgb(216, 71, 71);
 }
 
 .title-content > h5 {
 	font-size: 1.5em;
 	font-family: "Neucha";
-	color: rgb(201, 111, 8);
+	color: rgb(216, 71, 71);
 }
 
 .flex-column {
@@ -33,6 +35,7 @@ body {
 	justify-content: center;
 	height: 98vh;
 	margin: 10;
+	margin-top: -60px;
 }
 
 .flex-row {
@@ -46,27 +49,64 @@ body {
 }
 
 .bechdel-rules {
-	border: 8px solid black;
-	background: whitesmoke;
-	margin-top: -70px;
-	margin-bottom: -70px;
-	min-width: 50%;
-	max-width: 50%;
-	color: #e76f51;
+	margin-top: 40px;
+	min-width: 20%;
+	max-width: 60%;
+	min-height: 270px;
+	max-height: 270px;
+	margin-bottom: 50px;
+}
+.movie-screen {
 	display: flex;
 	flex-direction: row;
 	padding: 5px;
 	align-items: flex-start;
-}
-.bechdel-rules > div {
-	margin: 0;
-	text-align: center;
-	font-size: 1.3em;
+	border: 8px solid black;
+	background: whitesmoke;
+	color: #e76f51;
+	font-size: 1.2em;
 	font-family: "Klee One", cursive;
+	margin-right: 20px;
+	max-width: 620px;
 }
 
-.bechdel-rules > div > h2 {
+.movie-screen > div > ol > li {
+	margin-bottom: 15px;
+}
+
+.movie-screen > div > h2 {
 	margin: 0;
-	margin-bottom: -10px;
 	text-align: center;
+}
+
+.movie-screen > div {
+	width: 90%;
+}
+
+.intro-text {
+	margin: 0;
+	text-align: justify;
+	margin-right: 20px;
+}
+
+.link-style {
+	color: gold;
+	text-decoration: none;
+}
+
+//thanks https://stackoverflow.com/questions/10769016/display-image-on-text-link-hover-css-only
+.hover_img a {
+	position: relative;
+}
+.hover_img a span {
+	position: absolute;
+	display: none;
+	z-index: 1;
+}
+.hover_img a:hover span {
+	display: block;
+}
+
+.film-border {
+	margin-bottom: 10%;
 }

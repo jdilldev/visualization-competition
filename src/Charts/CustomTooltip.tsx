@@ -7,20 +7,29 @@ interface dataPoint {
 }
 
 const CustomTooltip = (props: { barType: string, content: dataPoint }) => {
-    let additionalText = ""
+    let tooltipText = ""
     const tooltipStyle = {
         padding: '10px',
         background: props.content.color,
-        fontFamily: 'Avenir'
+        fontFamily: 'Avenir',
+        color: 'black'
 
     } as React.CSSProperties
     switch (props.barType) {
         case 'sunburst':
-            additionalText = "# of movies:  "
+            let phrase = ""
+            switch (props.content.name) {
+                case 'fail':
+                    phrase = "fail one aspect of<br/>the Bechdel test"
+                    break
+                case 'pass':
+                    phrase = "meet all criteria<br/>of the Bechdel"
+            }
+            tooltipText = `<span style="color:yellow;"}>${props.content.value}% </span> of movies<br/>${phrase}`
             break;
     }
 
-    return <div style={tooltipStyle}>{props.content.name}<br />{additionalText}{props.content.value}</div>
+    return <div style={tooltipStyle} dangerouslySetInnerHTML={{ __html: tooltipText }} />
 }
 
 export default CustomTooltip
