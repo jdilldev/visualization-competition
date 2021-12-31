@@ -117,7 +117,7 @@ const data = [
 const OverTimeLineChart = () => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '39%', marginLeft: '10px' }}>
         <div style={{ height: '30vh' }}>
-            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." />
+            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="hi" />
             <ResponsiveLine
                 data={data}
                 theme={theme}
@@ -137,21 +137,27 @@ const OverTimeLineChart = () => (
                     legendOffset: 55,
                     legendPosition: 'middle'
                 }}
-                axisLeft={{
-                    tickSize: 8,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                    legend: 'count',
-                    legendOffset: -50,
-                    legendPosition: 'middle'
-                }}
-                pointSize={7}
+                pointSize={8}
                 pointColor={{ theme: 'background' }}
                 pointBorderWidth={2}
                 pointBorderColor={{ from: 'serieColor' }}
                 pointLabelYOffset={-12}
-                areaOpacity={0}
+                areaOpacity={.5}
+                //areaBlendMode="hard-light"
+                enableGridX={false}
+                enableGridY={true}
+                enableArea={true}
                 useMesh={true}
+                gridYValues={[0, 250, 500]}
+                axisLeft={{
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                    legend: 'total movies',
+                    legendPosition: 'middle',
+                    tickValues: [0, 250, 500],
+                    legendOffset: -60
+                }}
                 legends={[
                     {
                         anchor: 'bottom-right',

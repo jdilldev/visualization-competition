@@ -692,21 +692,22 @@ const data = [
     }
 ]
 const CountryOfOriginChloropleth = () => (
-    <div style={{ width: '45%', display: 'flex', alignItems: 'center', marginLeft: '10px', marginRight: 60 }}>
-        <div style={{ minWidth: '10%', maxWidth: '30%' }}>
-            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." />
+    <div style={{ width: '45%', display: 'flex', alignItems: 'center', marginLeft: '10px', marginRight: 50 }}>
+        <div style={{ flexBasis: .5, flexGrow: .5 }}>
+            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="bye" />
         </div>
-        <div style={{ display: 'flex', height: '30vh', width: '90%', }}>
+        <div style={{ height: '36vh', width: '90%', flexGrow: 1, flexBasis: .8, marginTop: '20px' }}>
             <ResponsiveChoropleth
                 data={data}
                 theme={theme}
                 features={featuresData.features}
-                margin={{ top: 0, right: 0, bottom: 100, left: 0 }}
+                margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
                 colors={['#B5DADA', '#A2D1D1', '#8BC5C5', '#74BABA', '#5DAEAE', '#46A3A3', '#2E9797', '#178C8C', '#008080']}
                 domain={[0, 1000000]}
                 unknownColor="#666666"
                 label="properties.name"
                 valueFormat=".2s"
+                projectionScale={80}
                 projectionTranslation={[0.5, 0.5]}
                 projectionRotation={[0, 0, 0]}
                 enableGraticule={false}
@@ -715,23 +716,23 @@ const CountryOfOriginChloropleth = () => (
                 borderColor="#152538"
                 legends={[
                     {
-                        anchor: 'bottom',
-                        direction: 'row',
+                        anchor: 'left',
+                        direction: 'column',
                         justify: true,
-                        translateX: 0,
-                        translateY: 0,
+                        translateX: 20,
+                        translateY: 20,
                         itemsSpacing: 0,
-                        itemWidth: 120,
+                        itemWidth: 100,
                         itemHeight: 18,
                         itemDirection: 'left-to-right',
-                        itemTextColor: '#444444',
+                        itemTextColor: 'white',
                         itemOpacity: 0.85,
-                        symbolSize: 18,
+                        symbolSize: 10,
                         effects: [
                             {
                                 on: 'hover',
                                 style: {
-                                    itemTextColor: '#000000',
+                                    itemTextColor: 'white',
                                     itemOpacity: 1
                                 }
                             }

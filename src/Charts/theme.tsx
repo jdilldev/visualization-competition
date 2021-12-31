@@ -16,15 +16,15 @@ export const theme = {
         },
         "ticks": {
             "line": {
-                "stroke": "white",
-                "strokeWidth": 0
+                "stroke": "lightgray",
+                "strokeWidth": 1
             }
         }
     },
     "grid": {
         "line": {
-            "stroke": "white",
-            "strokeWidth": 0
+            "stroke": "lightgray",
+            "strokeWidth": 1
         }
     }
 }

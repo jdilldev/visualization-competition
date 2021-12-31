@@ -1,10 +1,12 @@
 import * as React from "react";
 import PopcornIcon from "../../svgs/popcorn.svg"
 
-const PopcornNote = ({ text }) => {
-    return <div style={{ display: 'flex' }}>
-        <PopcornIcon style={{ minWidth: '30px', maxWidth: '30px' }} onMouseEnter={(a) => console.log(a)} />
-        <p style={{ marginLeft: '10px', textAlign: 'left' }}>{text}</p>
+const PopcornNote = ({ text, tooltipText }) => {
+    return <div className="tooltip" style={{ display: 'flex' }}>
+        <PopcornIcon style={{ minWidth: '30px', maxWidth: '30px', marginRight: '10px' }} onMouseEnter={(a) => { }} />
+        <p>{text}
+            <span className="tooltiptext">{tooltipText}</span>
+        </p>
     </div>
 }
 

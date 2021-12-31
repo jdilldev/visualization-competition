@@ -4,7 +4,7 @@ import { CustomTooltip, PopcornNote } from '.';
 import { theme } from './theme';
 
 const StackedRatingChart = () => (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '35%', marginLeft: '10px', marginTop: '10px', borderRight: '2px solid gold' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '35%', marginLeft: '10px', marginTop: '10px', borderRight: '2px solid #264653' }}>
         <div style={{ width: '100%', overflowX: 'scroll', overflowY: 'hidden', }}>
             <div style={{ height: '35vh', minWidth: '600px', }}>
                 <ResponsiveBar
@@ -116,46 +116,23 @@ const StackedRatingChart = () => (
                     valueScale={{ type: 'linear' }}
                     indexScale={{ type: 'band', round: true }}
                     colors={['#264653', '#2A9D8F', '#E9C46A', '#F4A261', '#E76F51']}
-                    /*  defs={[
-                         {
-                             id: 'dots',
-                             type: 'patternDots',
-                             background: 'inherit',
-                             color: '#38bcb2',
-                             size: 4,
-                             padding: 1,
-                             stagger: true
-                         },
-                         {
-                             id: 'lines',
-                             type: 'patternLines',
-                             background: 'inherit',
-                             color: '#eed312',
-                             rotation: -45,
-                             lineWidth: 6,
-                             spacing: 10
-                         }
-                     ]} */
-                    fill={[
-                        {
-                            match: {
-                                id: 'fries'
-                            },
-                            id: 'dots'
-                        },
-                        {
-                            match: {
-                                id: 'sandwich'
-                            },
-                            id: 'lines'
-                        }
-                    ]}
-                    enableGridY={true}
+                    //enableGridY={true}
+                    gridYValues={[0, 350, 700]}
                     borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                     padding={.35}
                     labelSkipWidth={12}
                     labelSkipHeight={12}
-                    labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+                    //labelTextColor={{ from: 'theme', modifiers: [['darker', 1.6]] }}
+                    axisLeft={{
+                        tickSize: 5,
+                        tickPadding: 5,
+                        tickRotation: 0,
+                        legend: 'total movies',
+                        legendPosition: 'middle',
+                        tickValues: [0, 350, 700],
+                        legendOffset: -45
+                    }}
+                    axisBottom={null}
                     legends={[
                         {
                             dataFrom: 'keys',
@@ -169,7 +146,8 @@ const StackedRatingChart = () => (
                             itemHeight: 20,
                             itemDirection: 'left-to-right',
                             itemOpacity: 0.85,
-                            symbolSize: 20,
+                            symbolSize: 10,
+                            symbolShape: 'circle',
                             effects: [
                                 {
                                     on: 'hover',
@@ -188,7 +166,7 @@ const StackedRatingChart = () => (
             </div>
         </div >
         <div style={{ position: 'sticky' }}>
-            <PopcornNote text={'Scroll to view all data. For all the movies that were assessed, you can see the composition of how many failed in which manner.'} />
+            <PopcornNote text={'Scroll to view all data. For all the movies that were assessed, you can see the composition of how many failed in which manner.'} tooltipText="yikes" />
 
         </div>
     </div>

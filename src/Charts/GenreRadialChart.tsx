@@ -71,7 +71,7 @@ const data = [
 ]
 const GenreRadialChart = () => (
     <div style={{ width: '47%', display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
-        <div style={{ height: '36vh', width: '90%', borderLeft: '2px solid gold', flexGrow: 1, flexBasis: .8, marginTop: '20px' }}>
+        <div style={{ height: '36vh', width: '90%', borderLeft: '2px solid #264653', flexGrow: 1, flexBasis: .8, marginTop: '20px' }}>
             <ResponsiveRadialBar
                 data={data}
                 theme={theme}
@@ -93,7 +93,7 @@ const GenreRadialChart = () => (
                         itemDirection: 'left-to-right',
                         itemWidth: 100,
                         itemHeight: 18,
-                        itemTextColor: '#999',
+                        itemTextColor: 'white',
                         symbolSize: 10,
                         symbolShape: 'circle',
                         effects: [
@@ -109,7 +109,7 @@ const GenreRadialChart = () => (
             />
         </div>
         <div style={{ flexBasis: .5, flexGrow: .5 }}>
-            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." />
+            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="molly" />
         </div>
     </div>
 )

@@ -36,8 +36,8 @@ const sunData = {
     ]
 }
 const PassFailSunburst = () => (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '25%', borderRight: '2px solid gold', marginTop: '10px' }}>
-        <PopcornNote text="Most movies do not completely fail the test. As shown, most movies don't completely exclude women." />
+    <div style={{ display: 'flex', flexDirection: 'column', width: '25%', borderRight: '2px solid #264653', marginTop: '10px' }}>
+        <PopcornNote text="Most movies do not completely fail the test. As shown, most movies don't completely exclude women." tooltipText="rabbit" />
         <div style={{ height: '30vh' }}>
             <ResponsiveSunburst
                 data={sunData}

@@ -4,7 +4,7 @@ body {
 	font-family: "Avenir";
 	color: whitesmoke;
 	//	border: 0.8em dotted gold;
-	background: #264653e5;
+	background: #092e3d;
 	max-height: 100vh;
 	background: inline-image("../svgs/film.svg");
 }
@@ -103,7 +103,34 @@ body {
 }
 
 .film-border {
-	border-top: 2px solid gold;
+	border-top: 2px solid #264653;
 	border-image: url(https://ibb.co/RzmN9F6][img]https://i.ibb.co/RzmN9F6/film-border.png)
 		20% round;
+}
+
+.tooltip {
+	position: relative;
+	display: inline-block;
+}
+
+.tooltip .tooltiptext {
+	visibility: hidden;
+	width: 120px;
+	background-color: #e9c46a;
+	color: #fff;
+	text-align: center;
+	border-radius: 6px;
+	padding: 5px 0;
+
+	/* Position the tooltip */
+	position: absolute;
+	z-index: 1;
+	width: 120px;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+	visibility: visible;
 }
