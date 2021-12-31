@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { ResponsiveRadialBar } from '@nivo/radial-bar'
-import { PopcornNote } from ".";
+import { CustomTooltip, PopcornNote } from ".";
 import { theme } from "./theme";
 
 const data = [
@@ -79,8 +79,12 @@ const GenreRadialChart = () => (
                 valueFormat=">-.2f"
                 margin={{ top: 30, right: 100, bottom: 30, left: 5 }}
                 padding={0.4}
+                enableRadialGrid={false}
+                enableCircularGrid={true}
+                tracksColor={'rgba(0, 0, 0, .35)'}
                 cornerRadius={0}
-                radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
+                //radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
+                //circularAxisOuter={null}
                 circularAxisOuter={{ tickSize: 5, tickPadding: 12, tickRotation: 0 }}
                 legends={[
                     {
@@ -106,10 +110,11 @@ const GenreRadialChart = () => (
                         ]
                     }
                 ]}
+                tooltip={({ bar }) => <CustomTooltip barType="radial" content={{ name: bar.id, value: { name: bar.id, value: (100 * bar.value / bar.stackedValue).toFixed(0) }, color: bar.color }} />}
             />
         </div>
         <div style={{ flexBasis: .5, flexGrow: .5 }}>
-            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="molly" />
+            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="molly" timeFrameText="all movies" />
         </div>
     </div>
 )

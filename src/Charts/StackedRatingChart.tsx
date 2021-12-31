@@ -140,7 +140,7 @@ const StackedRatingChart = () => (
                             direction: 'row',
                             justify: false,
                             translateX: 0,
-                            translateY: 50,
+                            translateY: 30,
                             itemsSpacing: 2,
                             itemWidth: 100,
                             itemHeight: 20,
@@ -166,7 +166,7 @@ const StackedRatingChart = () => (
             </div>
         </div >
         <div style={{ position: 'sticky' }}>
-            <PopcornNote text={'Scroll to view all data. For all the movies that were assessed, you can see the composition of how many failed in which manner.'} tooltipText="yikes" />
+            <PopcornNote text={'Scroll to view all data. For all the movies that were assessed, you can see the composition of how many failed in which manner.'} tooltipText="yikes" timeFrameText='decade' />
 
         </div>
     </div>

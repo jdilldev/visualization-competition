@@ -1,8 +1,7 @@
 import * as React from "react";
-
 import { ResponsiveChoropleth } from '@nivo/geo'
 import featuresData from '../../data/world_countries.json'
-import { PopcornNote } from ".";
+import { CustomTooltip, PopcornNote } from ".";
 import { theme } from "./theme";
 
 const data = [
@@ -694,7 +693,7 @@ const data = [
 const CountryOfOriginChloropleth = () => (
     <div style={{ width: '45%', display: 'flex', alignItems: 'center', marginLeft: '10px', marginRight: 50 }}>
         <div style={{ flexBasis: .5, flexGrow: .5 }}>
-            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="bye" />
+            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="bye" timeFrameText="all movies" />
         </div>
         <div style={{ height: '36vh', width: '90%', flexGrow: 1, flexBasis: .8, marginTop: '20px' }}>
             <ResponsiveChoropleth
@@ -739,6 +738,7 @@ const CountryOfOriginChloropleth = () => (
                         ]
                     }
                 ]}
+                tooltip={({ feature }) => <CustomTooltip barType="choropleth" content={{ name: feature.label, value: feature.formattedValue, color: feature.color }} />}
             />
         </div>
     </div>

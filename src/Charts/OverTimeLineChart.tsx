@@ -117,7 +117,7 @@ const data = [
 const OverTimeLineChart = () => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '39%', marginLeft: '10px' }}>
         <div style={{ height: '30vh' }}>
-            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="hi" />
+            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="hi" timeFrameText="by the decade" />
             <ResponsiveLine
                 data={data}
                 theme={theme}
@@ -126,7 +126,6 @@ const OverTimeLineChart = () => (
                 xScale={{ type: 'point' }}
                 yScale={{ type: 'linear', min: 'auto', max: 'auto', stacked: true, reverse: false }}
                 yFormat=" >-.2f"
-                // sliceTooltip={({ slice }) => <CustomTooltip barType={"line"} content={{ name: slice.id as string, value: [slice.points.map(point=>point.)]}} />}
                 axisTop={null}
                 axisRight={null}
                 axisBottom={{
@@ -185,6 +184,32 @@ const OverTimeLineChart = () => (
                         ]
                     }
                 ]}
+                enableSlices='x'
+                sliceTooltip={({ slice }) => {
+                    console.log(slice.points[0].data.xFormatted)
+                    return <div
+                        style={{
+                            background: 'white',
+                            padding: '9px 12px',
+                            border: '1px solid #ccc',
+                            color: "black"
+                        }}
+                    >
+                        <div>Year: {slice.points[0].data.xFormatted}</div>
+                        {slice.points.map(point => (
+                            < div
+                                key={point.id}
+                                style={{
+                                    color: point.serieColor,
+                                    padding: '3px 0',
+                                }}
+                            >
+                                <strong>{point.serieId}</strong> [{point.data.yFormatted}]
+                            </div>
+                        ))}
+                    </div>
+                }
+                }
             />
         </div>
     </div>

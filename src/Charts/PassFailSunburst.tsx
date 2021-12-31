@@ -3,7 +3,6 @@ import * as React from "react";
 import { CustomTooltip, PopcornNote } from '.';
 import { theme } from './theme';
 
-
 const sunData = {
     "name": "nivo",
     "children": [
@@ -37,7 +36,7 @@ const sunData = {
 }
 const PassFailSunburst = () => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '25%', borderRight: '2px solid #264653', marginTop: '10px' }}>
-        <PopcornNote text="Most movies do not completely fail the test. As shown, most movies don't completely exclude women." tooltipText="rabbit" />
+        <PopcornNote text="Most movies do not completely fail the test. As shown, most movies don't completely exclude women." tooltipText="rabbit" timeFrameText='all movies' />
         <div style={{ height: '30vh' }}>
             <ResponsiveSunburst
                 data={sunData}

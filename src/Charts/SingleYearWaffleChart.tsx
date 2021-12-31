@@ -26,7 +26,7 @@ const data = [
 ]
 const SingleYearWaffleChart = () => (
     <div style={{ width: '20%' }}>
-        <PopcornNote text="dummy text" />
+        <PopcornNote text={"dummy text"} tooltipText={'ok'} timeFrameText='Year' />
         <ResponsiveWaffle
             data={data}
             theme={theme}

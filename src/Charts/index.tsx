@@ -15,5 +15,5 @@ export {
     GenreRadialChart,
     CountryOfOriginChloropleth,
     CustomTooltip,
-    PopcornNote
+    PopcornNote,
 }
