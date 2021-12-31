@@ -10,7 +10,7 @@ export const theme = {
     "axis": {
         "domain": {
             "line": {
-                "stroke": "#777777",
+                "stroke": "lightgray",
                 "strokeWidth": 1
             }
         },

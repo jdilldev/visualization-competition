@@ -5,11 +5,8 @@ body {
 	color: whitesmoke;
 	//	border: 0.8em dotted gold;
 	background: #264653e5;
-	padding: "20px";
-}
-
-.title-content {
-	margin-left: 2%;
+	max-height: 100vh;
+	background: inline-image("../svgs/film.svg");
 }
 
 .title-content > * {
@@ -20,58 +17,49 @@ body {
 .title-content > h3 {
 	font-size: 1.5em;
 	font-family: "Neucha";
-	color: rgb(216, 71, 71);
+	color: #e9c46a;
 }
 
 .title-content > h5 {
 	font-size: 1.5em;
 	font-family: "Neucha";
-	color: rgb(216, 71, 71);
+	color: #e9c46a;
 }
 
 .flex-column {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	height: 98vh;
-	margin: 10;
-	margin-top: -60px;
+	margin-top: 0px;
 }
 
 .flex-row {
 	display: flex;
-	flex-direction: row;
-	justify-content: center;
-}
-
-.chart-row {
-	height: 40vh;
+	height: 36vh;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .bechdel-rules {
-	margin-top: 40px;
-	min-width: 20%;
-	max-width: 60%;
-	min-height: 270px;
-	max-height: 270px;
-	margin-bottom: 50px;
+	display: flex;
 }
 .movie-screen {
 	display: flex;
 	flex-direction: row;
-	padding: 5px;
+	padding-top: 5px;
 	align-items: flex-start;
 	border: 8px solid black;
 	background: whitesmoke;
 	color: #e76f51;
-	font-size: 1.2em;
+	font-size: 1em;
 	font-family: "Klee One", cursive;
 	margin-right: 20px;
 	max-width: 620px;
+	max-height: 100%;
+	overflow: scroll;
 }
 
 .movie-screen > div > ol > li {
-	margin-bottom: 15px;
+	margin-bottom: 10px;
 }
 
 .movie-screen > div > h2 {
@@ -87,6 +75,13 @@ body {
 	margin: 0;
 	text-align: justify;
 	margin-right: 20px;
+	border: 6px dotted gold;
+	padding: 0.6em;
+	font-size: 0.85em;
+	height: fit-content;
+	max-height: 100%;
+	max-width: 80%;
+	overflow: scroll;
 }
 
 .link-style {
@@ -96,7 +91,7 @@ body {
 
 //thanks https://stackoverflow.com/questions/10769016/display-image-on-text-link-hover-css-only
 .hover_img a {
-	position: relative;
+	position: static;
 }
 .hover_img a span {
 	position: absolute;
@@ -108,5 +103,7 @@ body {
 }
 
 .film-border {
-	margin-bottom: 10%;
+	border-top: 2px solid gold;
+	border-image: url(https://ibb.co/RzmN9F6][img]https://i.ibb.co/RzmN9F6/film-border.png)
+		20% round;
 }

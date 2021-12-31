@@ -1,12 +1,12 @@
 import { ResponsiveBar } from '@nivo/bar'
 import * as React from "react";
-import { PopcornNote } from '.';
+import { CustomTooltip, PopcornNote } from '.';
 import { theme } from './theme';
 
 const StackedRatingChart = () => (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '40%' }}>
-        <div style={{ width: '100%', overflowX: 'scroll', marginTop: '-100px' }}>
-            <div style={{ height: '40vh', minWidth: '600px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '35%', marginLeft: '10px', marginTop: '10px', borderRight: '2px solid gold' }}>
+        <div style={{ width: '100%', overflowX: 'scroll', overflowY: 'hidden', }}>
+            <div style={{ height: '35vh', minWidth: '600px', }}>
                 <ResponsiveBar
                     theme={theme}
                     data={[
@@ -112,30 +112,30 @@ const StackedRatingChart = () => (
                     ]}
                     keys={['hot dog', 'burger', 'sandwich', 'kebab', 'fries', 'donut']}
                     indexBy="country"
-                    margin={{ top: 30, right: 30, bottom: 80, left: 60 }}
+                    margin={{ top: 60, right: 30, bottom: 150, left: 60 }}
                     valueScale={{ type: 'linear' }}
                     indexScale={{ type: 'band', round: true }}
-                    colors={{ scheme: 'nivo' }}
-                    defs={[
-                        {
-                            id: 'dots',
-                            type: 'patternDots',
-                            background: 'inherit',
-                            color: '#38bcb2',
-                            size: 4,
-                            padding: 1,
-                            stagger: true
-                        },
-                        {
-                            id: 'lines',
-                            type: 'patternLines',
-                            background: 'inherit',
-                            color: '#eed312',
-                            rotation: -45,
-                            lineWidth: 6,
-                            spacing: 10
-                        }
-                    ]}
+                    colors={['#264653', '#2A9D8F', '#E9C46A', '#F4A261', '#E76F51']}
+                    /*  defs={[
+                         {
+                             id: 'dots',
+                             type: 'patternDots',
+                             background: 'inherit',
+                             color: '#38bcb2',
+                             size: 4,
+                             padding: 1,
+                             stagger: true
+                         },
+                         {
+                             id: 'lines',
+                             type: 'patternLines',
+                             background: 'inherit',
+                             color: '#eed312',
+                             rotation: -45,
+                             lineWidth: 6,
+                             spacing: 10
+                         }
+                     ]} */
                     fill={[
                         {
                             match: {
@@ -150,8 +150,9 @@ const StackedRatingChart = () => (
                             id: 'lines'
                         }
                     ]}
+                    enableGridY={true}
                     borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-
+                    padding={.35}
                     labelSkipWidth={12}
                     labelSkipHeight={12}
                     labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
@@ -179,6 +180,7 @@ const StackedRatingChart = () => (
                             ]
                         }
                     ]}
+                    tooltip={({ id, indexValue, value, color }) => <CustomTooltip barType='bar' content={{ name: id as string, value: { name: indexValue.toString(), value: value }, color: color }} />}
                     role="application"
                     ariaLabel="Nivo bar chart demo"
                     barAriaLabel={function (e) { return e.id + ": " + e.formattedValue + " in country: " + e.indexValue }}

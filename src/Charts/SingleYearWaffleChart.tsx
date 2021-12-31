@@ -1,6 +1,7 @@
 import { ResponsiveWaffle } from '@nivo/waffle'
 import * as React from "react";
 import { PopcornNote } from '.';
+import { theme } from './theme';
 
 
 const data = [
@@ -28,6 +29,7 @@ const SingleYearWaffleChart = () => (
         <PopcornNote text="dummy text" />
         <ResponsiveWaffle
             data={data}
+            theme={theme}
             total={100}
             rows={18}
             columns={14}
