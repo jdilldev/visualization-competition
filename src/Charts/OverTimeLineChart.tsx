@@ -137,13 +137,14 @@ const OverTimeLineChart = () => (
                     legendOffset: 55,
                     legendPosition: 'middle'
                 }}
-                pointSize={8}
+                pointSize={7}
                 pointColor={{ theme: 'background' }}
                 pointBorderWidth={2}
                 pointBorderColor={{ from: 'serieColor' }}
                 pointLabelYOffset={-12}
-                areaOpacity={.5}
-                //areaBlendMode="hard-light"
+                areaOpacity={.7}
+                //areaBlendMode="exclusion"
+                areaBlendMode="normal"
                 enableGridX={false}
                 enableGridY={true}
                 enableArea={true}
