@@ -66,8 +66,8 @@ const GenreRadialChart = ({ data, genreRange }) => {
                     }}
                 />
             </div>
-            <div style={{ flexBasis: .5, flexGrow: .5 }}>
-                <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="molly" timeFrameText="all movies" />
+            <div style={{ flexBasis: .5, flexGrow: .7 }}>
+                <PopcornNote timeFrameText="all movies" text='The genres (rings) in this radial bar chart have been grouped by their total data points. The genres are ordered such that the outermost ring is the longest, this way you can compare the relative percentages with total data points. Musicals and Family movies performed the best, while  Westerns and Shorts performed the worst.' />
             </div>
         </div>
     )

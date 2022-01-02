@@ -3,7 +3,7 @@ import * as React from "react";
 import { CustomTooltip, PopcornNote } from '.';
 import { theme } from './theme';
 const PassFailSunburst = ({ data }) => <div style={{ display: 'flex', flexDirection: 'column', width: '25%', borderRight: '2px solid #264653', marginTop: '10px' }}>
-    <PopcornNote text="Most movies do not completely fail the test. As shown, most movies don't completely exclude women." tooltipText="rabbit" timeFrameText='all movies' />
+    <PopcornNote text="Based on data available, most movies pass the Bechdel test. The most common reason for failing is not showing women conversing with each other." tooltipText="rabbit" timeFrameText='all movies' />
     <div style={{ height: '30vh' }}>
         <ResponsiveSunburst
             data={data}

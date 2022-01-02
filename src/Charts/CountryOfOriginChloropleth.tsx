@@ -306,7 +306,7 @@ const data = [
 const CountryOfOriginChloropleth = () => (
     <div style={{ width: '50%', display: 'flex', alignItems: 'center', marginLeft: '10px', marginRight: 40, marginTop: '15px', borderRight: '2px solid #264653', }}>
         <div style={{ flexBasis: .5, flexGrow: .5 }}>
-            <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="bye" timeFrameText="all movies" />
+            <PopcornNote text="This chloropleth shows the percentage of movies that passed the Bechdel test based on their country of origin. Most countries fell in the 50% passing range. Of countries with at least 50 movies, Australia scored the highest, while Italy and The Netherlands scored the lowest.[Note: Most movies in this dataset are from Western nations]" tooltipText="bye" timeFrameText="all movies" />
         </div>
         <div style={{ height: '36vh', width: '90%', flexGrow: 1, flexBasis: .8, marginTop: '20px' }}>
             <ResponsiveChoropleth

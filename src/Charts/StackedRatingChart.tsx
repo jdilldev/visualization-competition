@@ -75,7 +75,7 @@ const StackedRatingChart = ({ data, type }) => {
 
             </div >
             <div style={{ position: 'sticky', marginTop: '-43px' }}>
-                <PopcornNote text={'Scroll to view all data. For all the movies that were assessed, you can see the composition of how many failed in which manner.'} tooltipText="yikes" timeFrameText='by the decade' />
+                <PopcornNote text={'Becuase the amount of data availble for each decade varies greatly, the normalized view shows ratings as percentages of the total number of movies for that decade. Use the dropdown to view actual totals instead.'} tooltipText="yikes" timeFrameText='by the decade' />
             </div>
         </div>
     )

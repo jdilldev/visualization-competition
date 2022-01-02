@@ -6,9 +6,9 @@ import { CustomTooltip, PopcornNote } from ".";
 
 const OverTimeLineChart = ({ data, lineChartType, lineChartUpdate }) => (
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', marginLeft: '10px', }}>
-        <PopcornNote text="Although there was an overwhelmingly more amount of data available data for Western nations, it appears they tend to pass more often." tooltipText="hi" timeFrameText="by the decade" />
+        <PopcornNote text="Between 1900 and 2021, Bechdel ratings have increased, but not drastically. Change the dropdown to see how ratings changed throughout each decade." tooltipText="hi" timeFrameText="by the decade" />
         <select style={{ marginTop: '-10px', }} value={lineChartType} onChange={(e) => lineChartUpdate(e.target.value)}>
-            <option value={'by decade'}>by decade</option>
+            <option value={'by decade'}>By decade</option>
             <option value='by year of decade'>By year of decade</option>
         </select>
         <div style={{ height: '42vh', marginTop: '-50px' }}>

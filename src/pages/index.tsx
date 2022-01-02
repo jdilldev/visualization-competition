@@ -57,9 +57,9 @@ const IndexPage = ({ data }) => {
           <PassFailSunburst data={sunData} />
           <div style={{ width: '35%', marginLeft: '10px' }}>
             <StackedRatingChart data={getStackedBarData(data, barTypeSelect)} type={barTypeSelect} />
-            <select value={barTypeSelect} onChange={(e) => setBarType(e.target.value)}>
+            <select style={{ marginTop: '-10px' }} value={barTypeSelect} onChange={(e) => setBarType(e.target.value)}>
               <option value={'normalized'}>normalized</option>
-              <option value='relative'>relative</option>
+              <option value='total'>total</option>
             </select>
           </div>
           <div style={{ width: '35%', marginLeft: '10px', }}>
@@ -68,9 +68,9 @@ const IndexPage = ({ data }) => {
         </div>
         <div className="flex-row film-border"  >
           <CountryOfOriginChloropleth />
-          <div style={{ width: '40%', marginLeft: '10px', marginTop: '-20px' }}>
+          <div style={{ width: '43%', marginLeft: '10px', marginTop: '-10px' }}>
             <GenreRadialChart data={radialBarData} genreRange={genreSelect} />
-            <select value={genreSelect} onChange={(e) => setGenreRange(e.target.value)}>
+            <select style={{ marginTop: '-10px' }} value={genreSelect} onChange={(e) => setGenreRange(e.target.value)}>
               <option value={'popular'}>popular ({">"} 700 data points)</option>
               <option value='mid-range'>mid-range (100 {"<"} data points {"<"} 700)</option>
               <option value='least-common'>least common ({"<"} 60 data points)</option>
