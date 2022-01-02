@@ -22,7 +22,7 @@ const IndexPage = ({ data }) => {
   const radialBarData = getRadialData(data, genreSelect)
   return (
     <main>
-      <div style={{ display: 'flex', margin: '10px', maxHeight: '18vh' }}>
+      <div style={{ display: 'flex', margin: '8px', maxHeight: '18vh' }}>
         <div style={{ display: 'flex', flexDirection: 'column' }} >
           <svg width={'500px'}>
             <text x={0} y={60} fill="#E9C46A" fontFamily="Zen Tokyo Zoo" fontSize={'4.2em'}>The Bechdel Test
@@ -33,6 +33,7 @@ const IndexPage = ({ data }) => {
               <h3>Data Viz Competition | DataConnect Conference 2021</h3>
               <h5>Jasmine Dillard, Computer Scientist </h5>
               <h5> Maryland, USA</h5>
+              <h5><a id='source-link' style={{ textDecoration: 'none' }} target="_blank" rel="noopener noreferrer" href="https://bechdeltest.com/">source</a></h5>
             </div>
           </div>
         </div>
@@ -49,7 +50,7 @@ const IndexPage = ({ data }) => {
                 </ol>
               </div>
               <WomenTalking />
-            </div > : <div className="bechdel-test intro-text" >How are you? Two years deep in a pandemic means we spent a lot more time indoors. While indoors, it is likely we've consumed content from many of the streaming services that exist. With access to more digital content than ever before,now is as good a time as ever to analyze how women are portrayed in film.<br /><br />To assess, we will use the Bechdel test. It was coined by a <span className="hover_img"><a href="#" className="link-style">comic<span><img height={700} src={image} alt="image" /></span></a></span> by Alison Bechdel in 1985. Click the vintage camera to view the rules.<br /></div>}
+            </div > : <div className="bechdel-test intro-text" >How are you? Two years deep in a pandemic means we spent a lot more time indoors. While indoors, it is likely we've consumed content from many of the streaming services that exist. With access to more digital content than ever before,now is as good a time as ever to analyze how women are portrayed in film.<br /><br />To assess, we will use the Bechdel test. It was coined by a <span className="hover_img"><a href="#" className="link-style">comic<span><img height={700} src={image} alt="image" /></span></a></span> by Alison Bechdel in 1985.<br /><br />This visualization is interactive, please toggle the dropdowns and hover over the charts. Click the vintage camera to view the rules of the Bechdel test.<br /></div>}
         </div>
       </div>
       <div className="flex-column" >
