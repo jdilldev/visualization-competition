@@ -15,14 +15,14 @@ body {
 }
 
 .title-content > h3 {
-	font-size: 1.5em;
-	font-family: "Neucha";
+	font-size: 1.2em;
+	font-family: "Comic Neue";
 	color: #e9c46a;
 }
 
 .title-content > h5 {
-	font-size: 1.5em;
-	font-family: "Neucha";
+	font-size: 1.2em;
+	font-family: "Comic Neue";
 	color: #e9c46a;
 }
 
@@ -41,6 +41,7 @@ body {
 
 .bechdel-rules {
 	display: flex;
+	margin-bottom: 5px;
 }
 .movie-screen {
 	display: flex;
@@ -77,11 +78,12 @@ body {
 	margin-right: 20px;
 	border: 6px dotted gold;
 	padding: 0.6em;
-	font-size: 0.85em;
+	font-size: 0.9em;
 	height: fit-content;
 	max-height: 100%;
 	max-width: 80%;
 	overflow: scroll;
+	//font-family: Klee One;
 }
 
 .link-style {
@@ -104,8 +106,6 @@ body {
 
 .film-border {
 	border-top: 2px solid #264653;
-	border-image: url(https://ibb.co/RzmN9F6][img]https://i.ibb.co/RzmN9F6/film-border.png)
-		20% round;
 }
 
 .tooltip {
@@ -133,4 +133,20 @@ body {
 
 .tooltip:hover .tooltiptext {
 	visibility: visible;
+}
+
+select {
+	border: 1px solid #e76f51;
+	border-radius: 3px;
+	padding-right: 1rem;
+	padding-left: 0.5em;
+	font-family: "Avenir Next";
+	font-weight: 250;
+	font-size: 16px;
+	background: transparent;
+	color: #e76f51;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	z-index: 3;
 }

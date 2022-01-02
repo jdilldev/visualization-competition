@@ -1,123 +1,25 @@
-import { ResponsiveBar } from '@nivo/bar'
+import { BarDatum, ResponsiveBar } from '@nivo/bar'
 import * as React from "react";
 import { CustomTooltip, PopcornNote } from '.';
 import { theme } from './theme';
 
-const StackedRatingChart = () => (
-    <div style={{ display: 'flex', flexDirection: 'column', width: '35%', marginLeft: '10px', marginTop: '10px', borderRight: '2px solid #264653' }}>
-        <div style={{ width: '100%', overflowX: 'scroll', overflowY: 'hidden', }}>
-            <div style={{ height: '35vh', minWidth: '600px', }}>
+
+const StackedRatingChart = ({ data, type }) => {
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', borderRight: '2px solid #264653', marginTop: '10px' }}>
+            <div style={{ height: '30vh', marginTop: '-20px' }}>
                 <ResponsiveBar
                     theme={theme}
-                    data={[
-                        {
-                            "country": "AD",
-                            "hot dog": 108,
-                            "hot dogColor": "hsl(51, 70%, 50%)",
-                            "burger": 113,
-                            "burgerColor": "hsl(355, 70%, 50%)",
-                            "sandwich": 56,
-                            "sandwichColor": "hsl(184, 70%, 50%)",
-                            "kebab": 109,
-                            "kebabColor": "hsl(244, 70%, 50%)",
-                            "fries": 1,
-                            "friesColor": "hsl(220, 70%, 50%)",
-
-                        },
-                        {
-                            "country": "AE",
-                            "hot dog": 186,
-                            "hot dogColor": "hsl(230, 70%, 50%)",
-                            "burger": 181,
-                            "burgerColor": "hsl(142, 70%, 50%)",
-                            "sandwich": 59,
-                            "sandwichColor": "hsl(207, 70%, 50%)",
-                            "kebab": 126,
-                            "kebabColor": "hsl(203, 70%, 50%)",
-                            "fries": 143,
-                            "friesColor": "hsl(149, 70%, 50%)",
-
-                        },
-                        {
-                            "country": "AF",
-                            "hot dog": 20,
-                            "hot dogColor": "hsl(52, 70%, 50%)",
-                            "burger": 91,
-                            "burgerColor": "hsl(132, 70%, 50%)",
-                            "sandwich": 14,
-                            "sandwichColor": "hsl(332, 70%, 50%)",
-                            "kebab": 131,
-                            "kebabColor": "hsl(50, 70%, 50%)",
-                            "fries": 48,
-                            "friesColor": "hsl(282, 70%, 50%)",
-
-                        },
-                        {
-                            "country": "AG",
-                            "hot dog": 70,
-                            "hot dogColor": "hsl(257, 70%, 50%)",
-                            "burger": 16,
-                            "burgerColor": "hsl(65, 70%, 50%)",
-                            "sandwich": 23,
-                            "sandwichColor": "hsl(30, 70%, 50%)",
-                            "kebab": 122,
-                            "kebabColor": "hsl(333, 70%, 50%)",
-                            "fries": 27,
-                            "friesColor": "hsl(124, 70%, 50%)",
-
-                        },
-                        {
-                            "country": "AI",
-                            "hot dog": 101,
-                            "hot dogColor": "hsl(70, 70%, 50%)",
-                            "burger": 87,
-                            "burgerColor": "hsl(171, 70%, 50%)",
-                            "sandwich": 147,
-                            "sandwichColor": "hsl(181, 70%, 50%)",
-                            "kebab": 103,
-                            "kebabColor": "hsl(52, 70%, 50%)",
-                            "fries": 113,
-                            "friesColor": "hsl(32, 70%, 50%)",
-
-                        },
-                        {
-                            "country": "AL",
-                            "hot dog": 44,
-                            "hot dogColor": "hsl(359, 70%, 50%)",
-                            "burger": 117,
-                            "burgerColor": "hsl(156, 70%, 50%)",
-                            "sandwich": 123,
-                            "sandwichColor": "hsl(190, 70%, 50%)",
-                            "kebab": 60,
-                            "kebabColor": "hsl(253, 70%, 50%)",
-                            "fries": 199,
-                            "friesColor": "hsl(39, 70%, 50%)",
-
-                        },
-                        {
-                            "country": "AM",
-                            "hot dog": 78,
-                            "hot dogColor": "hsl(11, 70%, 50%)",
-                            "burger": 13,
-                            "burgerColor": "hsl(340, 70%, 50%)",
-                            "sandwich": 100,
-                            "sandwichColor": "hsl(189, 70%, 50%)",
-                            "kebab": 2,
-                            "kebabColor": "hsl(317, 70%, 50%)",
-                            "fries": 88,
-                            "friesColor": "hsl(116, 70%, 50%)",
-                            "donut": 20,
-                            "donutColor": "hsl(56, 70%, 50%)"
-                        }
-                    ]}
-                    keys={['hot dog', 'burger', 'sandwich', 'kebab', 'fries', 'donut']}
-                    indexBy="country"
-                    margin={{ top: 60, right: 30, bottom: 150, left: 60 }}
+                    data={data}
+                    keys={['One or no women', 'No female convo', 'Only discuss men', 'Pass']}
+                    indexBy="decade"
+                    margin={{ top: 90, right: 30, bottom: 110, left: 60 }}
                     valueScale={{ type: 'linear' }}
                     indexScale={{ type: 'band', round: true }}
-                    colors={['#264653', '#2A9D8F', '#E9C46A', '#F4A261', '#E76F51']}
+                    colors={['#E76F51', '#F4A261', '#E9C46A', '#2A9D8F',]}
                     //enableGridY={true}
-                    gridYValues={[0, 350, 700]}
+                    gridYValues={type === 'normalized' ? [0, 50, 100] : [0, 1000, 2000, 3000]}
+                    enableLabel={false}
                     borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
                     padding={.35}
                     labelSkipWidth={12}
@@ -127,12 +29,19 @@ const StackedRatingChart = () => (
                         tickSize: 5,
                         tickPadding: 5,
                         tickRotation: 0,
-                        legend: 'total movies',
+                        legend: type === 'normalized' ? 'total movies rated (%)' : 'total movies rated',
                         legendPosition: 'middle',
-                        tickValues: [0, 350, 700],
-                        legendOffset: -45
+                        tickValues: type === 'normalized' ? [0, 50, 100] : [0, 1000, 2000, 3000],
+                        legendOffset: -50
                     }}
-                    axisBottom={null}
+                    axisBottom={{
+                        tickSize: 5,
+                        tickPadding: 5,
+                        tickRotation: -30,
+                        //legend: 'decade',
+                        legendPosition: 'middle',
+                        legendOffset: 20
+                    }}
                     legends={[
                         {
                             dataFrom: 'keys',
@@ -140,12 +49,12 @@ const StackedRatingChart = () => (
                             direction: 'row',
                             justify: false,
                             translateX: 0,
-                            translateY: 30,
-                            itemsSpacing: 2,
-                            itemWidth: 100,
+                            translateY: 55,
+                            itemsSpacing: 40,
+                            itemWidth: 90,
                             itemHeight: 20,
                             itemDirection: 'left-to-right',
-                            itemOpacity: 0.85,
+                            //itemOpacity: 0.85,
                             symbolSize: 10,
                             symbolShape: 'circle',
                             effects: [
@@ -158,18 +67,18 @@ const StackedRatingChart = () => (
                             ]
                         }
                     ]}
-                    tooltip={({ id, indexValue, value, color }) => <CustomTooltip barType='bar' content={{ name: id as string, value: { name: indexValue.toString(), value: value }, color: color }} />}
+                    tooltip={({ id, indexValue, value, color, label }) => type === 'normalized' ? <CustomTooltip barType='bar' content={{ name: id as string, value: { name: indexValue as string, value: value }, color: color }} /> : <CustomTooltip barType='bar' content={{ name: id as string, value: value, color: color }} />}
                     role="application"
                     ariaLabel="Nivo bar chart demo"
                     barAriaLabel={function (e) { return e.id + ": " + e.formattedValue + " in country: " + e.indexValue }}
                 />
-            </div>
-        </div >
-        <div style={{ position: 'sticky' }}>
-            <PopcornNote text={'Scroll to view all data. For all the movies that were assessed, you can see the composition of how many failed in which manner.'} tooltipText="yikes" timeFrameText='decade' />
 
+            </div >
+            <div style={{ position: 'sticky', marginTop: '-43px' }}>
+                <PopcornNote text={'Scroll to view all data. For all the movies that were assessed, you can see the composition of how many failed in which manner.'} tooltipText="yikes" timeFrameText='by the decade' />
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 export default StackedRatingChart

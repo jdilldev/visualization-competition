@@ -1,7 +1,8 @@
 export const theme = {
+    '//background': 'lightgray',
     "textColor": "white",
     'fontFamily': 'Avenir',
-    "fontSize": 15,
+    "fontSize": 13,
     "labels": {
         "text": {
             "fill": 'white'
@@ -10,20 +11,20 @@ export const theme = {
     "axis": {
         "domain": {
             "line": {
-                "stroke": "lightgray",
+                "stroke": "#85858591",
                 "strokeWidth": 1
             }
         },
         "ticks": {
             "line": {
-                "stroke": "lightgray",
+                "stroke": "#85858591",
                 "strokeWidth": 1
             }
         }
     },
     "grid": {
         "line": {
-            "stroke": "lightgray",
+            "stroke": "#85858591",
             "strokeWidth": 1
         }
     }
