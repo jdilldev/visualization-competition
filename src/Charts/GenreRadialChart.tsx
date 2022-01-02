@@ -50,8 +50,8 @@ const GenreRadialChart = ({ data, genreRange }) => (
                     }
                 ]}
                 tooltip={({ bar }) => {
-                    console.log(bar)
-                    return <CustomTooltip barType="radial" content={{ name: bar.groupId, value: { name: bar.id, value: (100 * bar.value / bar.stackedValue).toFixed(0) }, color: bar.color }} />
+                    const genreTotal = data.filter((genre) => bar.groupId === genre.id)[0].data.reduce((a, b) => ({ y: a.y + b.y })).y
+                    return <CustomTooltip barType="radial" content={{ name: bar.groupId, value: { name: bar.category, value: (100 * bar.value / genreTotal).toFixed(0) }, color: bar.color }} />
                 }}
             />
         </div>

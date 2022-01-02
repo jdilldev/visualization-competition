@@ -31,7 +31,7 @@ const Infographic = ({ data }) => {
             </div>
           </div>
         </div>
-        <VintageCamera style={{ cursor: 'pointer', pointerEvents: 'stroke', marginLeft: '10px', marginRight: '20px', minWidth: '170px', maxWidth: '170px', maxHeight: '100%', }} onMouseEnter={(e) => console.log(e)} onClick={() => toggleRules(!showRules)} />
+        <VintageCamera style={{ cursor: 'pointer', pointerEvents: 'stroke', marginLeft: '10px', marginRight: '20px', minWidth: '170px', maxWidth: '170px', maxHeight: '100%', }} onClick={() => toggleRules(!showRules)} />
         <div className="bechdel-rules">
           {showRules ?
             <div className="movie-screen">
@@ -200,8 +200,8 @@ const getRadialData = (data, genreRange) => {
       const genreFail0 = data.allMovies.nodes.filter(movie => movie.genre === genre && movie.rating === 0).length
       const genreFail1 = data.allMovies.nodes.filter(movie => movie.genre === genre && movie.rating === 1).length
       const genreFail2 = data.allMovies.nodes.filter(movie => movie.genre === genre && movie.rating === 2).length
-      console.log(genre + " " + genrePass / genreTotal)
-      genreArray.push({ x: 'Have no women', y: genreFail0 })
+
+      genreArray.push({ x: 'One or no women', y: genreFail0 })
       genreArray.push({
         x: 'No female convo', y: genreFail1
       })

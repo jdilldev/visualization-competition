@@ -83,7 +83,6 @@ const OverTimeLineChart = ({ data, lineChartType, lineChartUpdate }) => (
                  ]} */
                 enableSlices='x'
                 sliceTooltip={({ slice }) => {
-                    //console.log(slice.points[0].data.xFormatted)
                     return <div
                         style={{
                             background: 'white',

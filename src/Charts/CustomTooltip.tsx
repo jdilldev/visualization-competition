@@ -42,24 +42,36 @@ const CustomTooltip = (props: { barType: string, content: dataPoint }) => {
             tooltipText = `<span style="color:yellow;"}> ${props.content.value.toLocaleString()} (${(100 * (props.content.value as number / 9368)).toFixed(0)}%) </span> movies<br/>${phrase}`
             break;
         case 'bar':
-            phrase = props.content.name.toLocaleLowerCase()
+            phrase = props.content.name.toLowerCase()
             switch (props.content.name.toLowerCase()) {
                 case 'only discuss men':
                     phrase = "have female characters<br/>only discussing  men"
                     break
                 case 'no female convo':
-                    phrase = "don't contain a conversation<br/>amongst at least two women"
+                    phrase = "don't show dialog<br/>between at least two women"
                     break
                 case 'one or no women':
-                    phrase = 'do not have at<br/>least two women'
+                    phrase = "don't have at least two women"
             }
-            tooltipText = props.content.value['value'] ? `<span style="color:yellow;position:static;zIndex:2;"}>${props.content.value['value']}% </span> of movies in <br/>${props.content.value['name']} ${phrase}` : `<span style="color:yellow;position:static;zIndex:2;"}>${props.content.value} </span>  movies ${phrase}`
+            tooltipText = props.content.value['value'] ? `<span style="color:yellow;position:static;zIndex:2;"}>${props.content.value['value']}% </span> of movies in <br/><span style="color:#caf0f8;font-weight:bolder;font-size:1.2em;"}>${props.content.value['name']}</span> ${phrase}` : `<span style="color:yellow;position:static;zIndex:2;"}>${props.content.value} </span>  movies ${phrase}`
             break
         case 'choropleth':
-            tooltipText = props.content.name ? `<span style="color:yellow;"}>${props.content.value}% </span> of movies in ${props.content.name}<br/> passed the Bechdel Test` : 'No data available'
+            tooltipText = props.content.name ? `<span style="color:yellow;"}>${props.content.value}% </span> of movies in <span style="color:#9d4edd;font-weight:bolder;font-size:1.2em;"}>${props.content.name}</span><br/> passed the Bechdel Test` : 'No data available'
             break
         case 'radial':
-            tooltipText = `<span style="color:yellow;"}>${props.content.value['value']}% </span> of ${props.content.value['name']} movies<br/>${props.content.value['value']}`
+            phrase = props.content.value['name'].toLowerCase()
+            switch (props.content.value['name'].toLowerCase()) {
+                case 'only discuss men':
+                    phrase = "have female characters only discussing men"
+                    break
+                case 'no female convo':
+                    phrase = "don't show dialog between at least two women"
+                    break
+                case 'one or no women':
+                    phrase = "don't have at least two women"
+            }
+
+            tooltipText = `<span style="color:yellow;"}>${props.content.value['value']}% </span>of <span style="color:#caf0f8;font-weight:bolder;font-size:1.2em;"}> ${props.content.name.toLowerCase()}</span> movies ${phrase}`
             break
     }
 
