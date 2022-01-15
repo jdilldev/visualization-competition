@@ -1,6 +1,6 @@
-# Women in Analytics Data Conference 2021 Submission
+# Data Viz Competition | Data Conference 2021 Submission
 
-On impulse about two weeks before the deadline, I decided to enter this competition for 2021: https://www.dataconnectconf.com/dataviz-competition. I gave myself about 5 total working days, as this was during the holidays and I was out-of-town visiting family. 
+On impulse about two weeks before the deadline (01/01/2022), I decided to enter this competition for 2021: https://www.dataconnectconf.com/dataviz-competition. I gave myself about 5 total working days, as this was during the holidays and I was out-of-town visiting family. 
 
 # The data 
 I used data from the publicly available API https://bechdeltest.com/api/v1/doc. Which means the fidelity of this data is incredibly subjective because it relies on unvalidated public input. Nonethless, I proceeded with this dataset as an exercise,as I was generally interested in visualizing whether or not movies have portrayed female characters in more robust contexts, rather than solely supporting characters or sexual interests.
