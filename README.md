@@ -21,7 +21,7 @@ Gatsby uses GraphQL for querying data, and that was another thing I had never us
 ### Frontend
 From a frontend perspective I used the charting library Nivo.rocks, because it was already built with React in mind, thus something I could spin up quickly. The documentation for library was also incredibly well done, as I could easily customize based on my preference.
 
-# Oh, but there is only 24 hours in a day
+# Oh, but there are only 24 hours in a day
 With more time, I would have... 
 - made this fully responsive (grid view and renderable on mobile)
 - made this performant (modify webpack config and memoized the tooltip calculations) 
