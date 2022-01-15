@@ -21,4 +21,6 @@ Results of the competition have not come out yet, but I will update this once th
 
 You can view the full prototype here: https://visualizationcompetitionsmaste.gatsbyjs.io/
 
-![J  Dillard Viz Competition](https://user-images.githubusercontent.com/92639901/149604448-17c9ca47-0a13-41c1-99b4-bd631fa592b4.png)
+![J  Dillard Viz Compteition](https://user-images.githubusercontent.com/92639901/149605074-0b0a9f63-aa73-4328-b2e5-b8b669de970d.gif)
+
+
