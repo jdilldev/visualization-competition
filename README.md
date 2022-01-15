@@ -10,12 +10,20 @@ Deciding to enter this competition was driven by the opportunity to exercise tec
 
 I opted to use Gatsby, as it was something I'd heard about but never used. Since all of my data was static, it seemed like a good choice to serve the web app for its efficiency in speed. 
 
+### Tech Stack and Tools
 Gatsby uses GraphQL for querying data, and that was another thing I had never used before, but because of its popularity, I very much wanted to try it (love it). Although my engagement with it was very rudimentary, I plan on architecting a more complex project to test out more of its features, outside of Gatsby. I found Gatsby unintuitive and would not use it again because of its requirement for plugins. This was confusing to me and I didn't have the time to become well versed in the inner workings, which likely contributed to my frustration.
 
+### Frontend
 From a frontend perspective I used the charting library Nivo.rocks, because it was already built with React in mind, thus something I could spin up quickly. The documentation for library was also incredibly well done, as I could easily customize based on my preference.
 
 # Oh, but there is only 24 hours in a day
-With more time, I would have made this webapp responsive (grid view and renderable on mobile), and performant (modify webpack config and memoized the tooltip calculations). I also would have included a fully interactive/sortable/filterable table that contained all of the movies analyzed. I would have also liked to pulled out deeper, more meaningful data points and cross reference some movies with the Waithe test. Being that I work full-time and have other pet projects I want to pursue, I likely won't go back and add these features.
+With more time, I would have... 
+- made this fully responsive (grid view and renderable on mobile)
+- made this performant (modify webpack config and memoized the tooltip calculations) 
+- included a fully interactive/sortable/filterable table that contained all of the movies analyzed
+- pulled out deeper, more meaningful data points and cross reference some movies with the Waithe test. 
+
+Being that I work full-time and have other pet projects I want to pursue, I likely won't go back and add these features.
 
 Results of the competition have not come out yet, but I will update this once they do! 
 
