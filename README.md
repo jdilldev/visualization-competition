@@ -1,5 +1,10 @@
 # Data Viz Competition | Data Conference 2021 Submission
 
+
+You can view the full prototype here: https://visualizationcompetitionsmaste.gatsbyjs.io/
+
+![J  Dillard Viz Competition](https://user-images.githubusercontent.com/92639901/149605105-12881afa-a17c-4275-9948-bf98bf98ad95.png)
+
 On impulse about two weeks before the deadline (01/01/2022), I decided to enter this competition for 2021: https://www.dataconnectconf.com/dataviz-competition. I gave myself about 5 total working days, as this was during the holidays and I was out-of-town visiting family. 
 
 # The data 
@@ -26,7 +31,3 @@ With more time, I would have...
 Being that I work full-time and have other pet projects I want to pursue, I likely won't go back and add these features.
 
 Results of the competition have not come out yet, but I will update this once they do! 
-
-You can view the full prototype here: https://visualizationcompetitionsmaste.gatsbyjs.io/
-
-![J  Dillard Viz Competition](https://user-images.githubusercontent.com/92639901/149605105-12881afa-a17c-4275-9948-bf98bf98ad95.png)
