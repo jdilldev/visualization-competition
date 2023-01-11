@@ -12,7 +12,7 @@ const RootLayout = ({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body style={{ padding: '10px', height: '100vh', overflow: 'hidden' }} className="bg-black h-screen text-white font-body subpixel-antialiased p-3">
+      <body className="h-screen md:overflow-hidden p-[10px] bg-black text-white font-body subpixel-antialiased">
         <div id="stars"></div>
         <div id="stars2"></div>
         <div id="stars3"></div>

@@ -26,7 +26,9 @@
   "devDependencies": {
     "@types/d3-array": "^3.0.4",
     "@types/d3-time-format": "^4.0.0",
+    "@types/mapbox-gl": "^2.7.10",
     "autoprefixer": "^10.4.13",
+    "mapbox-gl": "^2.12.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.4"
   }

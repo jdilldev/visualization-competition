@@ -7,6 +7,10 @@ import { Dropdown } from "@nextui-org/react";
 import { Wow } from '../components/Shared';
 import Example from "../components/Example"
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
+import mapboxgl, { Map } from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,29 +21,47 @@ type GridProps = {
 
 const themes: string[] = ['Accelerating Development and Governance', 'Global City Design and Sustainability', 'Exploring the Frontiers', 'Governing Economic Resilience and Connectivity', 'Future of Societies and Healthcare', 'Prioritizing Learning and Work']
 
+mapboxgl.accessToken = 'pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g';
 
 const Home = () => {
+  const mapContainer = useRef<HTMLDivElement | null>(null);
+  const map = useRef<Map | null>(null);
+  const [lng, setLng] = useState(-70.9);
+  const [lat, setLat] = useState(42.35);
+  const [zoom, setZoom] = useState(9);
 
-
+  useEffect(() => {
+    if (map.current && mapContainer) return; // initialize map only once
+    if (mapContainer.current) {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [lng, lat],
+        zoom: zoom
+      });
+    }
+  });
 
   return (
-    <Grid className='flex flex-col gap-5 h-full border-2 border-indigo-600'>
-      <Grid style={{ height: '10vh', maxHeight: '10vh' }} className='border-2 border-orange-600'>one</Grid>
-      <Grid style={{ height: '80vh', maxHeight: '80vh' }} className='border-2 border-yellow-600'>
-        <Grid className='flex flex-row h-full bg-blue-600'>
-          <Grid className='flex flex-row w-full'>
-            <Grid className='flex flex-col w-1/3'>
-              <Grid className='h-2/5 bg-orange-400'>
-                <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>
-              </Grid>
-              <Grid className='h-1/2'>
-                base
-              </Grid>
-              <Grid className='h-1/5 bg-purple-500'>
+    <Grid className='md:h-full flex flex-col gap-2 w-full border-2 border-gray-300'>
+      <Grid className='h-16 border-2 border-orange-600'>one</Grid>
+      <Grid className='h-screen md:h-full border-2 border-blue-600'>
+        <Grid className='md:flex md:flex-row h-full'>
+          <Grid className='md:flex md:flex-row w-full h-full'>
+            <Grid className='flex flex-wrap md:flex-nowrap flex-row h-1/2 md:h-full md:flex-col md:w-1/3'>
+              <Grid className='w-1/2 h-1/2 md:w-full md:h-2/6 bg-orange-400'>
+                hi
+                {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>
+ */}              </Grid>
+              <Grid className='w-1/2 h-1/2 md:w-full md:h-1/2 bg-green-600'>
+                eye
+                {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>
+ */}              </Grid>
+              <Grid className='w-full h-1/2 md:w-full md:h-1/6 bg-purple-500'>
                 mooth
               </Grid>
             </Grid>
-            <Grid className='flex flex-col w-2/3 bg-red-200'>
+            <Grid className='flex flex-col h-1/2 md:h-full md:w-2/3 bg-red-200'>
               <Grid className='h-3/4 bg-gray-600'>
                 mapbox
               </Grid>
@@ -48,7 +70,7 @@ const Home = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid className='h-fit border-2 border-pink-600'>end</Grid>
+      <Grid className='h-16 border-2 border-pink-600'>end</Grid>
     </Grid>
 
   )
