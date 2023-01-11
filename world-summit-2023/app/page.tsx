@@ -43,34 +43,34 @@ const Home = () => {
   });
 
   return (
-    <Grid className='md:h-full flex flex-col gap-2 w-full border-2 border-gray-300'>
-      <Grid className='h-16 border-2 border-orange-600'>one</Grid>
-      <Grid className='h-screen md:h-full border-2 border-blue-600'>
-        <Grid className='md:flex md:flex-row h-full'>
-          <Grid className='md:flex md:flex-row w-full h-full'>
-            <Grid className='flex flex-wrap md:flex-nowrap flex-row h-1/2 md:h-full md:flex-col md:w-1/3'>
-              <Grid className='w-1/2 h-1/2 md:w-full md:h-2/6 bg-orange-400'>
-                hi
-                {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>
- */}              </Grid>
-              <Grid className='w-1/2 h-1/2 md:w-full md:h-1/2 bg-green-600'>
-                eye
-                {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>
- */}              </Grid>
-              <Grid className='w-full h-1/2 md:w-full md:h-1/6 bg-purple-500'>
-                mooth
+    <Grid className='h-[130vh] lg:h-full flex flex-col gap-2 w-full border-2 border-gray-300'>
+      <Grid className='h-24 border-2 border-orange-600'>Themes</Grid>
+      <Grid className='h-full border-2 border-blue-600'>
+        <Grid className='lg:flex lg:flex-row h-full'>
+          <Grid className='lg:flex lg:flex-row w-full h-full'>
+            <Grid className='flex flex-wrap flex-row h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
+              <Grid className='w-full h-1/3 md:w-1/2 md:h-1/2 lg:w-full lg:h-2/6 bg-orange-400'>
+                Chart I
+                {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </Grid>
+              <Grid className='w-full h-1/3 md:w-1/2 md:h-1/2 lg:w-full lg:h-1/2 bg-green-600'>
+                Chart II
+                {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}
+              </Grid>
+              <Grid className='w-full h-1/3 md:h-1/2 md:w-full lg:h-1/6 bg-purple-500'>
+                Stats
               </Grid>
             </Grid>
-            <Grid className='flex flex-col h-1/2 md:h-full md:w-2/3 bg-red-200'>
+            <Grid className='h-[10%] md:h-[12.5%] lg:hidden border-2 border-pink-600 bg-teal-500'>Summary</Grid>
+            <Grid className='flex flex-col h-1/2 lg:h-full lg:w-2/3 bg-red-200'>
               <Grid className='h-3/4 bg-gray-600'>
                 mapbox
               </Grid>
-              <Grid className='h-1/4 bg-red-500'>love</Grid>
+              <Grid className='h-1/4 bg-red-500'>Visual Info</Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Grid className='h-16 border-2 border-pink-600'>end</Grid>
+      <Grid className='hidden lg:block lg:h-16 border-2 border-pink-600 bg-fuchsia-700'>Summary</Grid>
     </Grid>
 
   )
