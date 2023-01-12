@@ -10,6 +10,11 @@ module.exports = {
       body: ['Avenir']
     },
     extend: {},
+    screens: {
+      'md': '750px',
+      'lg': '1000px'
+
+    }
   },
   plugins: [],
 }
