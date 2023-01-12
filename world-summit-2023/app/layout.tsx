@@ -1,10 +1,35 @@
 import './globals.css'
+import { createTheme, createThemePaletteBasic } from '@arwes/design';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#0ff',
+      dark1: '#0cc',
+      dark2: '#099',
+      dark3: '#066',
+      light1: '#3ff',
+      light2: '#6ff',
+      light3: '#9ff'
+    },
+    tonalOffset: 0.15,
+    secondary: {
+      main: '#f0f'
+    },
+    elevationOffset: 0.025,
+    neutral: {
+      main: '#111'
+    },
+    yourOwnBasicPalette: createThemePaletteBasic({ main: '#00f' }, 0.1)
+  }
+});
 
 const RootLayout = ({
   children,
 }: {
   children: React.ReactNode
 }) => {
+
   return (
     <html lang="en">
       {/*
