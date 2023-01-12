@@ -65,12 +65,12 @@ const Home = () => {
               <Grid className='h-3/4 bg-gray-600'>
                 mapbox
               </Grid>
+              <Grid className='hidden lg:block lg:h-40 border-2 border-pink-600 bg-fuchsia-700'>Summary</Grid>
               <Grid className='h-1/4 bg-red-500'>Visual Info</Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
-      <Grid className='hidden lg:block lg:h-24 border-2 border-pink-600 bg-fuchsia-700'>Summary</Grid>
     </Grid>
 
   )
