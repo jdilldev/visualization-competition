@@ -44,14 +44,14 @@ const Home = () => {
 
   return (
     <Grid className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full border-2 border-gray-300'>
-      <Grid className='h-24 border-2 border-orange-600'>Themes</Grid>
+      <Grid className='h-32 border-2 border-orange-600'>Themes</Grid>
       <Grid className='h-full border-2 border-blue-600'>
         <Grid className='lg:flex lg:flex-row h-full'>
           <Grid className='lg:flex lg:flex-row w-full h-full'>
             <Grid className='flex flex-wrap flex-row h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
-              <Grid className='w-full h-1/4 md:w-1/2 md:h-2/3 lg:w-full lg:h-2/6 bg-orange-400'>
-                Chart I
-                {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </Grid>
+              <Grid className='w-full p-5 h-1/4 md:w-1/2 md:h-2/3 lg:w-full lg:h-2/6 bg-orange-400'>
+                {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>
+ */}              </Grid>
               <Grid className='w-full h-1/2 md:w-1/2 md:h-2/3 lg:w-full lg:h-1/2 bg-green-600'>
                 Chart II
                 {/*                 <ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}
@@ -70,7 +70,7 @@ const Home = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid className='hidden lg:block lg:h-16 border-2 border-pink-600 bg-fuchsia-700'>Summary</Grid>
+      <Grid className='hidden lg:block lg:h-24 border-2 border-pink-600 bg-fuchsia-700'>Summary</Grid>
     </Grid>
 
   )
