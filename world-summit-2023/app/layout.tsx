@@ -1,28 +1,24 @@
+'use client'
 import './globals.css'
-import { createTheme, createThemePaletteBasic } from '@arwes/design';
+import { createTheme } from '@arwes/design';
+import { useTheme, ThemeProvider } from '@emotion/react';
 
 const theme = createTheme({
   palette: {
-    primary: {
-      main: '#0ff',
-      dark1: '#0cc',
-      dark2: '#099',
-      dark3: '#066',
-      light1: '#3ff',
-      light2: '#6ff',
-      light3: '#9ff'
-    },
-    tonalOffset: 0.15,
-    secondary: {
-      main: '#f0f'
-    },
+    // Default theme palette basic colors.
+    tonalOffset: 0.1,
+    primary: { main: 'green' },
+    secondary: { main: '#ffea00' },
+    success: { main: '#0f0' },
+    error: { main: '#f00' },
+
+    // Default theme palette elevation colors.
     elevationOffset: 0.025,
-    neutral: {
-      main: '#111'
-    },
-    yourOwnBasicPalette: createThemePaletteBasic({ main: '#00f' }, 0.1)
+    neutral: { main: '#000' },
   }
 });
+
+console.log(theme.palette.primary.dark1)
 
 const RootLayout = ({
   children,
@@ -37,9 +33,11 @@ const RootLayout = ({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body className="h-screen  lg:overflow-hidden p-[10px] bg-black text-white font-body subpixel-antialiased">
-        {children}
-      </body>
+      <ThemeProvider theme={theme}>
+        <body className={`h-screen  lg:overflow-hidden p-[10px] bg-neutral-800 text-white font-body subpixel-antialiased`}>
+          {children}
+        </body>
+      </ThemeProvider>
     </html>
   )
 }
