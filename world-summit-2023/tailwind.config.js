@@ -9,7 +9,16 @@ module.exports = {
     fontFamily: {
       body: ['Avenir']
     },
-    extend: {},
+    extend: {
+      backgroundImage:
+      {
+        'starry-mountain': "url('/public/starry-mountain-bg.jpg)"
+      }
+    },
+    screens: {
+      'md': '750px',
+      'lg': '1700px',
+    }
   },
   plugins: [],
 }
