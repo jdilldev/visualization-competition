@@ -70,7 +70,7 @@ const Home = () => {
         <Grid className='flex gap-3 lg:flex lg:flex-row h-full'>
           <Grid className='flex flex-col gap-4 lg:flex lg:flex-row w-full h-full'>
             <Grid className='flex flex-wrap flex-row gap-3 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
-              <Grid className='w-full h-1/4 md:w-[30%] md:h-2/3 lg:w-full lg:h-2/6'>
+              <Grid className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
                 <ParentSize>{({ width, height }) =>
                 (<FrameCorners showContentLines cornerLength={50} cornerWidth={3} style={{ width: width, height: height, }} animator={{ animate: false }}>
                   {/*                     <Example width={width - 20} height={height - 20} />
@@ -82,7 +82,7 @@ const Home = () => {
                   <p className='ml-10'>open and close</p>
                 </FrameHexagon>
               </Grid>
-              <Grid className='w-full h-1/2 md:basis-2/3 md:h-2/3 lg:w-full lg:h-1/2'>
+              <Grid className='w-full h-1/2 md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
                 <FrameCorners showContentLines cornerLength={50} cornerWidth={3} className='h-full w-full' animator={{ animate: false }}>
                 </FrameCorners>
               </Grid>
