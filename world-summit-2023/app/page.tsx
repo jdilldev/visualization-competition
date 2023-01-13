@@ -98,24 +98,28 @@ const Home = () => {
                   </FrameHexagon>
                 </Grid>
               </Grid>
-              <Grid className='h-[10%] md:h-[12.5%] lg:hidden  bg-teal-500 mb-3'>
-                okra
+              <Grid className='flex h-[10%] md:h-[12.5%] gap-4 lg:hidden mb-3'>
+                <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                </FrameLines>
+                <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                </FrameLines>
+                <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                </FrameLines>
+                <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                </FrameLines>
               </Grid>
               <Grid className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
-                <Grid className='h-3/4'>
-                  <FrameCorners
-                    showContentLines
-                    className='h-full w-full'
-                    animator={{ animate: false }}
-                    contentLineWidth={3}
-                    cornerWidth={3}
-                    cornerLength={50}
-                    hover>
-                    love
-                  </FrameCorners>
+                <Grid className='hidden lg:flex lg:flex-row lg:gap-4 lg:justify-between lg:h-48 mt-3'>
+                  <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                  </FrameLines>
+                  <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                  </FrameLines>
+                  <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                  </FrameLines>
+                  <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                  </FrameLines>
                 </Grid>
-                <Grid className='hidden lg:block lg:h-'>
-                  <Card
+                {/*   <Card
                     className='h-full w-full '
                     image={{
                       src: 'https://ca-times.brightspotcdn.com/dims4/default/34a374e/2147483647/strip/true/crop/7500x3938+0+203/resize/1200x630!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F85%2Fac%2F4478940d4253803b6725a7ded3dc%2Fnasa-space-telescope-16841.jpg',
@@ -136,7 +140,21 @@ const Home = () => {
                       was used to describe any diffused astronomical object,
                       including galaxies beyond the Milky Way.
                     </Text>
-                  </Card>
+                  </Card> */}
+                <Grid className='h-3/4'>
+                  <Grid className='flex flex-col h-full w-full'>
+                    <FrameCorners
+                      showContentLines
+                      className='h-full w-full flex'
+                      animator={{ animate: false }}
+                      contentLineWidth={3}
+                      cornerWidth={3}
+                      cornerLength={50}
+                      hover>
+                    </FrameCorners>
+
+
+                  </Grid>
                 </Grid>
                 <Grid className='h-1/4'>
                   <FrameHexagon hover inverted palette='primary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full' >
