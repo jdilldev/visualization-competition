@@ -10,8 +10,16 @@ import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import mapboxgl, { Map } from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 import { ArwesThemeProvider, StylesBaseline, Text as ArwesText, Figure, FrameUnderline, FrameCorners, FrameHexagon, FrameLines, Button, Card } from '@arwes/core';
 import { url } from 'inspector';
-import img from '../public//Users/jaszy/Workspace/visualization-competitions/world-summit-2023/public/starry-mountain-bg.jpg'
+import imgy from '../public//Users/jaszy/Workspace/visualization-competitions/world-summit-2023/public/starry-mountain-bg.jpg'
 import { useTheme } from '@emotion/react';
+import { useDesktop } from './hooks/hooks';
+import Economy from '../public/icons/global-economy.svg'
+import Space from '../public/icons/global-fronteir.svg'
+import SustainableWorld from '../public/icons/global-sustainability.svg'
+import Health from '../public/icons/global-health.svg'
+import Education from '../public/icons/global-education.svg'
+import Exploring from '../public/icons/global-connectivity.svg'
+import Development from '../public/icons/009-overpopulation.svg'
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g';
 
@@ -22,7 +30,14 @@ type GridProps = {
   className: string
 }
 
-const worldSummitThemes: string[] = ['Accelerating Development and Governance', 'Global City Design and Sustainability', 'Exploring the Frontiers', 'Governing Economic Resilience and Connectivity', 'Future of Societies and Healthcare', 'Prioritizing Learning and Work']
+const worldSummitThemes: { name: string, icon: any }[] = [
+  { name: 'Accelerating Development and Governance', icon: Development },
+  { name: 'Global City Design and Sustainability', icon: SustainableWorld },
+  { name: 'Exploring the Frontiers', icon: Exploring },
+  { name: 'Governing Economic Resilience and Connectivity', icon: Economy },
+  { name: 'Future of Societies and Healthcare', icon: Health },
+  { name: 'Prioritizing Learning and Work', icon: Education }
+]
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g';
 const bag2 = "./starry-mountain-bg.jpg"
@@ -35,8 +50,8 @@ const Home = () => {
   const [lng, setLng] = useState(-70.9);
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
-  const [selectedTheme, setSelectedTheme] = useState('')
-  const colorTheme = useTheme()
+  const [selectedTheme, setSelectedTheme] = useState('Please select a theme')
+  const isDesktop = useDesktop()
 
   /*   useEffect(() => {
       if (map.current && mapContainer) return; // initialize map only once
@@ -52,16 +67,18 @@ const Home = () => {
 
   return (
     <Grid className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
-      <Grid className='h-32 flex justify-between'>
-        <Grid className='flex flex-col items-center w-full'>
+      <Grid className='h-44 flex justify-between'>
+        <Grid className='flex flex-col gap-3 fixed z-10 top-0 pt-3 items-center w-full lg:gap-1'>
           <p className='tracking-[1em] text-3xl uppercase'>Themes</p>
-          <Grid className='flex flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
-            {worldSummitThemes.map(worldSummitTheme => <Button
-              className={`hidden lg:h-8 lg:inline ${worldSummitTheme === selectedTheme ? colorTheme.palette.primary.light3 : ''}`}
+          <Grid className='flex no-wrap justify-evenly w-full gap-4 md:gap-6 lg:flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
+            {worldSummitThemes.map(worldSummitTheme => isDesktop ? <Button
+              className={`lg:h-8 lg:inline ${worldSummitTheme.name === selectedTheme ? 'bg-orange-400' : ''}`}
               FrameComponent={FrameCorners}
-              onClick={() => setSelectedTheme(worldSummitTheme)}>
-              <ArwesText>{worldSummitTheme}</ArwesText>
-            </Button>
+              onClick={() => setSelectedTheme(worldSummitTheme.name)}>
+              <ArwesText>{worldSummitTheme.name}</ArwesText>
+            </Button> : <worldSummitTheme.icon
+              onClick={() => setSelectedTheme(worldSummitTheme.name)}
+              className={`w-[50px] h-[50px] md:w-[70px] md:h-[70px] stroke-2 fill-slate-400 hover:fill-orange-700 ${worldSummitTheme.name === selectedTheme ? ' fill-orange-400' : ''}`} />
             )}
           </Grid>
         </Grid>
@@ -113,7 +130,37 @@ const Home = () => {
                 <FrameLines className='w-1/4 h-full' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
                 </FrameLines>
               </Grid>
-              {/*   <Card
+              <Grid className='h-3/4'>
+                <Grid className='flex flex-col h-full w-full'>
+                  <FrameCorners
+                    showContentLines
+                    className='h-full w-full flex'
+                    animator={{ animate: false }}
+                    contentLineWidth={3}
+                    cornerWidth={3}
+                    cornerLength={50}
+                  >
+                  </FrameCorners>
+
+
+                </Grid>
+              </Grid>
+              <Grid className='h-1/4'>
+                <FrameHexagon hover inverted palette='primary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full' >
+
+                </FrameHexagon>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Grid>
+  )
+}
+
+export default Home
+
+{/*   <Card
                     className='h-full w-full '
                     image={{
                       src: 'https://ca-times.brightspotcdn.com/dims4/default/34a374e/2147483647/strip/true/crop/7500x3938+0+203/resize/1200x630!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F85%2Fac%2F4478940d4253803b6725a7ded3dc%2Fnasa-space-telescope-16841.jpg',
@@ -135,32 +182,3 @@ const Home = () => {
                       including galaxies beyond the Milky Way.
                     </Text>
                   </Card> */}
-              <Grid className='h-3/4'>
-                <Grid className='flex flex-col h-full w-full'>
-                  <FrameCorners
-                    showContentLines
-                    className='h-full w-full flex'
-                    animator={{ animate: false }}
-                    contentLineWidth={3}
-                    cornerWidth={3}
-                    cornerLength={50}
-                    hover>
-                  </FrameCorners>
-
-
-                </Grid>
-              </Grid>
-              <Grid className='h-1/4'>
-                <FrameHexagon hover inverted palette='primary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full' >
-
-                </FrameHexagon>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-    </Grid>
-  )
-}
-
-export default Home

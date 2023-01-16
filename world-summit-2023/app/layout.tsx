@@ -34,7 +34,7 @@ const RootLayout = ({
       */}
       <head />
       <ThemeProvider theme={theme}>
-        <body className={`h-screen  lg:overflow-hidden p-[10px] bg-neutral-800 text-white font-body subpixel-antialiased`}>
+        <body className={`h-screen  lg:overflow-hidden p-[10px] bg-zinc-800 text-white font-body subpixel-antialiased`}>
           {children}
         </body>
       </ThemeProvider>
