@@ -7,7 +7,12 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      body: ['Avenir']
+      body: ['Avenir'],
+      dreamscape: ['Dreamscape'],
+      equinox: ['Equinox'],
+      nebula: ['Nebula'],
+      'nebula-hollow': ['Nebula-Hollow'],
+      flare: ['Flare']
     },
     extend: {
       backgroundImage:
@@ -17,7 +22,7 @@ module.exports = {
     },
     screens: {
       'md': '750px',
-      'lg': '1020px',
+      'lg': '1043px',
     }
   },
   plugins: [],

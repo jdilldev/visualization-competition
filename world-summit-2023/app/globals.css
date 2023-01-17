@@ -11,6 +11,49 @@
 	animation: glow 1s ease-in-out infinite alternate;
 }
 
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+	align-items: center;
+}
+
+.btn-black {
+	background: url(../public/container3.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	border: none;
+	color: #fff;
+	padding: 2px 5px;
+}
+
+.text-shadow {
+	box-shadow: 0px 0px 10px 10px rgb(211, 159, 5);
+}
+
+.box {
+	padding: 0 5px;
+	--b: 3px; /* thickness of the border */
+	--c: #68adbed3; /* color of the border */
+	--w: 9px; /* width of border */
+
+	border: var(--b) solid transparent; /* space for the border */
+	--_g: transparent 90deg, var(--c) 0;
+	--_p: var(--w) var(--w) border-box no-repeat;
+	background: conic-gradient(
+				from 90deg at top var(--b) left var(--b),
+				var(--_g)
+			)
+			0 0 / var(--_p),
+		conic-gradient(from 180deg at top var(--b) right var(--b), var(--_g)) 100% 0 /
+			var(--_p),
+		conic-gradient(from 0deg at bottom var(--b) left var(--b), var(--_g)) 0 100% /
+			var(--_p),
+		conic-gradient(from -90deg at bottom var(--b) right var(--b), var(--_g))
+			100% 100% / var(--_p);
+}
+
 @keyframes glow {
 	from {
 		text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073,
@@ -31,5 +74,31 @@
 	}
 	100% {
 		box-shadow: 0 0 0 black;
+	}
+}
+
+@layer base {
+	@font-face {
+		font-family: "Dreamscape";
+		src: url("./fonts/Dreamscape.ttf");
+	}
+
+	@font-face {
+		font-family: "Nebula";
+		src: url("./fonts/Nebula-Regular.otf");
+	}
+
+	@font-face {
+		font-family: "Nebula-Hollow";
+		src: url("./fonts/Nebula-Hollow.otf");
+	}
+
+	@font-face {
+		font-family: "Equinox";
+		src: url("./fonts/Equinox-Regular.otf");
+	}
+	@font-face {
+		font-family: "Flare";
+		src: url("./fonts/Flare-Regular.ttf");
 	}
 }
