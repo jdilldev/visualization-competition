@@ -84,7 +84,7 @@ const Home = () => {
       <Grid className='h-full'>
         <Grid className='flex gap-3 lg:flex lg:flex-row h-full'>
           <Grid className='flex flex-col gap-4 lg:flex lg:flex-row w-full h-full'>
-            {!isDesktop && <StatBoxes isDesktop={isDesktop} />}
+            {!isDesktop && <StatBoxes />}
             <Grid className='flex flex-wrap flex-row gap-3 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
               <Grid className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
                 <ParentSize>{({ width, height }) =>
@@ -110,8 +110,8 @@ const Home = () => {
             </Grid>
 
             <Grid className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
+              {isDesktop && <StatBoxes />}
               <Grid className='h-3/4'>
-                {isDesktop && <StatBoxes isDesktop={isDesktop} />}
                 <Grid className='flex flex-col h-full w-full'>
                   <FrameCorners
                     showContentLines
