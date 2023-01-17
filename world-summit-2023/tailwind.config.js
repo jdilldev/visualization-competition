@@ -22,7 +22,7 @@ module.exports = {
     },
     screens: {
       'md': '750px',
-      'lg': '1043px',
+      'lg': '1140px',
     }
   },
   plugins: [],

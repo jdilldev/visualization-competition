@@ -67,7 +67,7 @@ const Home = () => {
     <Grid className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
       <Grid className='h-36 md:h-48 flex justify-between'>
         <Grid className='flex flex-col gap-3 fixed z-10 top-0 pt-3 items-center w-full lg:gap-1'>
-          <p className='tracking-[.7em] md:tracking-[1em] text-slate-300 text-lg md:text-2xl lg:text-3xl uppercase font-equinox'>{`The Present Future`}</p>
+          <p className='tracking-[.7em] md:tracking-[1em] text-slate-300 text-md md:text-2xl lg:text-3xl uppercase font-equinox'>{`The Present Future`}</p>
           <p className='tracking-[.5em] text-xl uppercase font-dreamscape text-[#78CCE2]'>{`Themes`}</p>
           <Grid className='flex pr-4 no-wrap justify-evenly w-full gap-4 md:gap-6 lg:flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
             {worldSummitThemes.map(worldSummitTheme => isDesktop ? <div
