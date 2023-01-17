@@ -7,8 +7,8 @@ const theme = createTheme({
   palette: {
     // Default theme palette basic colors.
     tonalOffset: 0.1,
-    primary: { main: '#002439' },
-    secondary: { main: '#4e7988' },
+    primary: { main: '#005066' },
+    secondary: { main: '#578798' },
     success: { main: '#0f0' },
     error: { main: '#f00' },
 
@@ -32,7 +32,7 @@ const RootLayout = ({
       */}
       <head />
       <ThemeProvider theme={theme}>
-        <body className={`h-screen  lg:overflow-hidden p-[10px] bg-zinc-900 text-white font-body subpixel-antialiased`}>
+        <body className={`h-screen  lg:overflow-hidden p-[10px] bg-slate-900 text-white font-body subpixel-antialiased`}>
           {children}
         </body>
       </ThemeProvider>

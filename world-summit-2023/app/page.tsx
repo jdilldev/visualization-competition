@@ -67,13 +67,13 @@ const Home = () => {
     <Grid className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
       <Grid className='h-36 md:h-48 flex justify-between'>
         <Grid className='flex flex-col gap-3 fixed z-10 top-0 pt-3 items-center w-full lg:gap-1'>
-          <p className='tracking-[.7em] md:tracking-[1em]  text-lg md:text-2xl uppercase font-equinox'>{`The Present Future`}</p>
-          <p className='tracking-[.5em] text-xl uppercase font-dreamscape'>{`Themes`}</p>
+          <p className='tracking-[.7em] md:tracking-[1em] text-slate-300 text-lg md:text-2xl uppercase font-equinox'>{`The Present Future`}</p>
+          <p className='tracking-[.5em] text-xl uppercase font-dreamscape text-[#78CCE2]'>{`Themes`}</p>
           <Grid className='flex pr-4 no-wrap justify-evenly w-full gap-4 md:gap-6 lg:flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
             {worldSummitThemes.map(worldSummitTheme => isDesktop ? <div
-              className={`hidden lg:h-8 lg:inline  ${worldSummitTheme.name === selectedTheme ? 'box text-[#3297b3a8]' : 'text-slate-400'}`}
+              className={`hidden lg:h-8 lg:inline  ${worldSummitTheme.name === selectedTheme ? 'box text-[#3297b3a8]' : 'text-slate-500'}`}
               onClick={() => setSelectedTheme(worldSummitTheme.name)}>
-              <p className={`text-sm font-equinox hover:text-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'uppercase tracking-widest ' : ''}`}>{worldSummitTheme.name}</p>
+              <p className={`text-md font-equinox hover:text-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'uppercase tracking-widest ' : ''}`}>{worldSummitTheme.name}</p>
             </div> : <worldSummitTheme.icon
               onClick={() => setSelectedTheme(worldSummitTheme.name)}
               className={`w-[40px] h-[50px] md:w-[70px] md:h-[70px] stroke-2 fill-slate-400 hover:fill-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'fill-[#3297b3a8]' : ''}`} />
@@ -89,8 +89,8 @@ const Home = () => {
               <Grid className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
                 <ParentSize>{({ width, height }) =>
                 (<FrameCorners showContentLines cornerLength={50} cornerWidth={3} style={{ width: width, height: height, }} animator={{ animate: false }}>
-                  {/*                     <Example width={width - 20} height={height - 20} />
-                */}                  </FrameCorners>)
+                  <Example width={width - 20} height={height - 20} />
+                </FrameCorners>)
                 }</ParentSize>
                 {/*<ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </Grid>
               <Grid className='hidden lg:w-full lg:h-[20%]  lg:block'>
