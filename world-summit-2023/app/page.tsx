@@ -1,25 +1,22 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
-import Image from 'next/image'
 import { Grid, Text, Container } from '@nextui-org/react';
-import { Dropdown } from "@nextui-org/react";
-import { Wow } from '../components/Shared';
-import Example from "../components/Example"
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
-import mapboxgl, { Map } from 'mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
-import { ArwesThemeProvider, StylesBaseline, Text as ArwesText, Figure, FrameUnderline, FrameCorners, FrameHexagon, FrameLines, Button, Card } from '@arwes/core';
-import { url } from 'inspector';
-import imgy from '../public//Users/jaszy/Workspace/visualization-competitions/world-summit-2023/public/starry-mountain-bg.jpg'
-import { useTheme } from '@emotion/react';
+import { FrameCorners, FrameHexagon } from '@arwes/core';
+import mapboxgl, { Map } from 'mapbox-gl';
+import Example from "../components/Example"
 import { useDesktop } from './hooks/hooks';
+// assets
 import Economy from '../public/icons/global-economy.svg'
-import Space from '../public/icons/global-fronteir.svg'
 import SustainableWorld from '../public/icons/global-sustainability.svg'
 import Health from '../public/icons/global-health.svg'
 import Education from '../public/icons/global-education.svg'
 import Exploring from '../public/icons/global-connectivity.svg'
 import Development from '../public/icons/009-overpopulation.svg'
 import { StatBoxes } from '../components/StatBoxes';
+import { HexagonFrame } from '../components/HexagonFrame';
+const bag2 = "./starry-mountain-bg.jpg"
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g';
 
 
@@ -36,11 +33,6 @@ const worldSummitThemes: { name: string, icon: any }[] = [
   { name: 'Future of Societies and Healthcare', icon: Health },
   { name: 'Prioritizing Learning and Work', icon: Education }
 ]
-
-mapboxgl.accessToken = 'pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g';
-const bag2 = "./starry-mountain-bg.jpg"
-
-
 
 const Home = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
@@ -65,15 +57,15 @@ const Home = () => {
 
   return (
     <Grid className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
-      <Grid className='h-36 md:h-48 flex justify-between'>
-        <Grid className='flex flex-col gap-3 fixed z-10 top-0 pt-3 items-center w-full lg:gap-1'>
-          <p className='tracking-[.7em] md:tracking-[1em] text-slate-300 text-md md:text-2xl lg:text-3xl uppercase font-equinox'>{`The Present Future`}</p>
+      <Grid className='h-40 md:h-48 flex justify-center'>
+        <Grid style={{ backgroundImage: `url(${'bag2'})` }} className='flex flex-col pt-2 px-1 border-solid border-l-2 border-r-2 border-b-2  border-[#002439] backdrop-blur-lg gap-3 fixed top-0 z-10  w-[87%] md:w-[90%] items-center lg:w-full lg:gap-1 lg:border-none'>
+          <p className='tracking-[.3em] md:tracking-[.7em] text-slate-300 text-md md:text-2xl lg:text-3xl uppercase font-equinox'>{`The Present Future`}</p>
           <p className='tracking-[.5em] text-xl uppercase font-dreamscape text-[#78CCE2]'>{`Themes`}</p>
-          <Grid className='flex pr-4 no-wrap justify-evenly w-full gap-4 md:gap-6 lg:flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
+          <Grid className='flex pb-1 md:pb-2 no-wrap justify-evenly w-full gap-4 md:gap-6 lg:flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
             {worldSummitThemes.map(worldSummitTheme => isDesktop ? <div
               className={`hidden lg:h-8 lg:inline  ${worldSummitTheme.name === selectedTheme ? 'box text-[#3297b3a8]' : 'text-slate-500'}`}
               onClick={() => setSelectedTheme(worldSummitTheme.name)}>
-              <p className={`text-md font-equinox hover:text-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'uppercase tracking-widest ' : ''}`}>{worldSummitTheme.name}</p>
+              <p className={`text-md lowercase font-equinox hover:text-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'uppercase tracking-widest ' : ''}`}>{worldSummitTheme.name}</p>
             </div> : <worldSummitTheme.icon
               onClick={() => setSelectedTheme(worldSummitTheme.name)}
               className={`w-[40px] h-[50px] md:w-[70px] md:h-[70px] stroke-2 fill-slate-400 hover:fill-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'fill-[#3297b3a8]' : ''}`} />
@@ -93,20 +85,12 @@ const Home = () => {
                 </FrameCorners>)
                 }</ParentSize>
                 {/*<ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </Grid>
-              <Grid className='hidden lg:w-full lg:h-[20%]  lg:block'>
-                <FrameHexagon hover palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full'>
-                  <p className='ml-10'>open and close</p>
-                </FrameHexagon>
-              </Grid>
+              {isDesktop && <HexagonFrame />}
               <Grid className='w-full h-1/2 md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
                 <FrameCorners showContentLines cornerLength={50} cornerWidth={3} className='h-full w-full' animator={{ animate: false }}>
                 </FrameCorners>
               </Grid>
-              <Grid className='w-full h-[20%] md:h-[30%] md:w-full lg:hidden'>
-                <FrameHexagon hover palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full'>
-                  <Grid className='ml-10'>hi</Grid>
-                </FrameHexagon>
-              </Grid>
+              {!isDesktop && <HexagonFrame />}
             </Grid>
 
             <Grid className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
@@ -134,32 +118,9 @@ const Home = () => {
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </Grid >
     </Grid >
   )
 }
 
 export default Home
-
-{/*   <Card
-                    className='h-full w-full '
-                    image={{
-                      src: 'https://ca-times.brightspotcdn.com/dims4/default/34a374e/2147483647/strip/true/crop/7500x3938+0+203/resize/1200x630!/quality/80/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F85%2Fac%2F4478940d4253803b6725a7ded3dc%2Fnasa-space-telescope-16841.jpg',
-                      alt: 'A nebula'
-                    }}
-                    title='Nebula'
-                    options={
-                      <Button palette='secondary'>
-                        <ArwesText>Learn More</ArwesText>
-                      </Button>
-                    }
-                    landscape
-                    hover
-                  >
-                    <Text>
-                      A nebula is an interstellar cloud of dust, hydrogen,
-                      helium and other ionized gases. Originally, the term
-                      was used to describe any diffused astronomical object,
-                      including galaxies beyond the Milky Way.
-                    </Text>
-                  </Card> */}

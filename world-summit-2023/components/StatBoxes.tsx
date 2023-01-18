@@ -1,4 +1,4 @@
-import { Grid, Text, Container } from '@nextui-org/react';
+import { Grid, } from '@nextui-org/react';
 import { FrameLines } from '@arwes/core';
 
 type StatBoxProps = {

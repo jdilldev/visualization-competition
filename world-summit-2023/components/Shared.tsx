@@ -22,20 +22,3 @@ const Color = ({ color }: { color: any }) => (
     }} />
 );
 
-export const PaletteBasic = ({ palette }: { palette: any }) => {
-    const theme = useTheme();
-    return (
-        <div style={{
-            display: 'flex',
-            flexDirection: 'row'
-        }}>
-            <Color color={theme.palette[palette].dark3} />
-            <Color color={theme.palette[palette].dark2} />
-            <Color color={theme.palette[palette].dark1} />
-            <Color color={theme.palette[palette].main} />
-            <Color color={theme.palette[palette].light1} />
-            <Color color={theme.palette[palette].light2} />
-            <Color color={theme.palette[palette].light3} />
-        </div>
-    );
-};

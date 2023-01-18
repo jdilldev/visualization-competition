@@ -1,7 +1,7 @@
 'use client'
 import './globals.css'
 import { createTheme } from '@arwes/design';
-import { useTheme, ThemeProvider } from '@emotion/react';
+import { ThemeProvider } from '@emotion/react';
 
 const theme = createTheme({
   palette: {
@@ -10,7 +10,7 @@ const theme = createTheme({
     primary: { main: '#005066' },
     secondary: { main: '#578798' },
     success: { main: '#0f0' },
-    error: { main: '#f00' },
+    error: { main: '#e84242' },
 
     // Default theme palette elevation colors.
     elevationOffset: 0.025,
