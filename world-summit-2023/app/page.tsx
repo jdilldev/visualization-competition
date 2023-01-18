@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Grid, Text, Container } from '@nextui-org/react';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { FrameCorners, FrameHexagon } from '@arwes/core';
-import mapboxgl, { Map } from 'mapbox-gl';
+import Map, { GeolocateControl } from "react-map-gl";
 import Example from "../components/Example"
 import { useDesktop } from './hooks/hooks';
 // assets
@@ -17,14 +17,6 @@ import { StatBoxes } from '../components/StatBoxes';
 import { HexagonFrame } from '../components/HexagonFrame';
 const bag2 = "./starry-mountain-bg.jpg"
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g';
-
-
-type GridProps = {
-  children: React.ReactNode
-  className: string
-}
-
 const worldSummitThemes: { name: string, icon: any }[] = [
   { name: 'Accelerating Development and Governance', icon: Development },
   { name: 'Global City Design and Sustainability', icon: SustainableWorld },
@@ -36,25 +28,21 @@ const worldSummitThemes: { name: string, icon: any }[] = [
 
 const Home = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
-  const map = useRef<Map | null>(null);
+  //const map = useRef<Map | null>(null);
   const [lng, setLng] = useState(-70.9);
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
+  const [mapHeight, setMapHeight] = useState(0)
   const [selectedTheme, setSelectedTheme] = useState('Please select a theme')
   const isDesktop = useDesktop()
 
-  /*   useEffect(() => {
-      if (map.current && mapContainer) return; // initialize map only once
-      if (mapContainer.current) {
-        map.current = new mapboxgl.Map({
-          container: mapContainer.current,
-          style: 'mapbox://styles/mapbox/streets-v12',
-          center: [lng, lat],
-          zoom: zoom
-        });
-      }
-    }); */
+  useEffect(() => {
+    if (mapContainer.current) {
+      setMapHeight(mapContainer.current.clientHeight)
+    }
+  });
 
+  console.log(mapHeight)
   return (
     <Grid className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
       <Grid className='h-40 md:h-48 flex justify-center'>
@@ -95,8 +83,8 @@ const Home = () => {
 
             <Grid className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
               {isDesktop && <StatBoxes />}
-              <Grid className='h-3/4'>
-                <Grid className='flex flex-col h-full w-full'>
+              <Grid className='h-[60%]'>
+                <Grid ref={mapContainer} className={`border-solid border-3 border-cyan-500 h-full max-h-[${mapHeight}px]  w-full`}>
                   <FrameCorners
                     showContentLines
                     className='h-full w-full flex'
@@ -105,12 +93,28 @@ const Home = () => {
                     cornerWidth={3}
                     cornerLength={50}
                   >
+                    <Map
+                      mapboxAccessToken='pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
+                      initialViewState={{
+                        longitude: -100,
+                        latitude: 40,
+                        zoom: 3.5,
+                      }}
+                      attributionControl={false}
+                      style={{ width: '100%', height: mapHeight - 20 + 'px' }}
+                      mapStyle="mapbox://styles/mapbox/streets-v11"
+                      onRender={(event) => {
+                        if (mapContainer.current)
+                          setMapHeight(mapContainer.current.clientHeight)
+
+                        return event.target.resize()
+                      }
+                      }
+                    />
                   </FrameCorners>
-
-
                 </Grid>
               </Grid>
-              <Grid className='h-1/4'>
+              <Grid className='h-[20%]'>
                 <FrameHexagon hover inverted palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full' >
 
                 </FrameHexagon>
