@@ -67,9 +67,9 @@ const Home = () => {
             {!isDesktop && <StatBoxes />}
             <Grid className='flex flex-wrap flex-row gap-3 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
               <Grid className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
-                <ParentSize>{({ width, height }) =>
+                <ParentSize debounceTime={10}>{({ width, height }) =>
                 (<FrameCorners showContentLines cornerLength={50} cornerWidth={3} style={{ width: width, height: height, }} animator={{ animate: false }}>
-                  {/* <Example width={width - 20} height={height - 20} />*/}
+                  {/* <Example width={width - 20} height={height - 20} /> */}
                 </FrameCorners>)
                 }</ParentSize>
                 {/*<ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </Grid>
@@ -80,11 +80,10 @@ const Home = () => {
               </Grid>
               {!isDesktop && <HexagonFrame />}
             </Grid>
-
             <Grid className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
               {isDesktop && <StatBoxes />}
-              <Grid className='h-[60%]'>
-                <Grid ref={mapContainer} className={`border-solid border-3 border-cyan-500 h-full max-h-[${mapHeight}px]  w-full`}>
+              <Grid className='h-3/4 lg:h-[60%]'>
+                <Grid ref={mapContainer} className={`border-solid border-3 border-cyan-500 h-full w-full`}>
                   <FrameCorners
                     showContentLines
                     className='h-full w-full flex'
@@ -114,7 +113,7 @@ const Home = () => {
                   </FrameCorners>
                 </Grid>
               </Grid>
-              <Grid className='h-[20%]'>
+              <Grid className='h-1/4 lg:h-[20%]'>
                 <FrameHexagon hover inverted palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full' >
 
                 </FrameHexagon>
