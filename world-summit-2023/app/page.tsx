@@ -15,7 +15,7 @@ import Exploring from '../public/icons/global-connectivity.svg'
 import Development from '../public/icons/009-overpopulation.svg'
 import { StatBoxes } from '../components/StatBoxes';
 import { HexagonFrame } from '../components/HexagonFrame';
-const bag2 = "./starry-mountain-bg.jpg"
+const bag2 = 'https://api.mapbox.com/styles/v1/jdilldev/clcmbx409004c14qrslh0z9la/static/[-94.0749,-64.3648,117.0407,75.2404]/1150x1100?access_token=pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
 
 const worldSummitThemes: { name: string, icon: any }[] = [
   { name: 'Accelerating Development and Governance', icon: Development },
@@ -42,18 +42,19 @@ const Home = () => {
     }
   });
 
-  console.log(mapHeight)
   return (
     <Grid className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
       <Grid className='h-40 md:h-48 flex justify-center'>
-        <Grid style={{ backgroundImage: `url(${'bag2'})` }} className='flex flex-col pt-2 px-1 border-solid border-l-2 border-r-2 border-b-2  border-[#002439] backdrop-blur-lg gap-3 fixed top-0 z-10  w-[87%] md:w-[90%] items-center lg:w-full lg:gap-1 lg:border-none'>
+        <Grid style={{ backgroundImage: `url(${'bag2'})` }} className='flex flex-col pt-2 px-1 border-solid border-l-4 border-r-4 border-b-4  border-[#0c354e] backdrop-blur-lg gap-3 fixed top-0 z-10  w-[87%] md:w-[90%] items-center lg:w-full lg:gap-1 lg:border-none'>
           <p className='tracking-[.3em] md:tracking-[.7em] text-slate-300 text-md md:text-2xl lg:text-3xl uppercase font-equinox'>{`The Present Future`}</p>
-          <p className='tracking-[.5em] text-xl uppercase font-dreamscape text-[#78CCE2]'>{`Themes`}</p>
+          <p className='tracking-[.5em] text-xl uppercase font-dreamscape text-[#78CCE2]'>{`Themes`}
+            {/*  <span className='text-sm normal-case font-thin tracking-normal font-body'>{'(Click to select)'}</span> */}
+          </p>
           <Grid className='flex pb-1 md:pb-2 no-wrap justify-evenly w-full gap-4 md:gap-6 lg:flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
             {worldSummitThemes.map(worldSummitTheme => isDesktop ? <div
               className={`hidden lg:h-8 lg:inline  ${worldSummitTheme.name === selectedTheme ? 'box text-[#3297b3a8]' : 'text-slate-500'}`}
               onClick={() => setSelectedTheme(worldSummitTheme.name)}>
-              <p className={`text-md lowercase font-equinox hover:text-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'uppercase tracking-widest ' : ''}`}>{worldSummitTheme.name}</p>
+              <p className={`text-md lowercase min-w-fit max-w-full whitespace-nowrap font-equinox hover:text-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'uppercase tracking-widest ' : ''}`}>{worldSummitTheme.name}</p>
             </div> : <worldSummitTheme.icon
               onClick={() => setSelectedTheme(worldSummitTheme.name)}
               className={`w-[40px] h-[50px] md:w-[70px] md:h-[70px] stroke-2 fill-slate-400 hover:fill-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'fill-[#3297b3a8]' : ''}`} />
@@ -83,25 +84,27 @@ const Home = () => {
             <Grid className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
               {isDesktop && <StatBoxes />}
               <Grid className='h-3/4 lg:h-[60%]'>
-                <Grid ref={mapContainer} className={`border-solid border-3 border-cyan-500 h-full w-full`}>
+                <Grid ref={mapContainer} className={`border-solid border-3 border-cyan-500  h-full w-full`}>
                   <FrameCorners
                     showContentLines
-                    className='h-full w-full flex'
+                    className='h-full w-full flex bg-center bg-cover'
                     animator={{ animate: false }}
                     contentLineWidth={3}
                     cornerWidth={3}
                     cornerLength={50}
+                  // style={{ backgroundImage: `url(${bag2})` }}
                   >
                     <Map
                       mapboxAccessToken='pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
                       initialViewState={{
                         longitude: -100,
                         latitude: 40,
-                        zoom: 3.5,
+                        zoom: 0.9,
                       }}
+                      projection='mercator'
                       attributionControl={false}
                       style={{ width: '100%', height: mapHeight - 20 + 'px' }}
-                      mapStyle="mapbox://styles/mapbox/streets-v11"
+                      mapStyle="mapbox://styles/jdilldev/cld37ljym000801o0ygnt71yu"
                       onRender={(event) => {
                         if (mapContainer.current)
                           setMapHeight(mapContainer.current.clientHeight)
