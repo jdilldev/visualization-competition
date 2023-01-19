@@ -97,8 +97,8 @@ const Home = () => {
                     <Map
                       mapboxAccessToken='pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
                       initialViewState={{
-                        longitude: -100,
-                        latitude: 40,
+                        longitude: 13,
+                        latitude: 13,
                         zoom: 0.9,
                       }}
                       projection='mercator'
