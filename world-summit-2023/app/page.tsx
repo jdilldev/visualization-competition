@@ -111,10 +111,11 @@ const Home = () => {
                       maxZoom={3}
                       mapboxAccessToken='pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
                       initialViewState={{
-                        longitude: 13,
-                        latitude: 13,
+                        longitude: 15,
+                        latitude: 0,
                         zoom: 1,
                       }}
+                      pitch={mapProjection === 'mercator' ? 30 : 0}
                       projection={mapProjection}
                       attributionControl={false}
                       style={{ width: '100%', height: mapHeight - 20 + 'px' }}
