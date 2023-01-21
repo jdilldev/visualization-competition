@@ -6,7 +6,7 @@ import { FrameCorners, FrameHexagon } from '@arwes/core';
 import Map, { GeolocateControl } from "react-map-gl";
 import Example from "../components/Example"
 import { StatBoxes } from '../components/StatBoxes';
-import { HexagonFrame } from '../components/HexagonFrame';
+import { HexagonFrame as RegionalInfo } from '../components/RegionalSpecificHexagon';
 import { useDesktop } from './hooks/hooks';
 // assets
 import Economy from '../public/icons/global-economy.svg'
@@ -84,13 +84,13 @@ const Home = () => {
                 </FrameCorners>)
                 }</ParentSize>
                 {/*<ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </div>
-              {isDesktop && <HexagonFrame />}
+              {isDesktop && <RegionalInfo />}
               <div className='w-full h-1/2 md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
                 <FrameCorners showContentLines cornerLength={50} cornerWidth={3} className='h-full w-full' animator={{ animate: false }}>
                   <p>another chart</p>
                 </FrameCorners>
               </div>
-              {!isDesktop && <HexagonFrame />}
+              {!isDesktop && <RegionalInfo />}
             </div>
             <div className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
               {isDesktop && <StatBoxes />}
