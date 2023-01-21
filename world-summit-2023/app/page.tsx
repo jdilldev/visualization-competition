@@ -28,18 +28,18 @@ const worldSummitThemes: { name: string, icon: any }[] = [
   { name: 'Prioritizing Learning and Work', icon: Education }
 ]
 
-const DEFAULT_THEME_PROMPT = 'Please select a theme'
+const DEFAULT_THEME_PROMPT = 'Themes'
 
 const Home = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   //const map = useRef<Map | null>(null);
+  const isDesktop = useDesktop()
   const [lng, setLng] = useState(-70.9);
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
   const [mapHeight, setMapHeight] = useState(0)
-  const [mapProjection, setMapProjection] = useState<'mercator' | 'globe'>('mercator')
+  const [mapProjection, setMapProjection] = useState<'mercator' | 'globe'>(isDesktop ? 'mercator' : 'globe')
   const [selectedTheme, setSelectedTheme] = useState(DEFAULT_THEME_PROMPT)
-  const isDesktop = useDesktop()
 
   const isThemeSelected = selectedTheme !== DEFAULT_THEME_PROMPT
 
@@ -52,10 +52,10 @@ const Home = () => {
   return (
     <div className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
       <div className='h-40 md:h-48 flex justify-center'>
-        <div style={{ backgroundImage: `url(${'bag2'})` }} className='flex flex-col pt-2 px-1 border-solid border-l-4 border-r-4 border-b-4  border-[#0c354e] backdrop-blur-lg gap-3 fixed top-0 z-10  w-[87%] md:w-[90%] items-center lg:w-full lg:gap-1 lg:border-none'>
+        <div style={{ backgroundImage: `url(${'bag2'})` }} className='flex flex-col pt-2 px-1 border-solid border-l-4 border-r-4 border-b-4  border-[#0c354e] backdrop-blur-lg gap-3 fixed top-0 z-10 w-[87%] md:w-[90%] items-center lg:w-full lg:gap-1 lg:border-none'>
           <p className='tracking-[.3em] md:tracking-[.7em] text-slate-300 text-md md:text-2xl lg:text-3xl uppercase font-equinox'>{`The Present Future`}</p>
-          <p className='tracking-[.5em] text-xl uppercase font-dreamscape text-[#72a4b5]'>
-            <p>Themes
+          <p className='tracking-[.5em] text-xl white uppercase font-dreamscape text-[#72a4b5]'>
+            <p className={`${isThemeSelected ? 'tracking-normal text-sm md:tracking-widest md:text-xl font-body lg:font-dreamscape text-center' : ''}`}>{isDesktop ? 'Themes' : selectedTheme}
               {!isThemeSelected && <span className='text-sm normal-case font-thin tracking-normal font-body'>{'(Click to select)'}</span>}
             </p>
           </p>
