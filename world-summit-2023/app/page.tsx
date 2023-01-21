@@ -1,10 +1,12 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
-import { Grid, Text, Container } from '@nextui-org/react';
+import { Text, Container, Button } from '@nextui-org/react';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { FrameCorners, FrameHexagon } from '@arwes/core';
 import Map, { GeolocateControl } from "react-map-gl";
 import Example from "../components/Example"
+import { StatBoxes } from '../components/StatBoxes';
+import { HexagonFrame } from '../components/HexagonFrame';
 import { useDesktop } from './hooks/hooks';
 // assets
 import Economy from '../public/icons/global-economy.svg'
@@ -13,8 +15,8 @@ import Health from '../public/icons/global-health.svg'
 import Education from '../public/icons/global-education.svg'
 import Exploring from '../public/icons/global-connectivity.svg'
 import Development from '../public/icons/009-overpopulation.svg'
-import { StatBoxes } from '../components/StatBoxes';
-import { HexagonFrame } from '../components/HexagonFrame';
+import { ButtonGroup } from '../components/Shared';
+
 const bag2 = 'https://api.mapbox.com/styles/v1/jdilldev/clcmbx409004c14qrslh0z9la/static/[-94.0749,-64.3648,117.0407,75.2404]/1150x1100?access_token=pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
 
 const worldSummitThemes: { name: string, icon: any }[] = [
@@ -26,6 +28,8 @@ const worldSummitThemes: { name: string, icon: any }[] = [
   { name: 'Prioritizing Learning and Work', icon: Education }
 ]
 
+const DEFAULT_THEME_PROMPT = 'Please select a theme'
+
 const Home = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   //const map = useRef<Map | null>(null);
@@ -33,8 +37,11 @@ const Home = () => {
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
   const [mapHeight, setMapHeight] = useState(0)
-  const [selectedTheme, setSelectedTheme] = useState('Please select a theme')
+  const [mapProjection, setMapProjection] = useState<'mercator' | 'globe'>('mercator')
+  const [selectedTheme, setSelectedTheme] = useState(DEFAULT_THEME_PROMPT)
   const isDesktop = useDesktop()
+
+  const isThemeSelected = selectedTheme !== DEFAULT_THEME_PROMPT
 
   useEffect(() => {
     if (mapContainer.current) {
@@ -43,14 +50,16 @@ const Home = () => {
   });
 
   return (
-    <Grid className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
-      <Grid className='h-40 md:h-48 flex justify-center'>
-        <Grid style={{ backgroundImage: `url(${'bag2'})` }} className='flex flex-col pt-2 px-1 border-solid border-l-4 border-r-4 border-b-4  border-[#0c354e] backdrop-blur-lg gap-3 fixed top-0 z-10  w-[87%] md:w-[90%] items-center lg:w-full lg:gap-1 lg:border-none'>
+    <div className='h-[150vh] md:h-[130vh] lg:h-full flex flex-col gap-2 w-full bg-bottom bg-no-repeat bg-cover' style={{ backgroundImage: `url(${'bag2'})` }}>
+      <div className='h-40 md:h-48 flex justify-center'>
+        <div style={{ backgroundImage: `url(${'bag2'})` }} className='flex flex-col pt-2 px-1 border-solid border-l-4 border-r-4 border-b-4  border-[#0c354e] backdrop-blur-lg gap-3 fixed top-0 z-10  w-[87%] md:w-[90%] items-center lg:w-full lg:gap-1 lg:border-none'>
           <p className='tracking-[.3em] md:tracking-[.7em] text-slate-300 text-md md:text-2xl lg:text-3xl uppercase font-equinox'>{`The Present Future`}</p>
-          <p className='tracking-[.5em] text-xl uppercase font-dreamscape text-[#78CCE2]'>{`Themes`}
-            {/*  <span className='text-sm normal-case font-thin tracking-normal font-body'>{'(Click to select)'}</span> */}
+          <p className='tracking-[.5em] text-xl uppercase font-dreamscape text-[#72a4b5]'>
+            <p>Themes
+              {!isThemeSelected && <span className='text-sm normal-case font-thin tracking-normal font-body'>{'(Click to select)'}</span>}
+            </p>
           </p>
-          <Grid className='flex pb-1 md:pb-2 no-wrap justify-evenly w-full gap-4 md:gap-6 lg:flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
+          <div className='flex pb-1 md:pb-2 no-wrap justify-evenly w-full gap-4 md:gap-6 lg:flex-wrap lg:justify-evenly lg:gap-4 2xl:gap-18'>
             {worldSummitThemes.map(worldSummitTheme => isDesktop ? <div
               className={`hidden lg:h-8 lg:inline  ${worldSummitTheme.name === selectedTheme ? 'box text-[#3297b3a8]' : 'text-slate-500'}`}
               onClick={() => setSelectedTheme(worldSummitTheme.name)}>
@@ -59,32 +68,34 @@ const Home = () => {
               onClick={() => setSelectedTheme(worldSummitTheme.name)}
               className={`w-[40px] h-[50px] md:w-[70px] md:h-[70px] stroke-2 fill-slate-400 hover:fill-[#3297b3a8] ${worldSummitTheme.name === selectedTheme ? 'fill-[#3297b3a8]' : ''}`} />
             )}
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid className='h-full'>
-        <Grid className='flex gap-3 lg:flex lg:flex-row h-full'>
-          <Grid className='flex flex-col gap-4 lg:flex lg:flex-row w-full h-full'>
+          </div>
+        </div>
+      </div>
+      <div className='h-full'>
+        <div className='flex gap-3 lg:flex lg:flex-row h-full'>
+          <div className='flex flex-col gap-4 lg:flex lg:flex-row w-full h-full'>
             {!isDesktop && <StatBoxes />}
-            <Grid className='flex flex-wrap flex-row gap-3 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
-              <Grid className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
+            <div className='flex flex-wrap flex-row gap-3 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
+              <div className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
                 <ParentSize debounceTime={10}>{({ width, height }) =>
                 (<FrameCorners showContentLines cornerLength={50} cornerWidth={3} style={{ width: width, height: height, }} animator={{ animate: false }}>
+                  chart
                   {/* <Example width={width - 20} height={height - 20} /> */}
                 </FrameCorners>)
                 }</ParentSize>
-                {/*<ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </Grid>
+                {/*<ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </div>
               {isDesktop && <HexagonFrame />}
-              <Grid className='w-full h-1/2 md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
+              <div className='w-full h-1/2 md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
                 <FrameCorners showContentLines cornerLength={50} cornerWidth={3} className='h-full w-full' animator={{ animate: false }}>
+                  <p>another chart</p>
                 </FrameCorners>
-              </Grid>
+              </div>
               {!isDesktop && <HexagonFrame />}
-            </Grid>
-            <Grid className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
+            </div>
+            <div className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
               {isDesktop && <StatBoxes />}
-              <Grid className='h-3/4 lg:h-[60%]'>
-                <Grid ref={mapContainer} className={`border-solid border-3 border-cyan-500  h-full w-full`}>
+              <div className='h-3/4 lg:h-[60%]'>
+                <div ref={mapContainer} className={`border-solid border-3 border-cyan-500  h-full w-full`}>
                   <FrameCorners
                     showContentLines
                     className='h-full w-full flex bg-center bg-cover'
@@ -94,14 +105,17 @@ const Home = () => {
                     cornerLength={50}
                   // style={{ backgroundImage: `url(${bag2})` }}
                   >
+                    <ButtonGroup className='absolute top-0 right-0 z-10' values={['Mercator', 'Globe']} controlValue={mapProjection} onChange={(value: string) => setMapProjection(value as 'mercator' | 'globe')} />
                     <Map
+                      minZoom={1}
+                      maxZoom={3}
                       mapboxAccessToken='pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
                       initialViewState={{
                         longitude: 13,
                         latitude: 13,
-                        zoom: 0.9,
+                        zoom: 1,
                       }}
-                      projection='mercator'
+                      projection={mapProjection}
                       attributionControl={false}
                       style={{ width: '100%', height: mapHeight - 20 + 'px' }}
                       mapStyle="mapbox://styles/jdilldev/cld37ljym000801o0ygnt71yu"
@@ -114,18 +128,18 @@ const Home = () => {
                       }
                     />
                   </FrameCorners>
-                </Grid>
-              </Grid>
-              <Grid className='h-1/4 lg:h-[20%]'>
+                </div>
+              </div>
+              <div className='h-1/4 lg:h-[20%]'>
                 <FrameHexagon hover inverted palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full' >
-
+                  hey baby
                 </FrameHexagon>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid >
-    </Grid >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div >
+    </div >
   )
 }
 

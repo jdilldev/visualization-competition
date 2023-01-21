@@ -32,7 +32,7 @@ const RootLayout = ({
       */}
       <head />
       <ThemeProvider theme={theme}>
-        <body className={`h-screen  lg:overflow-hidden p-[10px] bg-slate-900 text-white font-body subpixel-antialiased`}>
+        <body className={`h-screen  lg:overflow-hidden p-[10px] bg-slate-900 text-[#9fd0dcb1] font-body subpixel-antialiased`}>
           {children}
         </body>
       </ThemeProvider>
