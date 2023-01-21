@@ -1,4 +1,3 @@
-import { Divider, Grid, } from '@nextui-org/react';
 import { FrameHexagon } from '@arwes/core';
 import Continents from '../public/icons/continents.svg'
 

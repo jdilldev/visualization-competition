@@ -16,6 +16,7 @@ import Education from '../public/icons/global-education.svg'
 import Exploring from '../public/icons/global-connectivity.svg'
 import Development from '../public/icons/009-overpopulation.svg'
 import { ButtonGroup } from '../components/Shared';
+import { restrieveSingleSeriesDatum, retriveRegionallyGroupedDatum } from './data/generateData';
 
 const bag2 = 'https://api.mapbox.com/styles/v1/jdilldev/clcmbx409004c14qrslh0z9la/static/[-94.0749,-64.3648,117.0407,75.2404]/1150x1100?access_token=pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
 
@@ -29,6 +30,9 @@ const worldSummitThemes: { name: string, icon: any }[] = [
 ]
 
 const DEFAULT_THEME_PROMPT = 'Themes'
+
+console.log(retriveRegionallyGroupedDatum('Northern Africa', '2021_HDI'))
+
 
 const Home = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
