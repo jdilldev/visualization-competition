@@ -1,13 +1,13 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import { Text, Container, Button } from '@nextui-org/react';
-import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { FrameCorners, FrameHexagon } from '@arwes/core';
 import Map, { GeolocateControl } from "react-map-gl";
 import Example from "../components/Example"
 import { StatBoxes } from '../components/StatBoxes';
 import { HexagonFrame as RegionalInfo } from '../components/RegionalSpecificHexagon';
 import { useDesktop } from './hooks/hooks';
+
 // assets
 import Economy from '../public/icons/global-economy.svg'
 import SustainableWorld from '../public/icons/global-sustainability.svg'
@@ -17,6 +17,8 @@ import Exploring from '../public/icons/global-connectivity.svg'
 import Development from '../public/icons/009-overpopulation.svg'
 import { ButtonGroup } from '../components/Shared';
 import { restrieveSingleSeriesDatum, retriveRegionallyGroupedDatum } from './data/generateData';
+import { ChartI } from '../components/ChartI';
+import { ChartII } from '../components/ChartII';
 
 const bag2 = 'https://api.mapbox.com/styles/v1/jdilldev/clcmbx409004c14qrslh0z9la/static/[-94.0749,-64.3648,117.0407,75.2404]/1150x1100?access_token=pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
 
@@ -31,17 +33,15 @@ const worldSummitThemes: { name: string, icon: any }[] = [
 
 const DEFAULT_THEME_PROMPT = 'Themes'
 
-console.log(retriveRegionallyGroupedDatum('Northern Africa', '2021_HDI'))
-
 
 const Home = () => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
+  const chartContainer = useRef<HTMLDivElement | null>(null);
+
   //const map = useRef<Map | null>(null);
   const isDesktop = useDesktop()
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
   const [mapHeight, setMapHeight] = useState(0)
+  const [chart2height, setchartheight] = useState(0)
   const [mapProjection, setMapProjection] = useState<'mercator' | 'globe'>(isDesktop ? 'mercator' : 'globe')
   const [selectedTheme, setSelectedTheme] = useState(DEFAULT_THEME_PROMPT)
 
@@ -50,6 +50,10 @@ const Home = () => {
   useEffect(() => {
     if (mapContainer.current) {
       setMapHeight(mapContainer.current.clientHeight)
+    }
+
+    if (chartContainer.current) {
+      setchartheight(chartContainer.current.clientHeight)
     }
   });
 
@@ -81,18 +85,11 @@ const Home = () => {
             {!isDesktop && <StatBoxes />}
             <div className='flex flex-wrap flex-row gap-3 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
               <div className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
-                <ParentSize debounceTime={10}>{({ width, height }) =>
-                (<FrameCorners showContentLines cornerLength={50} cornerWidth={3} style={{ width: width, height: height, }} animator={{ animate: false }}>
-                  chart
-                  {/* <Example width={width - 20} height={height - 20} /> */}
-                </FrameCorners>)
-                }</ParentSize>
-                {/*<ParentSize>{({ width, height }) => <Example width={width} height={height} />}</ParentSize>*/}              </div>
+                <ChartI selectedTheme={selectedTheme} />
+              </div>
               {isDesktop && <RegionalInfo />}
-              <div className='w-full h-1/2 md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
-                <FrameCorners showContentLines cornerLength={50} cornerWidth={3} className='h-full w-full' animator={{ animate: false }}>
-                  <p>another chart</p>
-                </FrameCorners>
+              <div className='w-full h-1/2 md:w-[58%] md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
+                <ChartII />
               </div>
               {!isDesktop && <RegionalInfo />}
             </div>
@@ -111,8 +108,9 @@ const Home = () => {
                   >
                     <ButtonGroup className='absolute top-0 right-0 z-10' values={['Mercator', 'Globe']} controlValue={mapProjection} onChange={(value: string) => setMapProjection(value as 'mercator' | 'globe')} />
                     <Map
+                      // trackResize
                       minZoom={1}
-                      maxZoom={3}
+                      maxZoom={2.5}
                       mapboxAccessToken='pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
                       initialViewState={{
                         longitude: 15,
@@ -129,15 +127,16 @@ const Home = () => {
                           setMapHeight(mapContainer.current.clientHeight)
 
                         return event.target.resize()
-                      }
-                      }
+                      }}
                     />
                   </FrameCorners>
                 </div>
               </div>
               <div className='h-1/4 lg:h-[20%]'>
                 <FrameHexagon hover inverted palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full' >
-                  hey baby
+                  <p className='text-center'>Feel free to toggle the orientation of the map.</p>
+                  <br />
+                  <p className='text-center'>If you zoom into the map, you can see country locations. However, please note data and charts only display information at the world or subregional level.</p>
                 </FrameHexagon>
               </div>
             </div>

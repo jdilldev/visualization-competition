@@ -12,7 +12,11 @@ module.exports = {
       equinox: ['Equinox'],
       nebula: ['Nebula'],
       'nebula-hollow': ['Nebula-Hollow'],
-      flare: ['Flare']
+      flare: ['Flare'],
+      stacker: ['Stacker'],
+      progress: ['Progress'],
+      agelast: ['Agelast'],
+      axeon: ['Axeon']
     },
     extend: {
       backgroundImage:

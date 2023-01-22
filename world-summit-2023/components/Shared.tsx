@@ -26,6 +26,7 @@ const Color = ({ color }: { color: any }) => (
 export const ButtonGroup = ({ values, className, controlValue, onChange }: { values: string[], className: string, controlValue: string, onChange: (value: string) => void }) => {
     return <div className={`flex flex-row gap-1 rounded-lg border-2 border-solid border-green-600 ${className}`}>
         {values.map(value => <div
+            key={value}
             onClick={() => {
                 const lowerCaseValue = value.toLowerCase()
                 onChange(lowerCaseValue)
