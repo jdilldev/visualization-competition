@@ -1,38 +1,78 @@
-import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import { FrameCorners } from '@arwes/core';
-import Example from './Example';
-import ChartIcon from '../public/icons/pie-chart.svg';
-import { restrieveSingleSeriesDatum } from '../app/data/generateData';
-import { Point } from '@visx/point';
-import { Line, LineRadial } from '@visx/shape';
+import { Radar } from '@nivo/radar'
+import { DefaultPlaceholder } from './Shared';
+
 
 type ChartDimensions = { width: number; height: number }
 
-const AreaChart = ({ width, height }: ChartDimensions) => {
+/* const AreaChart = ({ width, height }: ChartDimensions) => {
     return <Example width={width - 20} height={height - 20} />
-}
+} */
+const data = [
+    {
+        "taste": "fruity",
+        "syrah": 79
+    },
+    {
+        "taste": "bitter",
+        "syrah": 20
+    },
+    {
+        "taste": "heavy",
+        "syrah": 42
+    },
+]
 
-const RadialChart = ({ width, height }: ChartDimensions) => {
+const RadialChart = ({ width, height }: ChartDimensions) =>
+    <Radar
+        width={width}
+        height={height}
+        data={data}
+        keys={['syrah']}
+        indexBy="taste"
+        valueFormat=">-.2f"
+        margin={{ top: 30, right: 0, bottom: 30, left: 0 }}
+        borderColor={{ from: 'color', modifiers: [] }}
+        gridLabelOffset={20}
+        dotSize={5}
+        dotColor={{ theme: 'background' }}
+        dotBorderWidth={1}
+        colors={{ scheme: 'blues' }}
+        fillOpacity={.5}
+        blendMode="overlay"
+        motionConfig="wobbly"
+        legends={[
+            {
+                anchor: 'top-left',
+                direction: 'column',
+                translateX: -50,
+                translateY: -40,
+                itemWidth: 80,
+                itemHeight: 20,
+                itemTextColor: '#999',
+                symbolSize: 12,
+                symbolShape: 'circle',
+                effects: [
+                    {
+                        on: 'hover',
+                        style: {
+                            itemTextColor: '#000'
+                        }
+                    }
+                ]
+            }
+        ]}
+    />
 
-}
 
-const DefaultPlaceholder = () => {
-    return <div className='flex flex-row md:flex-col gap-4 justify-center items-center'>
-        <ChartIcon className='w-20 h-20 md:w-32 md:h-32' />
-        <p className='font-agelast uppercase tracking-widest text-2xl'>Choose a theme</p>
-    </div>
-}
-
-export const ChartI = ({ selectedTheme }: { selectedTheme: string }) => {
-    return <ParentSize debounceTime={10}>{({ width, height }) =>
-    (<FrameCorners
+export const ChartI = ({ selectedTheme, width, height }: { selectedTheme: string, width: number, height: number }) => {
+    return <FrameCorners
         showContentLines
         cornerLength={50}
         cornerWidth={3}
         animator={{ animate: false }}
         style={{ width: width, height: height }}
     >
-        <DefaultPlaceholder />
-    </FrameCorners>)
-    }</ParentSize>
+        <DefaultPlaceholder height={height} placeholderLocation='one' />
+    </FrameCorners>
 }

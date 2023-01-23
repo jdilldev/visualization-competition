@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+/* import React, { useMemo, useCallback } from 'react';
 import { AreaClosed, Line, Bar } from '@visx/shape';
 import appleStock, { AppleStock } from '@visx/mock-data/lib/mocks/appleStock';
 import { curveMonotoneX } from '@visx/curve';
@@ -210,3 +210,4 @@ export default withTooltip<AreaProps, TooltipData>(
         );
     },
 );
+ */

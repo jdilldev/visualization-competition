@@ -3,9 +3,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Text, Container, Button } from '@nextui-org/react';
 import { FrameCorners, FrameHexagon } from '@arwes/core';
 import Map, { GeolocateControl } from "react-map-gl";
-import Example from "../components/Example"
+import { ParentSize } from '@visx/responsive';
 import { StatBoxes } from '../components/StatBoxes';
-import { HexagonFrame as RegionalInfo } from '../components/RegionalSpecificHexagon';
+import { HexagonFrame as RegionalInfo } from '../components/RegionalStats';
 import { useDesktop } from './hooks/hooks';
 
 // assets
@@ -83,14 +83,19 @@ const Home = () => {
         <div className='flex gap-3 lg:flex lg:flex-row h-full'>
           <div className='flex flex-col gap-4 lg:flex lg:flex-row w-full h-full'>
             {!isDesktop && <StatBoxes />}
-            <div className='flex flex-wrap flex-row gap-3 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
+            <div className='flex flex-wrap flex-row gap-1 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
               <div className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
-                <ChartI selectedTheme={selectedTheme} />
+                <ParentSize debounceTime={10}>{({ width, height }) =>
+                  <ChartI selectedTheme={selectedTheme} width={width} height={height - 10} />
+                }
+                </ParentSize>
               </div>
               {isDesktop && <RegionalInfo />}
               <div className='w-full h-1/2 md:w-[58%] md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
-                <ChartII />
-              </div>
+                <ParentSize debounceTime={10}>{({ width, height }) =>
+                  <ChartII selectedTheme={selectedTheme} width={width} height={height - 10} />
+                }
+                </ParentSize>              </div>
               {!isDesktop && <RegionalInfo />}
             </div>
             <div className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>
@@ -133,10 +138,10 @@ const Home = () => {
                 </div>
               </div>
               <div className='h-1/4 lg:h-[20%]'>
-                <FrameHexagon hover inverted palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full' >
+                <FrameHexagon hover inverted palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full text-base md:text-lg' >
                   <p className='text-center'>Feel free to toggle the orientation of the map.</p>
                   <br />
-                  <p className='text-center'>If you zoom into the map, you can see country locations. However, please note data and charts only display information at the world or subregional level.</p>
+                  <p className='text-center px-4'>If you zoom into the map, you can see country locations. However, please note data and charts only display information at the global or subregional level.</p>
                 </FrameHexagon>
               </div>
             </div>

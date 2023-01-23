@@ -19,6 +19,11 @@ const groupCountriesByRegion = () => {
 
 const COUNTRIES_BY_REGION = groupCountriesByRegion();
 
+const generateRadarChartData = (metrics: string[]) => {
+	//key to be the metric
+	//value to be the avg accross all countries
+};
+
 export const restrieveSingleSeriesDatum = (
 	aggregator: AggregatorType,
 	metric: keyof CountryProfile,
