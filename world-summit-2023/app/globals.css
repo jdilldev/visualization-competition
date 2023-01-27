@@ -108,6 +108,11 @@ body {
 	}
 
 	@font-face {
+		font-family: "Astrobia";
+		src: url("./fonts/Astrobia.ttf");
+	}
+
+	@font-face {
 		font-family: "Progress";
 		src: url("./fonts/Progress.ttf");
 	}
@@ -123,7 +128,7 @@ body {
 	}
 
 	@font-face {
-		font-family: "Agelast";
-		src: url("./fonts/Agelast.otf");
+		font-family: "SpaceGame";
+		src: url("./fonts/SpaceGame.otf");
 	}
 }

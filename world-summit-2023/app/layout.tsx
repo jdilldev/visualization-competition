@@ -9,6 +9,10 @@ const theme = createTheme({
     tonalOffset: 0.1,
     primary: { main: '#005066' },
     secondary: { main: '#578798' },
+    statBoxOne: { main: 'yellow' },
+    statBoxTwo: { main: '' },
+    statBoxThree: { main: '' },
+    statBox4: { main: '' },
     success: { main: '#0f0' },
     error: { main: '#e84242' },
 

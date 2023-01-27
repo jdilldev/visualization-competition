@@ -27,6 +27,6 @@ export const DefaultPlaceholder = ({ height, placeholderLocation }: DefaultPlace
     const chartIconClassName = 'w-16 h-16 md:w-28 md:h-28'
     return <div style={{ height: height }} className='flex flex-row mb-3 md:flex-col gap-4 justify-center items-center'>
         {placeholderLocation === 'one' ? <PieChartIcon className={chartIconClassName} /> : <LineChartIcon className={chartIconClassName} />}
-        <p className='font-agelast uppercase tracking-widest text-2xl'>Choose a theme</p>
+        <p className='font-agelast uppercase tracking-widest text-2xl'>Select a theme</p>
     </div>
 }

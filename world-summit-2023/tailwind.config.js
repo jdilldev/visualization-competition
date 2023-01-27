@@ -12,10 +12,10 @@ module.exports = {
       equinox: ['Equinox'],
       nebula: ['Nebula'],
       'nebula-hollow': ['Nebula-Hollow'],
-      flare: ['Flare'],
+      astrobia: ['Astrobia'],
       stacker: ['Stacker'],
       progress: ['Progress'],
-      agelast: ['Agelast'],
+      space: ['SpaceGame'],
       axeon: ['Axeon']
     },
     extend: {
