@@ -1,6 +1,9 @@
 import { Grid, } from '@nextui-org/react';
 import { FrameLines } from '@arwes/core';
 import InsightIcon from '../public/icons/brain.svg'
+import { useContext } from 'react';
+import { DEFAULT_THEME_PROMPT, SummitThemeContext } from '../app/page';
+import { getWorldAvg, retrieveData } from '../app/data/generateData';
 
 type DefaultStatItem = {
     numeric: string
@@ -8,7 +11,7 @@ type DefaultStatItem = {
 }
 
 const defaultStatBoxes: DefaultStatItem[] = [
-    { numeric: '13', text: 'Subregions' },
+    { numeric: '15', text: 'Subregions' },
     { numeric: '174', text: 'Countries' },
     { numeric: '6', text: 'Themes' },
     { numeric: '', text: 'Endless Insights' }
@@ -27,5 +30,8 @@ const Default = () => <Grid className='flex gap-4 justify-between h-[10%] md:h-[
 </Grid>
 
 export const StatBoxes = () => {
-    return <Default />
+    retrieveData({ aggregator: "world", metrics: ['2017_HDI'], }, "hierarchical");
+    //console.log(getWorldAvg('2018_unemployment'))
+    const selectedTheme = useContext(SummitThemeContext)
+    return selectedTheme === DEFAULT_THEME_PROMPT ? <Default /> : <Default />
 }

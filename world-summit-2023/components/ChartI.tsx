@@ -23,7 +23,7 @@ const data = [
     },
 ]
 
-const RadialChart = ({ width, height }: ChartDimensions) =>
+const RadarChart = ({ width, height }: ChartDimensions) =>
     <Radar
         width={width}
         height={height}

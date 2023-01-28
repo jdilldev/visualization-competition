@@ -1,4 +1,4 @@
-import source_data from "./source_data";
+export type ChartDimensions = { width: number; height: number };
 
 export const M49_subregions = [
 	"Northern Africa",
@@ -305,3 +305,5 @@ export type CountryProfile = {
 	"2015_electricity_from_renewables"?: string;
 	"2020_electricity_from_renewables"?: string;
 };
+
+export type CountryMetrics = keyof CountryProfile;

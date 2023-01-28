@@ -5923,4 +5923,9 @@ const source_data: CountryProfile[] = [
 	},
 ];
 
+export const source_data_obj = source_data.reduce((acc, curr) => {
+	acc[curr.name] = curr;
+	return acc;
+}, {} as { [key: string]: CountryProfile });
+
 export default source_data;

@@ -1,11 +1,72 @@
-import { useMemo } from "react";
-import data from "./source_data";
-import { CountryProfile, M49_subregion, M49_subregions } from "./types";
+import _ from "lodash";
+import data, { source_data_obj as dataObj } from "./source_data";
+import {
+	CountryProfile,
+	M49_subregion,
+	M49_subregions,
+	CountryMetrics,
+} from "./types";
 
-type AggregatorType = "country" | "region";
+type AggregatorType = "world" | "multiRegions" | "singleRegion";
 
-const groupCountriesByRegion = () => {
-	const countriesByRegion: { [region: M49_subregion]: CountryProfile[] } = {};
+type ChartType = "linear" | "hierarchical" | "percentile" | "categorical";
+
+// scatter, radialbar, line, heatmap, bump
+type LinearData = {
+	id: string;
+	data: { x: string | keyof CountryProfile; y: number }[];
+};
+
+// sunburst, circle packing
+type HierarchicalData = {
+	id: string;
+	value: number;
+	children: HierarchicalData[];
+};
+
+// pie, waffle, funnel
+type PercentileData = {
+	id: string;
+	value: number;
+	label?: string;
+	color?: string;
+	//subregion: M49_subregion;
+};
+
+// radar, parallel cooridnates, stream, swarm, bar
+type CategoricalData = {
+	[key: string]: number | string;
+};
+
+type ChartDataType =
+	| LinearData[]
+	| HierarchicalData
+	| PercentileData[]
+	| CategoricalData[];
+
+type RegionCountries = { [region: M49_subregion]: CountryProfile[] };
+
+interface ChartInputs {
+	aggregator: AggregatorType;
+	metrics: CountryMetrics[];
+	regions?: M49_subregion[];
+}
+
+const extractMetricValue = (
+	country: CountryProfile,
+	metric: CountryMetrics
+): number | false => {
+	const metricValue = country[metric];
+
+	if (!metricValue) return false;
+
+	return typeof metricValue === "string"
+		? parseFloat(metricValue as string)
+		: (metricValue as number);
+};
+
+const getAllRegions = (): RegionCountries => {
+	const countriesByRegion: RegionCountries = {};
 	for (const key of M49_subregions) {
 		const countries = data
 			.filter((country) => country.region && country.region === key)
@@ -17,81 +78,293 @@ const groupCountriesByRegion = () => {
 	return countriesByRegion;
 };
 
-const COUNTRIES_BY_REGION = groupCountriesByRegion();
+const COUNTRIES_BY_REGION = getAllRegions();
 
-const generateRadarChartData = (metrics: string[]) => {
-	//key to be the metric
-	//value to be the avg accross all countries
+const getSpecificRegions = (specificRegions = [] as M49_subregion[]) => {
+	if (specificRegions.length === 0) return COUNTRIES_BY_REGION;
+	const filteredRegions = Object.keys(COUNTRIES_BY_REGION)
+		.filter((region) => specificRegions.includes(region))
+		.reduce(
+			(acc, currRegion) => ({
+				...acc,
+				[currRegion]: COUNTRIES_BY_REGION[currRegion],
+			}),
+			{} as RegionCountries
+		);
+
+	return filteredRegions;
 };
 
-export const restrieveSingleSeriesDatum = (
+const getAggregatorIndicies = (
 	aggregator: AggregatorType,
-	metric: keyof CountryProfile,
-	region?: M49_subregion
+	regions = [] as M49_subregion[]
 ) => {
-	const chartData = [];
-
-	if (aggregator === "country") {
-		const source = region ? COUNTRIES_BY_REGION[region] : data;
-
-		source.forEach((country) => {
-			let value: number;
-
-			if (country[metric]) {
-				value = (
-					typeof country[metric] === "string"
-						? (value = parseFloat(country[metric] as string))
-						: country[metric]
-				) as number;
-
-				chartData.push({ key: country.name, data: value });
-			}
-		});
-	} else {
-		//go thru each country in the region and avg their metric value
-		for (const region in COUNTRIES_BY_REGION) {
-			let accumulatedTotal = 0;
-			const numOfCountriesInRegion = COUNTRIES_BY_REGION[region].length;
-			let value: number;
-
-			COUNTRIES_BY_REGION[region].forEach((country) => {
-				if (country[metric]) {
-					value = (
-						typeof country[metric] === "string"
-							? (value = parseFloat(country[metric] as string))
-							: country[metric]
-					) as number;
-				}
-				accumulatedTotal += value;
-			});
-			const avgForRegion = accumulatedTotal / numOfCountriesInRegion;
-			chartData.push({ key: region, data: avgForRegion });
-		}
+	switch (aggregator) {
+		case "world":
+			return dataObj;
+		case "multiRegions":
+		case "singleRegion":
+			return getSpecificRegions(regions);
 	}
-
-	console.log(chartData);
-	return chartData;
 };
 
-export const retriveRegionallyGroupedDatum = (
-	specificRegion: "all" | M49_subregion,
-	metric: keyof CountryProfile
-) => {
-	const chartData = [];
+// supports multiple metrics
+// does not support world (all indiviuda)
+const generateLinearData = (inputs: ChartInputs) => {
+	let linearData: LinearData[] = [];
 
-	if (specificRegion === "all") {
-		for (const region of M49_subregions) {
-			chartData.push({
-				key: region,
-				data: restrieveSingleSeriesDatum("country", metric, region),
+	const { aggregator, metrics, regions } = inputs;
+	const r = getAggregatorIndicies(aggregator, regions) as RegionCountries;
+
+	//if it's a single region, we want to index by country; otherwise, get avg of all regions or specified regions
+	if (regions && regions.length === 1) {
+		const region = regions[0];
+		linearData = r[region].reduce((acc, currCountry) => {
+			const tmp: { x: string; y: number }[] = [];
+			metrics.forEach((metric) => {
+				const extractedVal = extractMetricValue(currCountry, metric);
+
+				if (extractedVal) tmp.push({ x: metric, y: extractedVal });
 			});
-		}
+			acc.push({ id: currCountry.name, data: tmp });
+			return acc;
+		}, [] as LinearData[]);
 	} else {
-		chartData.push({
-			key: specificRegion,
-			data: restrieveSingleSeriesDatum("country", metric, specificRegion),
+		linearData = Object.keys(r).reduce((acc, currRegion) => {
+			let val = 0;
+			let total = 0;
+			const tmp: { x: string; y: number }[] = [];
+
+			metrics.forEach((metric) => {
+				r[currRegion].forEach((country) => {
+					const extractedVal = extractMetricValue(country, metric);
+
+					if (extractedVal) {
+						total++;
+						val += extractedVal;
+					}
+				});
+				tmp.push({ x: metric, y: val / total });
+			});
+			acc.push({ id: currRegion, data: tmp });
+
+			return acc;
+		}, [] as LinearData[]);
+	}
+
+	return linearData;
+};
+
+//supports a single metric
+const generateHierarchicalData = (inputs: ChartInputs) => {
+	let hierarchicalData = {
+		id: "world",
+		value: 0,
+		children: [],
+	} as HierarchicalData;
+
+	const { aggregator, metrics, regions } = inputs;
+
+	const metric = metrics[0];
+	const r = getAggregatorIndicies(aggregator, regions) as RegionCountries;
+
+	if (aggregator === "world") {
+		data.forEach((country) => {
+			const extractedVal = extractMetricValue(country, metric);
+
+			if (extractedVal)
+				hierarchicalData.children.push({
+					id: country.name,
+					value: extractedVal,
+					children: [],
+				});
+		});
+	} else if (aggregator === "multiRegions") {
+		Object.keys(r).reduce((acc, currRegion) => {
+			let val = 0;
+			let total = 0;
+
+			r[currRegion].forEach((country) => {
+				const extractedVal = extractMetricValue(country, metric);
+
+				if (extractedVal) {
+					total++;
+					val += extractedVal;
+				}
+			});
+			const regionalAvg = val / total;
+			acc.children.push({ id: currRegion, value: regionalAvg, children: [] });
+			return acc;
+		}, hierarchicalData);
+	} else if (regions && aggregator === "singleRegion") {
+		const region = regions[0];
+
+		r[region].forEach((country) => {
+			const extractedVal = extractMetricValue(country, metric);
+
+			if (extractedVal)
+				hierarchicalData.children.push({
+					id: country.name,
+					value: extractedVal,
+					children: [],
+				});
 		});
 	}
 
-	return chartData;
+	hierarchicalData.value = hierarchicalData.children.reduce(
+		(acc, curr) => (acc += curr.value),
+		0
+	);
+	return hierarchicalData;
+};
+
+// supports a single metric
+const generatePercentileData = (inputs: ChartInputs) => {
+	let percentileData: PercentileData[] = [];
+
+	const { aggregator, metrics, regions } = inputs;
+	const metric = metrics[0];
+	const r = getAggregatorIndicies(aggregator, regions) as RegionCountries;
+
+	if (aggregator === "world") {
+		data.forEach((country) => {
+			const extractedVal = extractMetricValue(country, metric);
+
+			if (extractedVal)
+				percentileData.push({ id: country.name, value: extractedVal });
+		});
+	} else if (aggregator === "multiRegions") {
+		percentileData = Object.keys(r).reduce((acc, currRegion) => {
+			let val = 0;
+			let total = 0;
+
+			r[currRegion].forEach((country) => {
+				const extractedVal = extractMetricValue(country, metric);
+
+				if (extractedVal) {
+					total++;
+					val += extractedVal;
+				}
+			});
+			const regionalAvg = val / total;
+			acc.push({ id: currRegion, value: regionalAvg });
+			return acc;
+		}, [] as PercentileData[]);
+	} else if (regions && aggregator === "singleRegion") {
+		const region = regions[0];
+
+		r[region].forEach((country) => {
+			const extractedVal = extractMetricValue(country, metric);
+
+			if (extractedVal)
+				percentileData.push({ id: country.name, value: extractedVal });
+		});
+	}
+
+	return percentileData;
+};
+
+//supports multiple metrics
+const generateCategoricalData = (inputs: ChartInputs) => {
+	let categoricalData: CategoricalData[] = [];
+	const { aggregator, metrics, regions } = inputs;
+	const r = getAggregatorIndicies(aggregator, regions) as RegionCountries;
+
+	switch (aggregator) {
+		case "world":
+			data.forEach((country) => {
+				const tmp: { [key: string]: number | string } = {};
+
+				for (const metric of metrics) {
+					const extractedVal = extractMetricValue(country, metric);
+
+					if (extractedVal) tmp[metric] = extractedVal;
+				}
+				tmp["country"] = country.name;
+				categoricalData.push(tmp);
+			});
+			break;
+		case "multiRegions":
+			categoricalData = Object.keys(r).reduce((acc, currRegion) => {
+				let val = 0;
+				let total = 0;
+				const tmp: { [key: string]: number | string } = {};
+
+				metrics.forEach((metric) => {
+					r[currRegion].forEach((country) => {
+						const extractedVal = extractMetricValue(country, metric);
+
+						if (extractedVal) {
+							total++;
+							val += extractedVal;
+						}
+					});
+					const avgVal = val / total;
+					tmp[metric] = avgVal;
+				});
+				tmp["name"] = currRegion;
+				acc.push(tmp);
+
+				return acc;
+			}, [] as CategoricalData[]);
+			break;
+		case "singleRegion":
+			if (!regions || regions.length !== 1)
+				throw Error(
+					"a single region must be defined in the regions array for a singleRegion chart"
+				);
+			const region = regions[0];
+			categoricalData = r[region].reduce((acc, currCountry) => {
+				const tmp: { [key: string]: number | string } = {};
+				metrics.forEach((metric) => {
+					const extractedVal = extractMetricValue(currCountry, metric);
+
+					if (extractedVal) tmp[metric] = extractedVal;
+				});
+				tmp["country"] = currCountry.name;
+				acc.push(tmp);
+
+				return acc;
+			}, [] as CategoricalData[]);
+			break;
+		default:
+			throw Error("unmatched case");
+	}
+
+	return categoricalData;
+};
+
+export const getWorldAvg = (metric: CountryMetrics) => {
+	let totalCountries = 0;
+	const totalVal = data.reduce((acc, curr) => {
+		const extractedVal = extractMetricValue(curr, metric);
+
+		if (extractedVal) {
+			totalCountries++;
+			acc += extractedVal;
+		}
+
+		return acc;
+	}, 0);
+
+	return totalVal / totalCountries;
+};
+
+export const retrieveData = (inputs: ChartInputs, type: ChartType) => {
+	switch (type) {
+		case "linear":
+			console.log(generateLinearData(inputs));
+			break;
+		case "hierarchical":
+			console.log(generateHierarchicalData(inputs));
+			break;
+		case "percentile":
+			console.log(generatePercentileData(inputs));
+			break;
+		case "categorical":
+			console.log(generateCategoricalData(inputs));
+			break;
+		default:
+			throw Error("trying to create a Chart of an invalid type");
+	}
 };
