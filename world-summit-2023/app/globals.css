@@ -93,6 +93,11 @@ body {
 	}
 
 	@font-face {
+		font-family: "Agelast";
+		src: url("./fonts/Agelast.otf");
+	}
+
+	@font-face {
 		font-family: "Nebula";
 		src: url("./fonts/Nebula-Regular.otf");
 	}

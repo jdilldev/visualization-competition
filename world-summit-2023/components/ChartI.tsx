@@ -1,71 +1,39 @@
 import { FrameCorners } from '@arwes/core';
 import { Radar } from '@nivo/radar'
+import { useContext } from 'react';
+import { getWorldAvg, retrieveData } from '../app/data/generateData';
+import { SummitThemeContext } from '../app/page';
+import RadarChart from './Charts/RadarChart';
 import { DefaultPlaceholder } from './Shared';
 
 
-type ChartDimensions = { width: number; height: number }
-
-/* const AreaChart = ({ width, height }: ChartDimensions) => {
-    return <Example width={width - 20} height={height - 20} />
-} */
 const data = [
     {
-        "taste": "fruity",
-        "syrah": 79
+        "metric": "Government Effectiveness",
+        "value": 12//getWorldAvg('2021_government_effectiveness')
     },
     {
-        "taste": "bitter",
-        "syrah": 20
+        "metric": "Rule of Law",
+        "value": 8//getWorldAvg('2022_government_integrity')
     },
     {
-        "taste": "heavy",
-        "syrah": 42
+        "metric": "Political Instability",
+        "value": 15 //getWorldAvg('2021_political_instability')
     },
+    {
+        "metric": "Control of Corruption",
+        "value": 21 //getWorldAvg('2021_political_instability')
+    },
+    {
+        "metric": "Regulatory Quality",
+        "value": 17 //getWorldAvg('2021_political_instability')
+    }
 ]
 
-const RadarChart = ({ width, height }: ChartDimensions) =>
-    <Radar
-        width={width}
-        height={height}
-        data={data}
-        keys={['syrah']}
-        indexBy="taste"
-        valueFormat=">-.2f"
-        margin={{ top: 30, right: 0, bottom: 30, left: 0 }}
-        borderColor={{ from: 'color', modifiers: [] }}
-        gridLabelOffset={20}
-        dotSize={5}
-        dotColor={{ theme: 'background' }}
-        dotBorderWidth={1}
-        colors={{ scheme: 'blues' }}
-        fillOpacity={.5}
-        blendMode="overlay"
-        motionConfig="wobbly"
-        legends={[
-            {
-                anchor: 'top-left',
-                direction: 'column',
-                translateX: -50,
-                translateY: -40,
-                itemWidth: 80,
-                itemHeight: 20,
-                itemTextColor: '#999',
-                symbolSize: 12,
-                symbolShape: 'circle',
-                effects: [
-                    {
-                        on: 'hover',
-                        style: {
-                            itemTextColor: '#000'
-                        }
-                    }
-                ]
-            }
-        ]}
-    />
 
+export const ChartI = ({ width, height }: { width: number, height: number }) => {
+    const selectedTheme = useContext(SummitThemeContext)
 
-export const ChartI = ({ selectedTheme, width, height }: { selectedTheme: string, width: number, height: number }) => {
     return <FrameCorners
         showContentLines
         cornerLength={50}
@@ -73,6 +41,10 @@ export const ChartI = ({ selectedTheme, width, height }: { selectedTheme: string
         animator={{ animate: false }}
         style={{ width: width, height: height }}
     >
-        <DefaultPlaceholder height={height} placeholderLocation='one' />
+        <RadarChart
+            dimensions={{ width, height }}
+            data={data}
+            indexBy={'metric'}
+            keys={['value']} />
     </FrameCorners>
 }

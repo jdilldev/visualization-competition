@@ -5,52 +5,15 @@ import {
 	M49_subregion,
 	M49_subregions,
 	CountryMetrics,
+	AggregatorType,
+	CategoricalData,
+	ChartInputs,
+	ChartType,
+	HierarchicalData,
+	LinearData,
+	PercentileData,
+	RegionCountries,
 } from "./types";
-
-type AggregatorType = "world" | "multiRegions" | "singleRegion";
-
-type ChartType = "linear" | "hierarchical" | "percentile" | "categorical";
-
-// scatter, radialbar, line, heatmap, bump
-type LinearData = {
-	id: string;
-	data: { x: string | keyof CountryProfile; y: number }[];
-};
-
-// sunburst, circle packing
-type HierarchicalData = {
-	id: string;
-	value: number;
-	children: HierarchicalData[];
-};
-
-// pie, waffle, funnel
-type PercentileData = {
-	id: string;
-	value: number;
-	label?: string;
-	color?: string;
-	//subregion: M49_subregion;
-};
-
-// radar, parallel cooridnates, stream, swarm, bar
-type CategoricalData = {
-	[key: string]: number | string;
-};
-
-type ChartDataType =
-	| LinearData[]
-	| HierarchicalData
-	| PercentileData[]
-	| CategoricalData[];
-
-type RegionCountries = { [region: M49_subregion]: CountryProfile[] };
-
-interface ChartInputs {
-	aggregator: AggregatorType;
-	metrics: CountryMetrics[];
-	regions?: M49_subregion[];
-}
 
 const extractMetricValue = (
 	country: CountryProfile,
@@ -353,16 +316,16 @@ export const getWorldAvg = (metric: CountryMetrics) => {
 export const retrieveData = (inputs: ChartInputs, type: ChartType) => {
 	switch (type) {
 		case "linear":
-			console.log(generateLinearData(inputs));
+			generateLinearData(inputs);
 			break;
 		case "hierarchical":
-			console.log(generateHierarchicalData(inputs));
+			generateHierarchicalData(inputs);
 			break;
 		case "percentile":
-			console.log(generatePercentileData(inputs));
+			generatePercentileData(inputs);
 			break;
 		case "categorical":
-			console.log(generateCategoricalData(inputs));
+			generateCategoricalData(inputs);
 			break;
 		default:
 			throw Error("trying to create a Chart of an invalid type");

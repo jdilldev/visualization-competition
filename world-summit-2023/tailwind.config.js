@@ -9,6 +9,7 @@ module.exports = {
     fontFamily: {
       body: ['Avenir'],
       dreamscape: ['Dreamscape'],
+      agelast: ['Agelast'],
       equinox: ['Equinox'],
       nebula: ['Nebula'],
       'nebula-hollow': ['Nebula-Hollow'],

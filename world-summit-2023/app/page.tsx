@@ -16,7 +16,6 @@ import Education from '../public/icons/global-education.svg'
 import Exploring from '../public/icons/global-connectivity.svg'
 import Development from '../public/icons/009-overpopulation.svg'
 import { ButtonGroup } from '../components/Shared';
-import { restrieveSingleSeriesDatum, retriveRegionallyGroupedDatum } from './data/generateData';
 import { ChartI } from '../components/ChartI';
 import { ChartII } from '../components/ChartII';
 
@@ -89,14 +88,14 @@ const Home = () => {
               <div className='flex flex-wrap flex-row gap-1 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
                 <div className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
                   <ParentSize debounceTime={10}>{({ width, height }) =>
-                    <ChartI selectedTheme={selectedTheme} width={width} height={height - 10} />
+                    <ChartI width={width - 10} height={height - 10} />
                   }
                   </ParentSize>
                 </div>
                 {isDesktop && <RegionalInfo />}
                 <div className='w-full h-1/2 md:w-[58%] md:basis-[58%] md:h-2/3 lg:w-full lg:h-1/2'>
                   <ParentSize debounceTime={10}>{({ width, height }) =>
-                    <ChartII selectedTheme={selectedTheme} width={width} height={height - 10} />
+                    <ChartII width={width} height={height - 10} />
                   }
                   </ParentSize>              </div>
                 {!isDesktop && <RegionalInfo />}
@@ -141,10 +140,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div className='h-1/4 lg:h-[20%]'>
-                  <FrameHexagon hover inverted palette='secondary' squareSize={60} lineWidth={3} animator={{ animate: false }} className='h-full w-full text-base md:text-lg' >
-                    <p className='text-center'>Feel free to toggle the orientation of the map.</p>
-                    <br />
-                    <p className='text-center px-4'>If you zoom into the map, you can see country locations. However, please note data and charts only display information at the global or subregional level.</p>
+                  <FrameHexagon hover inverted palette='secondary' squareSize={40} lineWidth={3} animator={{ animate: false }} className='h-full w-full text-base md:text-lg' >
+                    <p className='text-sm md:text-base white text-center mb-2'>Feel free to toggle the orientation of the map.</p>
+                    <p className='text-sm md:text-base text-center px-4'>If you zoom into the map, you can see country locations. However, please note data and charts only display information at the global or subregional level.</p>
                   </FrameHexagon>
                 </div>
               </div>

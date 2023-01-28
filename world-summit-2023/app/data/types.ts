@@ -1,5 +1,54 @@
 export type ChartDimensions = { width: number; height: number };
 
+export type AggregatorType = "world" | "multiRegions" | "singleRegion";
+
+export type ChartType =
+	| "linear"
+	| "hierarchical"
+	| "percentile"
+	| "categorical";
+
+// scatter, radialbar, line, heatmap, bump
+export type LinearData = {
+	id: string;
+	data: { x: string | keyof CountryProfile; y: number }[];
+};
+
+// sunburst, circle packing
+export type HierarchicalData = {
+	id: string;
+	value: number;
+	children: HierarchicalData[];
+};
+
+// pie, waffle, funnel
+export type PercentileData = {
+	id: string;
+	value: number;
+	label?: string;
+	color?: string;
+	//subregion: M49_subregion;
+};
+
+// radar, parallel cooridnates, stream, swarm, bar
+export type CategoricalData = {
+	[key: string]: number | string;
+};
+
+export type ChartDataType =
+	| LinearData[]
+	| HierarchicalData
+	| PercentileData[]
+	| CategoricalData[];
+
+export type RegionCountries = { [region: M49_subregion]: CountryProfile[] };
+
+export interface ChartInputs {
+	aggregator: AggregatorType;
+	metrics: CountryMetrics[];
+	regions?: M49_subregion[];
+}
+
 export const M49_subregions = [
 	"Northern Africa",
 	"Sub-Saharan Africa",
