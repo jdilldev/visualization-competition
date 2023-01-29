@@ -30,6 +30,12 @@ body {
 	animation: glow 1s ease-in-out infinite alternate;
 }
 
+.pulse {
+	-webkit-animation: pulsate 1s ease-in-out infinite alternate;
+	-moz-animation: pulsate 1s ease-in-out infinite alternate;
+	animation: pulsate 1s ease-in-out infinite alternate;
+}
+
 .container {
 	display: flex;
 	flex-direction: column;
@@ -113,11 +119,6 @@ body {
 	}
 
 	@font-face {
-		font-family: "Astrobia";
-		src: url("./fonts/Astrobia.ttf");
-	}
-
-	@font-face {
 		font-family: "Progress";
 		src: url("./fonts/Progress.ttf");
 	}
@@ -130,10 +131,5 @@ body {
 	@font-face {
 		font-family: "Axeon";
 		src: url("./fonts/Axeon.otf");
-	}
-
-	@font-face {
-		font-family: "SpaceGame";
-		src: url("./fonts/SpaceGame.otf");
 	}
 }

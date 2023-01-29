@@ -15,7 +15,7 @@ import Health from '../public/icons/global-health.svg'
 import Education from '../public/icons/global-education.svg'
 import Exploring from '../public/icons/global-connectivity.svg'
 import Development from '../public/icons/009-overpopulation.svg'
-import { ButtonGroup } from '../components/Charts/Shared/Shared';
+import { ButtonGroup } from '../components/Shared';
 import { ChartI } from '../components/ChartI';
 import { ChartII } from '../components/ChartII';
 
@@ -88,7 +88,7 @@ const Home = () => {
               <div className='flex flex-wrap flex-row gap-1 md:justify-between h-[40%] w-full  md:h-[37.5%] lg:flex-nowrap lg:h-full lg:flex-col lg:w-1/3'>
                 <div className='w-full h-1/4 md:w-[40%] md:h-2/3 lg:w-full lg:h-2/6'>
                   <ParentSize debounceTime={10}>{({ width, height }) =>
-                    <ChartI width={width - 10} height={height - 10} />
+                    <ChartI width={width} height={height - 10} />
                   }
                   </ParentSize>
                 </div>
@@ -113,7 +113,7 @@ const Home = () => {
                       cornerLength={50}
                     // style={{ backgroundImage: `url(${bag2})` }}
                     >
-                      <ButtonGroup className='absolute top-0 right-0 z-10' values={['Mercator', 'Globe']} controlValue={mapProjection} onChange={(value: string) => setMapProjection(value as 'mercator' | 'globe')} />
+                      <ButtonGroup className='absolute top-0 right-0 z-10 font-normal' values={['Mercator', 'Globe']} controlValue={mapProjection} onChange={(value: string) => setMapProjection(value as 'mercator' | 'globe')} />
                       {/*    <Map
                         // trackResize
                         minZoom={1}

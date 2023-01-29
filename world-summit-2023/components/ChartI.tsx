@@ -1,11 +1,28 @@
 import { FrameCorners } from '@arwes/core';
-import { Radar } from '@nivo/radar'
 import { useContext } from 'react';
-import { getWorldAvg, retrieveData } from '../app/data/generateData';
 import { SummitThemeContext } from '../app/page';
-import RadarChart from './Charts/RadarChart';
-import { DefaultPlaceholder } from './Charts/Shared/Shared';
+import { DefaultPlaceholder } from './Shared';
 import { GovernmentStabilityRadar } from './Charts/Themes/AcceleratingGov';
+
+
+const renderChartBasedOnTheme = (selectedTheme: string, width: number, height: number) => {
+    switch (selectedTheme) {
+        case 'Accelerating Development and Governance':
+            return <GovernmentStabilityRadar width={width} height={height} />
+        case 'Global City Design and Sustainability':
+            return;
+        case 'Exploring the Frontiers':
+            return
+        case 'Governing Economic Resilience and Connectivity':
+            return
+        case 'Future of Societies and Healthcare':
+            return
+        case 'Prioritizing Learning and Work':
+            return
+        default: return <DefaultPlaceholder placeholderLocation='one' height={height} />
+
+    }
+}
 
 export const ChartI = ({ width, height }: { width: number, height: number }) => {
     const selectedTheme = useContext(SummitThemeContext)
@@ -16,8 +33,8 @@ export const ChartI = ({ width, height }: { width: number, height: number }) => 
         cornerWidth={3}
         animator={{ animate: false }}
         style={{ width: width, height: height }}
+        className='bg-cyan-700 bg-opacity-20'
     >
-        {/*  <DefaultPlaceholder placeholderLocation='one' height={height} /> */}
-        <GovernmentStabilityRadar width={width} height={height} />
+        {renderChartBasedOnTheme(selectedTheme, width, height)}
     </FrameCorners>
 }

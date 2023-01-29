@@ -11,7 +11,8 @@ export const UN_PERMANENT = [
 export const NIVO_THEME = {
 	background: "transparent",
 	textColor: "#9fd0dcb1",
-	fontSize: 11,
+	fontSize: 13,
+	fontFamily: "avenir",
 	axis: {
 		domain: {
 			line: {
@@ -22,7 +23,7 @@ export const NIVO_THEME = {
 		legend: {
 			text: {
 				fontSize: 12,
-				fill: "#333333",
+				fill: "white",
 			},
 		},
 		ticks: {
@@ -31,9 +32,9 @@ export const NIVO_THEME = {
 				strokeWidth: 1,
 			},
 			text: {
-				fontSize: 13,
+				fontSize: 11,
 				fill: "#9fd0dcb1",
-				fontFamily: "avenir",
+				fontFamily: "agelast",
 				fontWeight: 200,
 			},
 		},
@@ -47,7 +48,7 @@ export const NIVO_THEME = {
 	annotations: {
 		text: {
 			fontSize: 13,
-			fill: "#333333",
+			fill: "red",
 			outlineWidth: 2,
 			outlineColor: "#ffffff",
 			outlineOpacity: 1,
@@ -77,7 +78,7 @@ export const NIVO_THEME = {
 		container: {
 			background: "rgba(0, 70, 102, .8)",
 			color: "white",
-			fontSize: 12,
+			fontSize: 13,
 			fontWeight: 100,
 			fontFamily: "avenir",
 		},

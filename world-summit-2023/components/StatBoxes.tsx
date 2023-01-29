@@ -5,10 +5,10 @@ import { ReactNode, useContext } from 'react';
 import { DEFAULT_THEME_PROMPT, SummitThemeContext } from '../app/page';
 import { getWorldAvg, retrieveData } from '../app/data/generateData';
 import RadarChart from './Charts/RadarChart';
-import RadialBarChart from './Charts/Shared/RadialBar';
+import RadialBarChart from './Charts/RadialBarChart';
 import { ParentSize } from '@visx/responsive';
-import { GovernmentStabilityRadar } from './Charts/Themes/AcceleratingGov';
-import { GdpPercentagesRadialBarChart } from './Charts/Shared/Shared';
+import { GovernmentHDIDifferenceChart, GovernmentIncreaseDecreaseChart, GovernmentRadialBar, GovernmentStabilityRadar } from './Charts/Themes/AcceleratingGov';
+import { GdpPercentagesRadialBarChart } from './Shared';
 
 type DefaultStatItem = {
     numeric: string
@@ -39,7 +39,7 @@ const StatBox = ({ item, index }: { item: DefaultStatItem, index: number }) => {
 
 const DefaultStatBox = ({ item }: { item: DefaultStatItem }) => <>
     {item.numeric !== '' ? <p className='w-12 h-12 font-nebula text-3xl'>{item.numeric}</p> : <InsightIcon className='w-16 h-12 pb-2 fill-[#9fd0dcb1]' />}
-    <p className='font-body uppercase md:font-nebula whitespace-wrap text-sm md:text-base'>{item.text}</p>
+    <p className='font-body uppercase md:font-nebula whitespace-wrap text-sm md:text-xl'>{item.text}</p>
 </>
 
 const getContentForTheme = (width: number, height: number, theme: string, position: number) => {
@@ -47,13 +47,11 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
         case 'Accelerating Development and Governance':
             switch (position) {
                 case 0:
-                    return <p>acc 1</p>
+                    return <GovernmentHDIDifferenceChart width={width} height={height} />
                 case 1:
-                    return <p>acc 2</p>
+                    return <GovernmentIncreaseDecreaseChart width={width} height={height} />
                 case 2:
-                    return <p>acc 3</p>
-                case 3:
-                    return <GdpPercentagesRadialBarChart width={width} height={height} relevantMetric='Government' />
+                    return <GovernmentRadialBar width={width} height={height} />
             }
         case 'Global City Design and Sustainability':
             switch (position) {
@@ -79,7 +77,6 @@ export const StatBoxes = () => {
 
         {defaultStatBoxes.map((item, index) =>
             <StatBox item={item} index={index} />
-        )
-        }
+        )}
     </Grid>
 }
