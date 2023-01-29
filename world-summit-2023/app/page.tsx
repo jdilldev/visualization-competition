@@ -97,7 +97,8 @@ const Home = () => {
                   <ParentSize debounceTime={10}>{({ width, height }) =>
                     <ChartII width={width} height={height - 10} />
                   }
-                  </ParentSize>              </div>
+                  </ParentSize>
+                </div>
                 {!isDesktop && <RegionalInfo />}
               </div>
               <div className='gap-3 flex flex-col h-1/2 lg:h-full lg:w-2/3'>

@@ -1,6 +1,10 @@
 export type ChartDimensions = { width: number; height: number };
 
-export type AggregatorType = "world" | "multiRegions" | "singleRegion";
+export type AggregatorType =
+	| "world"
+	| "multiRegions"
+	| "singleRegion"
+	| "country";
 
 export type ChartType =
 	| "linear"
@@ -47,6 +51,7 @@ export interface ChartInputs {
 	aggregator: AggregatorType;
 	metrics: CountryMetrics[];
 	regions?: M49_subregion[];
+	countries?: Alpha3_country_codes[];
 }
 
 export const M49_subregions = [

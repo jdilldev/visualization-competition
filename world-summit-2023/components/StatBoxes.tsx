@@ -25,9 +25,9 @@ const defaultStatBoxes: DefaultStatItem[] = [
 const StatBox = ({ item, index }: { item: DefaultStatItem, index: number }) => {
     const selectedTheme = useContext(SummitThemeContext)
 
-    return <div className='w-1/4 h-full flex flex-col justify-between'>
+    return <div className='w-[24%] h-full flex flex-col justify-between'>
         <ParentSize debounceTime={10}>{({ width, height }) =>
-            <FrameLines style={{ width: width - 10, height: height }} palette='secondary' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+            <FrameLines style={{ width: width - 1, height: height }} palette='secondary' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
                 {selectedTheme === DEFAULT_THEME_PROMPT ? <DefaultStatBox item={item} /> : getContentForTheme(width - 5, height - 20, selectedTheme, index)}
             </FrameLines >
         }
@@ -73,7 +73,7 @@ export const StatBoxes = () => {
     retrieveData({ aggregator: "world", metrics: ['2017_HDI'], }, "hierarchical");
     //console.log(getWorldAvg('2018_unemployment'))
     const selectedTheme = useContext(SummitThemeContext)
-    return <Grid className='flex gap-4 justify-between h-[10%] md:h-[12.5%] lg:h-[20%]'>
+    return <Grid className='flex  md:gap-4 justify-between h-[10%] md:h-[12.5%] lg:h-[20%]'>
 
         {defaultStatBoxes.map((item, index) =>
             <StatBox item={item} index={index} />

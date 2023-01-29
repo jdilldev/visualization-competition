@@ -34,7 +34,7 @@ export const NIVO_THEME = {
 			text: {
 				fontSize: 11,
 				fill: "#9fd0dcb1",
-				fontFamily: "agelast",
+				fontFamily: "avenir",
 				fontWeight: 200,
 			},
 		},

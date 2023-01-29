@@ -6,6 +6,7 @@ import { GdpPercentagesRadialBarChart } from "../../Shared"
 import LegendIcon from '../../../public/icons/rect-vertical.svg'
 import LegendIconII from '../../../public/icons/rect-horizontal.svg'
 import PieChart from "../PieChart"
+import ParallelCoordinatesChart from "../ParallelCoordinates"
 
 export const GovernmentStabilityRadar = ({ width, height }: ChartDimensions) => {
     const data = [
@@ -108,8 +109,19 @@ export const GovernmentHealthBullet = ({ width, height }: ChartDimensions) => {
 
 
 export const GovernmentHDIDifferenceChart = ({ width, height }: ChartDimensions) => {
+    const data = [
+        {
+            "Integrity Score": 15,
+            "HDI": 3,
 
-    return <p>hi</p>
+        },
+        {
+            "Integrity Score": 11,
+            "HDI": 8,
+        },
+    ]
+
+    return <ParallelCoordinatesChart data={data} dimensions={{ width, height }} />
 }
 
 export const GovernmentIncreaseDecreaseChart = ({ width, height }: ChartDimensions) => {
@@ -127,3 +139,4 @@ export const GovernmentIncreaseDecreaseChart = ({ width, height }: ChartDimensio
 
     return <PieChart data={data} width={width} height={height} />
 }
+

@@ -64,6 +64,7 @@ const getAggregatorIndicies = (
 ) => {
 	switch (aggregator) {
 		case "world":
+		case "country":
 			return dataObj;
 		case "multiRegions":
 		case "singleRegion":
@@ -80,7 +81,7 @@ const generateLinearData = (inputs: ChartInputs) => {
 	const r = getAggregatorIndicies(aggregator, regions) as RegionCountries;
 
 	//if it's a single region, we want to index by country; otherwise, get avg of all regions or specified regions
-	if (regions && regions.length === 1) {
+	if (regions && aggregator === "singleRegion") {
 		const region = regions[0];
 		linearData = r[region].reduce((acc, currCountry) => {
 			const tmp: { x: string; y: number }[] = [];
@@ -92,7 +93,7 @@ const generateLinearData = (inputs: ChartInputs) => {
 			acc.push({ id: currCountry.name, data: tmp });
 			return acc;
 		}, [] as LinearData[]);
-	} else {
+	} else if (aggregator === "multiRegions") {
 		linearData = Object.keys(r).reduce((acc, currRegion) => {
 			let val = 0;
 			let total = 0;
@@ -113,6 +114,18 @@ const generateLinearData = (inputs: ChartInputs) => {
 
 			return acc;
 		}, [] as LinearData[]);
+	} else if (aggregator === "world") {
+		data.forEach((country) => {
+			const tmp: { x: string; y: number }[] = [];
+
+			for (const metric of metrics) {
+				const extractedVal = extractMetricValue(country, metric);
+
+				if (extractedVal) tmp.push({ x: metric, y: extractedVal });
+			}
+
+			linearData.push({ id: country.name, data: tmp });
+		});
 	}
 
 	return linearData;
