@@ -5,8 +5,10 @@ import { ReactNode, useContext } from 'react';
 import { DEFAULT_THEME_PROMPT, SummitThemeContext } from '../app/page';
 import { getWorldAvg, retrieveData } from '../app/data/generateData';
 import RadarChart from './Charts/RadarChart';
-import RadialBarChart from './Charts/RadialBar';
+import RadialBarChart from './Charts/Shared/RadialBar';
 import { ParentSize } from '@visx/responsive';
+import { GovernmentStabilityRadar } from './Charts/Themes/AcceleratingGov';
+import { GdpPercentagesRadialBarChart } from './Charts/Shared/Shared';
 
 type DefaultStatItem = {
     numeric: string
@@ -20,13 +22,13 @@ const defaultStatBoxes: DefaultStatItem[] = [
     { numeric: '', text: 'Endless Insights' }
 ]
 
-const StatBox = ({ width, height, content }: { width?: number, height?: number, content: ReactNode }) => {
+const StatBox = ({ item, index }: { item: DefaultStatItem, index: number }) => {
     const selectedTheme = useContext(SummitThemeContext)
 
     return <div className='w-1/4 h-full flex flex-col justify-between'>
         <ParentSize debounceTime={10}>{({ width, height }) =>
-            <FrameLines style={{ width: width, height: height }} palette='secondary' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
-                {getContentForTheme(width, height - 20, selectedTheme, 3)}
+            <FrameLines style={{ width: width - 10, height: height }} palette='secondary' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+                {selectedTheme === DEFAULT_THEME_PROMPT ? <DefaultStatBox item={item} /> : getContentForTheme(width - 5, height - 20, selectedTheme, index)}
             </FrameLines >
         }
         </ParentSize>
@@ -37,7 +39,7 @@ const StatBox = ({ width, height, content }: { width?: number, height?: number, 
 
 const DefaultStatBox = ({ item }: { item: DefaultStatItem }) => <>
     {item.numeric !== '' ? <p className='w-12 h-12 font-nebula text-3xl'>{item.numeric}</p> : <InsightIcon className='w-16 h-12 pb-2 fill-[#9fd0dcb1]' />}
-    <p className='font-body uppercase md:font-nebula lg:whitespace-nowrap text-xs md:text-xl'>{item.text}</p>
+    <p className='font-body uppercase md:font-nebula whitespace-wrap text-sm md:text-base'>{item.text}</p>
 </>
 
 const getContentForTheme = (width: number, height: number, theme: string, position: number) => {
@@ -51,9 +53,7 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
                 case 2:
                     return <p>acc 3</p>
                 case 3:
-                    const governanceGDP = getWorldAvg('government_gdp')
-                    const data = [{ id: '% GDP spent on Government', data: [{ x: 'gov', y: governanceGDP }] }]
-                    return <RadialBarChart width={width} height={height} data={data} />
+                    return <GdpPercentagesRadialBarChart width={width} height={height} relevantMetric='Government' />
             }
         case 'Global City Design and Sustainability':
             switch (position) {
@@ -78,10 +78,8 @@ export const StatBoxes = () => {
     return <Grid className='flex gap-4 justify-between h-[10%] md:h-[12.5%] lg:h-[20%]'>
 
         {defaultStatBoxes.map((item, index) =>
-            <StatBox content={selectedTheme === DEFAULT_THEME_PROMPT
-                ? <DefaultStatBox item={item} />
-                : getContentForTheme(selectedTheme, index)}
-            />)
+            <StatBox item={item} index={index} />
+        )
         }
     </Grid>
 }

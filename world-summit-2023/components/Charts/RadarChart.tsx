@@ -14,22 +14,22 @@ const RadarChart = ({ data, indexBy, keys, dimensions }: { data: { [key: string]
         data={data}
         keys={keys}
         gridLevels={6}
-        enableDots={false}
+        enableDots={true}
         indexBy={indexBy}
         valueFormat=">-.2f"
         margin={{ top: 30, right: 20, bottom: 10, left: 20 }}
         borderColor={{ from: 'color' }}
         gridLabelOffset={10}
-        dotSize={5}
+        //dotSize={3}
         dotColor={{ theme: 'background' }}
-        dotBorderWidth={2}
+        // dotBorderWidth={1}
+        colors={['#78cce2']}
         fillOpacity={.6}
-        colors={{ scheme: 'nivo' }}
         blendMode="difference"
         motionConfig="gentle"
         gridShape='linear'
         theme={NIVO_THEME}
-        layers={['layers', 'grid', 'legends']}
+    //  layers={['layers', 'grid', 'legends']}
     // gridLabel={({ anchor, angle, id }) => <g><text textAnchor={anchor} dominantBaseline={'central'}>{id}</text></g>}
     />
 )

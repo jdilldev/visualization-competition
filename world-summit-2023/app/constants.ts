@@ -31,7 +31,7 @@ export const NIVO_THEME = {
 				strokeWidth: 1,
 			},
 			text: {
-				fontSize: 12,
+				fontSize: 13,
 				fill: "#9fd0dcb1",
 				fontFamily: "avenir",
 				fontWeight: 200,
@@ -75,9 +75,11 @@ export const NIVO_THEME = {
 	},
 	tooltip: {
 		container: {
-			background: "#ffffff",
-			color: "#333333",
+			background: "rgba(0, 70, 102, .8)",
+			color: "white",
 			fontSize: 12,
+			fontWeight: 100,
+			fontFamily: "avenir",
 		},
 	},
 };

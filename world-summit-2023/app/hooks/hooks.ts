@@ -14,3 +14,18 @@ export const useDesktop = () => {
 
 	return isDesktop;
 };
+
+export const useMobile = () => {
+	const [isMobile, setMobile] = useState(window.innerWidth < 749);
+
+	const updateMedia = () => {
+		setMobile(window.innerWidth < 749);
+	};
+
+	useEffect(() => {
+		window.addEventListener("resize", updateMedia);
+		return () => window.removeEventListener("resize", updateMedia);
+	});
+
+	return isMobile;
+};

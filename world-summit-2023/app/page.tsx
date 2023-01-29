@@ -15,7 +15,7 @@ import Health from '../public/icons/global-health.svg'
 import Education from '../public/icons/global-education.svg'
 import Exploring from '../public/icons/global-connectivity.svg'
 import Development from '../public/icons/009-overpopulation.svg'
-import { ButtonGroup } from '../components/Shared';
+import { ButtonGroup } from '../components/Charts/Shared/Shared';
 import { ChartI } from '../components/ChartI';
 import { ChartII } from '../components/ChartII';
 
@@ -114,7 +114,7 @@ const Home = () => {
                     // style={{ backgroundImage: `url(${bag2})` }}
                     >
                       <ButtonGroup className='absolute top-0 right-0 z-10' values={['Mercator', 'Globe']} controlValue={mapProjection} onChange={(value: string) => setMapProjection(value as 'mercator' | 'globe')} />
-                      <Map
+                      {/*    <Map
                         // trackResize
                         minZoom={1}
                         maxZoom={2.5}
@@ -135,7 +135,7 @@ const Home = () => {
 
                           return event.target.resize()
                         }}
-                      />
+                      /> */}
                     </FrameCorners>
                   </div>
                 </div>
