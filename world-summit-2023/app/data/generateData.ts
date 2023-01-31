@@ -329,17 +329,13 @@ export const getWorldAvg = (metric: CountryMetrics) => {
 export const retrieveData = (inputs: ChartInputs, type: ChartType) => {
 	switch (type) {
 		case "linear":
-			generateLinearData(inputs);
-			break;
+			return generateLinearData(inputs);
 		case "hierarchical":
-			generateHierarchicalData(inputs);
-			break;
+			return generateHierarchicalData(inputs);
 		case "percentile":
-			generatePercentileData(inputs);
-			break;
+			return generatePercentileData(inputs);
 		case "categorical":
-			generateCategoricalData(inputs);
-			break;
+			return generateCategoricalData(inputs);
 		default:
 			throw Error("trying to create a Chart of an invalid type");
 	}

@@ -1,7 +1,8 @@
 import { Pie } from '@nivo/pie'
 import { NIVO_THEME } from '../../app/constants';
 import { PercentileData } from '../../app/data/types'
-import { rangeColors } from './BulletChart';
+
+const colors = ['#b3f5ffb9', '#00b1ccd9', '#047898e3']
 
 const PieChart = ({ data, width, height }: { data: PercentileData[], width: number, height: number }) => (
     <Pie
@@ -16,7 +17,7 @@ const PieChart = ({ data, width, height }: { data: PercentileData[], width: numb
         enableArcLinkLabels={width > 255}
         activeOuterRadiusOffset={12}
         borderWidth={1}
-        colors={rangeColors}
+        colors={colors}
         arcLinkLabelsTextColor="white"
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}

@@ -8,8 +8,8 @@ type BulletData = {
     markers: number[]
 }
 
-export const measureColors = ['#b2f54de0', '#7726f9a0']
-export const rangeColors = ['#b3f5ffb9', '#00b1ccd9', '#047898e3']
+export const measureColors = ['#b2f54dca', 'transparent', '#8837faea']
+export const rangeColors = ['#0e5f76b4']
 export const markerColors = ['#ffb84ddf']
 
 const BulletChart = ({ data, width, height }: { data: BulletData[], width: number, height: number }) => (
@@ -17,14 +17,17 @@ const BulletChart = ({ data, width, height }: { data: BulletData[], width: numbe
         width={width}
         height={height - 10}
         data={data}
-        margin={{ top: 10, right: 40, bottom: 90, left: 80 }}
-        spacing={30}
+        margin={{ top: 10, right: 40, bottom: 90, left: 90 }}
+        spacing={height < 250 ? 30 : 65}
+        markerSize={1}
+        measureSize={.2}
+        //measureBorderColor={'#0ff0f8e0'}
         //titleRotation={-29}
-        rangeBorderColor={'#1d96d3e1'}
+        rangeBorderWidth={3}
+        rangeBorderColor={'#37a2a5cc'}
         //rangeBorderWidth={2}
         titleAlign="start"
-        titleOffsetX={-80}
-        measureSize={0.3}
+        titleOffsetX={-90}
         theme={NIVO_THEME}
         rangeColors={rangeColors}
         measureColors={measureColors}

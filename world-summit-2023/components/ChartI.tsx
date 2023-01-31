@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { SummitThemeContext } from '../app/page';
 import { DefaultPlaceholder } from './Shared';
 import { GovernmentStabilityRadar } from './Charts/Themes/AcceleratingGov';
+import { ShareOfElectricityFromRenewables } from './Charts/Themes/GlobalCityDesign';
 
 
 const renderChartBasedOnTheme = (selectedTheme: string, width: number, height: number) => {
@@ -10,7 +11,7 @@ const renderChartBasedOnTheme = (selectedTheme: string, width: number, height: n
         case 'Accelerating Development and Governance':
             return <GovernmentStabilityRadar width={width} height={height} />
         case 'Global City Design and Sustainability':
-            return;
+            return <ShareOfElectricityFromRenewables dimensions={{ width, height }} />
         case 'Exploring the Frontiers':
             return
         case 'Governing Economic Resilience and Connectivity':

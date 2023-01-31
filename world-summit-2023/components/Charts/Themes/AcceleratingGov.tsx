@@ -7,6 +7,9 @@ import LegendIcon from '../../../public/icons/rect-vertical.svg'
 import LegendIconII from '../../../public/icons/rect-horizontal.svg'
 import PieChart from "../PieChart"
 import ParallelCoordinatesChart from "../ParallelCoordinates"
+import { useMobile } from "../../../app/hooks/hooks"
+import GaugeChart from "../GaugeChart"
+import LineChart from "../LineChart"
 
 export const GovernmentStabilityRadar = ({ width, height }: ChartDimensions) => {
     const data = [
@@ -47,11 +50,26 @@ export const GovernmentRadialBar = ({ width, height }: ChartDimensions) => <>
 
 export const GovernmentHealthBullet = ({ width, height }: ChartDimensions) => {
     const data = [
+
+        {
+            "id": "Integrity (2022)",
+            "ranges": [
+                0,
+                8
+            ],
+            "measures": [
+                1,
+                5.7,
+                8
+            ],
+            "markers": [
+                3
+            ]
+        },
         {
             "id": "HDI (2021)",
             "ranges": [
                 0,
-                4,
                 8
             ],
             "measures": [
@@ -60,37 +78,20 @@ export const GovernmentHealthBullet = ({ width, height }: ChartDimensions) => {
 
             ],
             "markers": [
-                3
-            ]
-        },
-        {
-            "id": "Integrity (2022)",
-            "ranges": [
-                0,
-                2,
-                6,
-                8
-            ],
-            "measures": [
-                4,
-            ],
-            "markers": [
-                3
+                6.3
             ]
         },
         {
             "id": "Efficacy (2021)",
             "ranges": [
                 0,
-                2,
-                6,
                 8
             ],
             "measures": [
-                7
+                7.5
             ],
             "markers": [
-                3
+                5
             ]
         }
     ]
@@ -98,8 +99,8 @@ export const GovernmentHealthBullet = ({ width, height }: ChartDimensions) => {
         <div className="flex flex-col items-start justify-between">
             <p className="font-agelast text-lg">Government Health</p>
             <div className="w-full text-sm flex flex-row justify-evenly gap-3 lg:gap-1">
-                {['Global Avg', 'Bottom 50th percentile', 'Top 50th percentile']
-                    .map(item => <div className="flex flex-row items-center">{item === 'Global Avg' ? <LegendIcon className='h-6 w-5 pr-2 fill-[#ffb84ddf]' /> : <LegendIconII className={`h-6 w-5 pr-2 ${item === 'Bottom 50th percentile' ? 'fill-[#b2f54de0]' : 'fill-[#7726f982]'}`} />}<span className='whitespace-nowrap'>{item}</span></div>)
+                {['Global Avg', '10th percentile', '90th percentile']
+                    .map(item => <div className="flex flex-row items-center">{item === 'Global Avg' ? <LegendIcon className='h-6 w-5 pr-2 fill-[#ffb84ddf]' /> : <LegendIconII className={`h-6 w-5 pr-2 ${item === '10th percentile' ? 'fill-[#b2f54de0]' : 'fill-[#7726f982]'}`} />}<span className='whitespace-nowrap'>{item}</span></div>)
                 }
             </div>
         </div>
@@ -109,19 +110,34 @@ export const GovernmentHealthBullet = ({ width, height }: ChartDimensions) => {
 
 
 export const GovernmentHDIDifferenceChart = ({ width, height }: ChartDimensions) => {
+    const isMobile = useMobile()
     const data = [
         {
-            "Integrity Score": 15,
-            "HDI": 3,
+            id: 'HDI',
+            year1: 2017,
+            year2: 2021,
+            data: [
+                {
+                    x: 'year 1',
+                    y: 17
+                },
+                {
+                    x: 'year 2',
+                    y: 12
+                }
+            ]
 
         },
         {
-            "Integrity Score": 11,
-            "HDI": 8,
-        },
+            id: 'Integrity',
+            year1: 2018,
+            year2: 2022,
+            data: [{ x: 'year 1', y: 15 }, { x: 'year 2', y: 8 }]
+        }
+
     ]
 
-    return <ParallelCoordinatesChart data={data} dimensions={{ width, height }} />
+    return isMobile ? <p>hi</p> : <LineChart data={data} dimensions={{ width, height }} />
 }
 
 export const GovernmentIncreaseDecreaseChart = ({ width, height }: ChartDimensions) => {
@@ -132,7 +148,7 @@ export const GovernmentIncreaseDecreaseChart = ({ width, height }: ChartDimensio
         },
         {
             "id": "Decreased",
-            "value": 40,
+            "value": 50,
         },
 
     ]
@@ -140,3 +156,7 @@ export const GovernmentIncreaseDecreaseChart = ({ width, height }: ChartDimensio
     return <PieChart data={data} width={width} height={height} />
 }
 
+export const GovernmentKeyMetrics = ({ width, height }: ChartDimensions) => {
+    const avgInfantMortalityRate = getWorldAvg('2017_HDI')
+    return <div className='flex flex-col'><GaugeChart avg={20.1} text='Average Infant Mortality' dimensions={{ width, height }} /></div>
+}

@@ -7,8 +7,9 @@ import { getWorldAvg, retrieveData } from '../app/data/generateData';
 import RadarChart from './Charts/RadarChart';
 import RadialBarChart from './Charts/RadialBarChart';
 import { ParentSize } from '@visx/responsive';
-import { GovernmentHDIDifferenceChart, GovernmentIncreaseDecreaseChart, GovernmentRadialBar, GovernmentStabilityRadar } from './Charts/Themes/AcceleratingGov';
-import { GdpPercentagesRadialBarChart } from './Shared';
+import { GovernmentHDIDifferenceChart, GovernmentIncreaseDecreaseChart, GovernmentKeyMetrics, GovernmentRadialBar, GovernmentStabilityRadar } from './Charts/Themes/AcceleratingGov';
+import { GdpPercentagesRadialBarChart, StatCard } from './Shared';
+import { AvgGlobalTempChangePerDecade, HappyPlanetIndex, ParisAgreementStatus, ShareOfElectricityFromRenewables, WaterStressByRegion } from './Charts/Themes/GlobalCityDesign';
 
 type DefaultStatItem = {
     numeric: string
@@ -25,11 +26,11 @@ const defaultStatBoxes: DefaultStatItem[] = [
 const StatBox = ({ item, index }: { item: DefaultStatItem, index: number }) => {
     const selectedTheme = useContext(SummitThemeContext)
 
-    return <div className='w-[24%] h-full flex flex-col justify-between'>
+    return <div style={{ backgroundImage: `url(${'535.jpg'})` }} className='w-[24%] h-full flex flex-col justify-between bg-cover bg-bottom'>
         <ParentSize debounceTime={10}>{({ width, height }) =>
-            <FrameLines style={{ width: width - 1, height: height }} palette='secondary' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
+            <FrameLines style={{ width: width, height: height, }} className='backdrop-blur-[.3px]' palette='secondary' animator={{ animate: false }} hover largeLineWidth={2} smallLineWidth={4} smallLineLength={20}>
                 {selectedTheme === DEFAULT_THEME_PROMPT ? <DefaultStatBox item={item} /> : getContentForTheme(width - 5, height - 20, selectedTheme, index)}
-            </FrameLines >
+            </FrameLines>
         }
         </ParentSize>
     </div>
@@ -51,9 +52,55 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
                 case 1:
                     return <GovernmentIncreaseDecreaseChart width={width} height={height} />
                 case 2:
+                    return <GovernmentKeyMetrics width={width} height={height} />
+                case 3:
                     return <GovernmentRadialBar width={width} height={height} />
             }
         case 'Global City Design and Sustainability':
+            switch (position) {
+                case 0:
+                    return <AvgGlobalTempChangePerDecade dimensions={{ width, height }} />
+                case 1:
+                    return <WaterStressByRegion />
+                case 2:
+                    return <ParisAgreementStatus />
+                case 3:
+                    return <HappyPlanetIndex dimensions={{ width, height }} />
+            }
+        case 'Exploring the Frontiers':
+            switch (position) {
+                case 0:
+                    return <StatCard stat='40.2 Avg' preText='Infant Mortality' secondaryText='2021 to 2022' delta={{ change: 'decrease', percent: 10 }} dimensions={{ width, height }} />
+                case 1:
+                    return <p>acc 2</p>
+                case 2:
+                    return <p>acc 3</p>
+                case 3:
+                    return <p>acc 4</p>
+            }
+        case 'Governing Economic Resilience and Connectivity':
+            switch (position) {
+                case 0:
+                    return <p>acc 1</p>
+                case 1:
+                    return <p>acc 2</p>
+                case 2:
+                    return <p>acc 3</p>
+                case 3:
+                    return <p>acc 4</p>
+            }
+        case 'Future of Societies and Healthcare':
+            switch (position) {
+                case 0:
+                    return <p>acc 1</p>
+                case 1:
+                    return <p>acc 2</p>
+                case 2:
+                    return <p>acc 3</p>
+                case 3:
+                    return <p>acc 4</p>
+            }
+        case 'Prioritizing Learning and Work':
             switch (position) {
                 case 0:
                     return <p>acc 1</p>
@@ -73,8 +120,7 @@ export const StatBoxes = () => {
     retrieveData({ aggregator: "world", metrics: ['2017_HDI'], }, "hierarchical");
     //console.log(getWorldAvg('2018_unemployment'))
     const selectedTheme = useContext(SummitThemeContext)
-    return <Grid className='flex  md:gap-4 justify-between h-[10%] md:h-[12.5%] lg:h-[20%]'>
-
+    return <Grid className='flex md:gap-4 justify-between h-[10%] md:h-[12.5%] lg:h-[20%]'>
         {defaultStatBoxes.map((item, index) =>
             <StatBox item={item} index={index} />
         )}

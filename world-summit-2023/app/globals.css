@@ -16,6 +16,10 @@ body {
 	--color-handle-line: #67c2e4;
 }
 
+.card {
+	border-radius: 10px;
+}
+
 .default-font-color {
 	color: #9fd0dcb1;
 	fill: #9fd0dcb1;

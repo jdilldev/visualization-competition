@@ -14,7 +14,7 @@ const theme = createTheme({
     statBoxThree: { main: '' },
     statBox4: { main: '' },
     success: { main: '#0f0' },
-    error: { main: '#e84242' },
+    error: { main: '#c63d3d' },
 
     // Default theme palette elevation colors.
     elevationOffset: 0.025,
@@ -36,7 +36,7 @@ const RootLayout = ({
       */}
       <head />
       <ThemeProvider theme={theme}>
-        <body className={`h-screen  lg:overflow-auto p-[10px] bg-slate-900 text-[#9fd0dcb1] font-body subpixel-antialiased`}>
+        <body className={`h-screen  lg:overflow-hidden p-[10px] bg-slate-900 text-[#9fd0dccc] font-body subpixel-antialiased`}>
           {children}
         </body>
       </ThemeProvider>
