@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 
 export const useDesktop = () => {
-	const [isDesktop, setDesktop] = useState(window.innerWidth >= 1345);
+	const [isDesktop, setDesktop] = useState(window.innerWidth >= 1487);
 
 	const updateMedia = () => {
-		setDesktop(window.innerWidth >= 1345);
+		setDesktop(window.innerWidth >= 1487);
 	};
 
 	useEffect(() => {
