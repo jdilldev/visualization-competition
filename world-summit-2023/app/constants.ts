@@ -1,6 +1,7 @@
 export const BRICS = ["Brazil", "Russia", "India", "China", "South Africa"];
 
-export const PRE_CONTENT_ICON_SIZE = "self-start md:self-center basis-1/3 mb-2";
+export const PRE_CONTENT_ICON_SIZE =
+	"self-start md:self-center basis-1/3 lg:basis-1/2 mb-2";
 
 export const UN_PERMANENT = [
 	"China",

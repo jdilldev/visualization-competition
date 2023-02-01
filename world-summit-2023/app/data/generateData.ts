@@ -326,6 +326,63 @@ export const getWorldAvg = (metric: CountryMetrics) => {
 	return totalVal / totalCountries;
 };
 
+const getRegion = (region: M49_subregion) => COUNTRIES_BY_REGION[region];
+
+export const getMax = (
+	metric: CountryMetrics,
+	geographicArea: "world" | M49_subregion
+) => {
+	let countryName = "";
+	let maxValue = Number.MIN_SAFE_INTEGER;
+	let countries = geographicArea === "world" ? data : getRegion(geographicArea);
+
+	countries.forEach((country) => {
+		const checkVal = extractMetricValue(country, metric);
+		if (checkVal && checkVal > maxValue) {
+			maxValue = checkVal;
+			countryName = country.name;
+		}
+	});
+	return { country: countryName, value: maxValue };
+};
+
+export const getMin = (
+	metric: CountryMetrics,
+	geographicArea: "world" | M49_subregion
+) => {
+	let countryName = "";
+	let minValue = Number.MAX_SAFE_INTEGER;
+	let countries = geographicArea === "world" ? data : getRegion(geographicArea);
+
+	countries.forEach((country) => {
+		const checkVal = extractMetricValue(country, metric);
+		if (checkVal && checkVal < minValue) {
+			minValue = checkVal;
+			countryName = country.name;
+		}
+	});
+	return { country: countryName, value: minValue };
+};
+
+export const countNumberOfIncreaseAndDecrease = (
+	metric: CountryMetrics,
+	geographicArea: "world" | M49_subregion
+) => {
+	let countries = geographicArea === "world" ? data : getRegion(geographicArea);
+	let increased = 0;
+	let decreased = 0;
+
+	countries.forEach((country) => {
+		const checkVal = extractMetricValue(country, metric);
+
+		if (checkVal) {
+			if (checkVal > 0) increased++;
+			if (checkVal < 0) decreased++;
+		}
+	});
+	return { increased, decreased };
+};
+
 export const retrieveData = (inputs: ChartInputs, type: ChartType) => {
 	switch (type) {
 		case "linear":

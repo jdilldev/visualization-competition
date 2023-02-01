@@ -1,3 +1,18 @@
+export type TooltipPlacement =
+	| "bottom"
+	| "left"
+	| "right"
+	| "top"
+	| "topStart"
+	| "topEnd"
+	| "leftStart"
+	| "leftEnd"
+	| "bottomStart"
+	| "bottomEnd"
+	| "rightStart"
+	| "rightEnd"
+	| undefined;
+
 export type ChartDimensions = { width: number; height: number };
 
 export type AggregatorType =
@@ -53,6 +68,54 @@ export interface ChartInputs {
 	regions?: M49_subregion[];
 	countries?: Alpha3_country_codes[];
 }
+
+export type CountryProfile = {
+	iso_3: Alpha3_country_codes;
+	name: string;
+	region: M49_subregion;
+	gii?: number;
+	gini?: number;
+	seda?: number;
+	population: string;
+	health_expenditure_per_person?: number;
+	access_to_electricity?: number;
+	government_gdp?: number;
+	military_gdp?: string;
+	inflation?: number;
+	"2016_happy_planet_index"?: number;
+	"2019_happy_planet_index"?: number;
+	"2017_HDI"?: number;
+	"2021_HDI"?: number;
+	"2018_economic_growth"?: number;
+	"2021_economic_growth"?: number;
+	"2020_infant_mortality"?: number;
+	"2017_health_gdp"?: number;
+	"2018_health_gdp"?: number;
+	"2019_health_gdp"?: number;
+	"2018_education_gdp"?: number;
+	"2021_education_gdp"?: number;
+	"2018_primary_school_aged_kids_out"?: number;
+	"2021_primary_school_aged_kids_out"?: number;
+	"2018_unemployment"?: number;
+	"2021_unemployment"?: number;
+	"2017_regulatory_quality"?: number;
+	"2021_regulatory_quality"?: number;
+	"2017_rule_of_law"?: number;
+	"2021_rule_of_law"?: number;
+	"2017_control_of_corruption"?: number;
+	"2021_control_of_corruption"?: number;
+	"2017_political_instability"?: number;
+	"2021_political_instability"?: number;
+	"2017_government_effectiveness"?: number;
+	"2021_government_effectiveness"?: number;
+	"2018_government_integrity"?: number;
+	"2022_government_integrity"?: number;
+	"2019_CO2e_emissions_per_capita"?: number;
+	"2015_electricity_from_renewables"?: string;
+	"2020_electricity_from_renewables"?: string;
+};
+
+export type CountryMetrics = keyof CountryProfile;
 
 export const M49_subregions = [
 	"Northern Africa",
@@ -323,52 +386,3 @@ export type Alpha3_country_codes =
 	| "ZMB"
 	| "ZWE"
 	| "XXK";
-
-export type CountryProfile = {
-	iso_3: Alpha3_country_codes;
-	name: string;
-	region: M49_subregion;
-	gii?: number;
-	gini?: number;
-	seda?: number;
-	population: string;
-	health_expenditure_per_person?: number;
-	access_to_electricity?: number;
-	government_gdp?: number;
-	military_gdp?: string;
-	inflation?: number;
-	"2016_happy_planet_index"?: number;
-	"2019_happy_planet_index"?: number;
-	"2017_HDI"?: number;
-	"2021_HDI"?: number;
-	"2021_GDP"?: string | number;
-	"2018_economic_growth"?: number;
-	"2021_economic_growth"?: number;
-	"2020_infant_mortality"?: number;
-	"2017_health_gdp"?: number;
-	"2018_health_gdp"?: number;
-	"2019_health_gdp"?: number;
-	"2018_education_gdp"?: number;
-	"2021_education_gdp"?: number;
-	"2018_primary_school_aged_kids_out"?: number;
-	"2021_primary_school_aged_kids_out"?: number;
-	"2018_unemployment"?: number;
-	"2021_unemployment"?: number;
-	"2017_regulatory_quality"?: number;
-	"2021_regulatory_quality"?: number;
-	"2017_rule_of_law"?: number;
-	"2021_rule_of_law"?: number;
-	"2017_control_of_corruption"?: number;
-	"2021_control_of_corruption"?: number;
-	"2017_political_instability"?: number;
-	"2021_political_instability"?: number;
-	"2017_government_effectiveness"?: number;
-	"2021_government_effectiveness"?: number;
-	"2018_government_integrity"?: number;
-	"2022_government_integrity"?: number;
-	"2019_CO2e_emissions_per_capita"?: number;
-	"2015_electricity_from_renewables"?: string;
-	"2020_electricity_from_renewables"?: string;
-};
-
-export type CountryMetrics = keyof CountryProfile;

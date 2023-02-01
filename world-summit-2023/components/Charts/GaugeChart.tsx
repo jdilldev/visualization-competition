@@ -8,7 +8,7 @@ import { ChartDimensions, CountryMetrics, LinearData } from '../../app/data/type
 
 
 
-const GaugeChart = ({ avg, text, dimensions: { width, height } }: { avg: number, text: string, dimensions: ChartDimensions }) => {
+const GaugeChart = ({ avg, text, percentage, dimensions: { width, height } }: { avg: number, text: string, percentage: boolean, dimensions: ChartDimensions }) => {
     const data = [
         {
             "id": "gauge",
@@ -33,7 +33,7 @@ const GaugeChart = ({ avg, text, dimensions: { width, height } }: { avg: number,
     return <div className='flex flex-col items-center'>
         <RadialBar
             width={width}
-            height={height + 40}
+            height={height - 40}
             data={data}
             animate={false}
             maxValue={100}
@@ -46,14 +46,14 @@ const GaugeChart = ({ avg, text, dimensions: { width, height } }: { avg: number,
             tooltip={() => null}
             innerRadius={.8}
             cornerRadius={0}
-            margin={{ top: 30, right: 30, bottom: 0, left: 25 }}
+            margin={{ top: 0, right: 30, bottom: 0, left: 25 }}
             enableTracks={false}
             enableRadialGrid={false}
             enableCircularGrid={false}
             radialAxisStart={null}
             circularAxisOuter={{ tickSize: 8, tickPadding: 10, tickRotation: 0 }}
         />
-        <p className={`flex flex-col items-center top-16 absolute text-orange-300 font-medium text-center text-2xl whitespace-prewrap`}>{avg}%<span className='text-sm font-thin'>{text}</span></p>
+        <p className={`flex flex-col items-center top-16 absolute text-white font-medium text-center text-2xl whitespace-prewrap`}>{avg.toFixed(1)}{percentage ? '%' : ''}<span className='text-sm font-thin'>{text}</span></p>
     </div>
 }
 

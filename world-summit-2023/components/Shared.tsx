@@ -1,20 +1,22 @@
 import PieChartIcon from '../public/icons/pie-chart.svg';
 import LineChartIcon from '../public/icons/line-chart.svg';
+import InfoIcon from '../public/icons/magnifier.svg';
 import { getWorldAvg } from '../app/data/generateData';
 import RadialBarChart from './Charts/RadialBarChart';
-import { ChartDimensions } from '../app/data/types';
+import { ChartDimensions, TooltipPlacement } from '../app/data/types';
 import NeutralIndicator from '../public/icons/neutral.svg'
 import IncreaseIndicator from '../public/icons/up-triangle.svg'
 import DecreaseIndicator from '../public/icons/down-triangle.svg'
 import { ReactNode } from 'react';
+import { Tooltip } from '@nextui-org/react';
 
 type DefaultPlaceholderProps = {
     height: number;
     placeholderLocation: 'one' | 'two'
 }
 
-export const ButtonGroup = ({ values, className, controlValue, onChange }: { values: string[], className: string, controlValue: string, onChange: (value: string) => void }) => {
-    return <div className={`flex flex-row gap-1 rounded-lg border-2 border-solid border-[#b8ff4d] ${className}`}>
+export const ButtonGroup = ({ values, className, controlValue, onChange }: { values: string[], className?: string, controlValue: string, onChange: (value: string) => void }) => {
+    return <div className={`flex flex-row gap-1 rounded-lg border-2 border-solid border-[#b8ff4d] w-fit ${className}`}>
         {values.map(value => <div
             key={value}
             onClick={() => {
@@ -70,9 +72,9 @@ type StatCardProps = {
 }
 
 export const StatCard = ({ stat, text, preContent, secondaryText, delta, dimensions: { width, height } }: StatCardProps) => {
-    return <div style={{ width: width - 5, height, }} className={`div flex flex-col w-full md:place-content-center md:items-center justify-between text-[white]`}>
+    return <div style={{ width: width - 5, height, }} className={`div flex flex-col w-full md:place-content-center md:items-center justify-evenly lg:justify-around text-white`}>
         {preContent && preContent}
-        <span className='text-sm font-equinox md:text-2xl lg:text-4xl mb-2 lowercase tracking-widest underline underline-offset-8 decoration-2 decoration-solid decoration-[#78cce2]'>{stat}</span>
+        <span className='text-bae font-equinox md:text-2xl lg:text-3xl mb-2 lowercase tracking-widest underline underline-offset-8 decoration-2 decoration-solid decoration-[#78cce2]'>{stat}</span>
         {text && <span className='text-xs md:text-sm lg:text-base lg:tracking-normal font-nebula md:whitespace-nowrap'>{text}</span>}
         {delta &&
             <p className='flex flex-row items-center gap-1 md:gap-2 m-0'>
@@ -90,3 +92,10 @@ export const StatCard = ({ stat, text, preContent, secondaryText, delta, dimensi
 export const StatCardCustom = ({ content, dimensions: { width, height } }: { content: ReactNode, dimensions: ChartDimensions }) => {
     return <div style={{ width: width - 5, height, }}>{content}</div>
 }
+
+export const CustomTooltip = ({ text, placement, fill }: { text: string | ReactNode, placement?: TooltipPlacement, fill?: string }) =>
+    <Tooltip content={<div className='max-w-xs text-center'>{text}</div>} trigger="click" placement={placement ? placement : 'top'}>
+        <InfoIcon className='h-3 w-3 fill-blue-400' />
+    </Tooltip>
+
+

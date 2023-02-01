@@ -1,7 +1,7 @@
 import { Grid, } from '@nextui-org/react';
 import { FrameLines } from '@arwes/core';
 import InsightIcon from '../public/icons/brain.svg'
-import MagnifyIcon from '../public/icons/analytics.svg'
+import SourceIcon from '../public/icons/source.svg'
 import { ReactNode, useContext } from 'react';
 import { DEFAULT_THEME_PROMPT, SummitThemeContext } from '../app/page';
 import { getWorldAvg, retrieveData } from '../app/data/generateData';
@@ -14,6 +14,8 @@ import { AvgGlobalTempChangePerDecade, HappyPlanetIndex, ParisAgreementStatus, S
 import GlobalWarmingIcon from '../public/icons/global-warming.svg'
 import { PRE_CONTENT_ICON_SIZE } from '../app/constants';
 import { AstronautsAndSatellites, CryptoStats, GDPStats, SpaceAgencies } from './Charts/Themes/ExploringtheFrontier';
+import { EconomicGrowthDelta, GINI, InflationChanges, WarningAboutInterdependentEconomies } from './Charts/Themes/EconomicResillience';
+import { string } from 'prop-types';
 
 type DefaultStatItem = {
     numeric: string
@@ -23,16 +25,16 @@ type DefaultStatItem = {
 
 const defaultStatBoxes: DefaultStatItem[] = [
     { numeric: '15', text: 'Subregions', /* bgImage: 'nw.jpg' */ },
-    { numeric: '174', text: 'Countries', },
+    { numeric: '171', text: 'Countries', },
     { numeric: '6', text: 'Themes', },
     { numeric: '', text: 'Endless Insights', }
 ]
 
-const StatBox = ({ item, index }: { item: DefaultStatItem, index: number }) => {
+const StatBox = ({ item, index, source }: { item: DefaultStatItem, index: number, source?: string }) => {
     const selectedTheme = useContext(SummitThemeContext)
 
-    return <div style={{ backgroundImage: `url(${item.bgImage ? item.bgImage : ''})`, }} className='w-[24%] h-full flex flex-col justify-between bg-cover bg-top'>
-        <ParentSize className={`backdrop-blur-[0px]  backdrop-invert-0 backdrop-contrast-125  backdrop-brightness-150 backdrop-saturate-100 bg-black/50 `} debounceTime={10}>{({ width, height }) =>
+    return <div style={{ backgroundImage: `url(${item.bgImage ? item.bgImage : ''})`, }} className='w-[24%] h-full bg-cover bg-top'>
+        <ParentSize className={`backdrop-blur-[0px]  backdrop-invert-0 backdrop-contrast-125  backdrop-brightness-150 backdrop-saturate-100 bg-black/40 `} debounceTime={10}>{({ width, height }) =>
             <FrameLines
                 hover
                 style={{ width: width, height: height, }}
@@ -43,6 +45,7 @@ const StatBox = ({ item, index }: { item: DefaultStatItem, index: number }) => {
                 smallLineLength={20}>
                 {/* <MagnifyIcon className='absolute right-0 place-self-end hover:fill-yellow-400 w-4 h-4 fill-[#78cce2]' onClick={() => console.log('yoyo')} />*/}
                 {selectedTheme === DEFAULT_THEME_PROMPT ? <DefaultStatBox item={item} /> : getContentForTheme(width - 5, height - 20, selectedTheme, index)}
+                {source && <a href={source} target="_blank"><SourceIcon className='absolute right-0 bottom-0 default-font-color h-3 w-3' /></a>}
             </FrameLines>
         }
         </ParentSize>
@@ -50,7 +53,7 @@ const StatBox = ({ item, index }: { item: DefaultStatItem, index: number }) => {
 }
 
 const DefaultStatBox = ({ item }: { item: DefaultStatItem }) => <>
-    {item.numeric !== '' ? <p className='font-nebula text-3xl'>{item.numeric}</p> : <InsightIcon className='w-16 h-12 -mt-3 fill-[#9fd0dcb1]' />}
+    {item.numeric !== '' ? <p className='font-nebula text-3xl p-2'>{item.numeric}</p> : <InsightIcon className='w-16 h-12 fill-[#9fd0dcb1]' />}
     <p className='font-body font-white uppercase md:font-nebula whitespace-wrap text-xs md:text-xl'>{item.text}</p>
 </>
 
@@ -92,13 +95,13 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
         case 'Governing Economic Resilience and Connectivity':
             switch (position) {
                 case 0:
-                    return <p>acc 1</p>
+                    return <InflationChanges dimensions={{ width, height }} />
                 case 1:
-                    return <p>acc 2</p>
+                    return <GINI dimensions={{ width, height }} />
                 case 2:
-                    return <p>acc 3</p>
+                    return <WarningAboutInterdependentEconomies dimensions={{ width, height }} />
                 case 3:
-                    return <p>acc 4</p>
+                    return <EconomicGrowthDelta dimensions={{ width, height }} />
             }
         case 'Future of Societies and Healthcare':
             switch (position) {
@@ -127,13 +130,32 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
 
 }
 
+const sourceMap: { [key: string]: { [key: number]: string } } = {
+    'Accelerating Development and Governance': {
+
+    },
+    'Global City Design and Sustainability': {},
+    'Exploring the Frontiers': {
+        0: "https://www.investopedia.com/articles/forex/041515/countries-where-bitcoin-legal-illegal.asp",
+        2: 'https://www.civitas-stl.com/civ1819/Government-space-agencies.pdf',
+        3: "https://www.civitas-stl.com/civ1819/Government-space-agencies.pdf",
+    },
+    'Governing Economic Resilience and Connectivity': {},
+    'Future of Societies and Healthcare': {},
+    'Prioritizing Learning and Work': {}
+}
+
+const checkForSource = (selectedTheme: string, index: number) =>
+    selectedTheme !== DEFAULT_THEME_PROMPT && Object.hasOwn(sourceMap[selectedTheme], index) ? sourceMap[selectedTheme][index] : undefined
+
+
 export const StatBoxes = () => {
     retrieveData({ aggregator: "world", metrics: ['2017_HDI'], }, "hierarchical");
     //console.log(getWorldAvg('2018_unemployment'))
     const selectedTheme = useContext(SummitThemeContext)
     return <Grid className='flex justify-between h-1/6 lg:h-1/5'>
         {defaultStatBoxes.map((item, index) =>
-            <StatBox item={item} index={index} />
+            <StatBox item={item} index={index} source={checkForSource(selectedTheme, index)} />
         )}
     </Grid>
 }
