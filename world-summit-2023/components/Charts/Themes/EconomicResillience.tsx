@@ -26,7 +26,7 @@ export const GINI = ({ dimensions: { width, height } }: { dimensions: ChartDimen
         const { country: maxCountry, value: maxValue } = getMax('gini', 'world')
 
         return <div style={{ width, height }} className='flex flex-col font-bold w-full h-full gap-1 lg:gap-2 text-2xl text-center font-equinox justify-center items-center'>
-            <p className='font-equinox flex flex-row items-center gap-1 text-white tracking-widest'>{'GINI '}
+            <p className='font-equinox flex flex-row items-center gap-1 default-text-color tracking-widest'>{'GINI '}
                 <CustomTooltip text={<p>GINI measures inequality amongst households within a country. The lower the index, the better.<br /><br />The years for which this data is available varies greatly per country.</p>} /></p>
             <hr className="mx-4" />
             <p className='text-xs md:text-base text-amber-400'><span >#1 - </span> {minCountry} {minValue}</p>

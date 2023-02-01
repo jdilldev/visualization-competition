@@ -188,7 +188,7 @@ const generateHierarchicalData = (inputs: ChartInputs) => {
 	}
 
 	hierarchicalData.value = hierarchicalData.children.reduce(
-		(acc, curr) => (acc += curr.value),
+		(acc, curr) => (curr.value ? (acc += curr.value) : (acc += 0)),
 		0
 	);
 	return hierarchicalData;

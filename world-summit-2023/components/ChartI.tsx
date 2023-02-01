@@ -1,9 +1,9 @@
 import { FrameCorners } from '@arwes/core';
 import { useContext } from 'react';
-import { SummitThemeContext } from '../app/page';
 import { DefaultPlaceholder } from './Shared';
 import { GovernmentStabilityRadar } from './Charts/Themes/AcceleratingGov';
 import { ShareOfElectricityFromRenewables } from './Charts/Themes/GlobalCityDesign';
+import { SummitThemeContext } from '../app/constants';
 
 
 const renderChartBasedOnTheme = (selectedTheme: string, width: number, height: number) => {
@@ -28,6 +28,8 @@ const renderChartBasedOnTheme = (selectedTheme: string, width: number, height: n
 export const ChartI = ({ width, height }: { width: number, height: number }) => {
     const selectedTheme = useContext(SummitThemeContext)
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return <FrameCorners
         showContentLines
         cornerLength={50}

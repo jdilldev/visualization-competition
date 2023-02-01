@@ -37,7 +37,7 @@ export const DefaultPlaceholder = ({ height, placeholderLocation }: DefaultPlace
     </div>
 }
 
-export const GdpPercentagesRadialBarChart = ({ width, height, relevantMetric }: { width: number, height: number, relevantMetric: string }) => {
+export const GdpPercentagesRadialBarChart = ({ dimensions: { width, height }, relevantMetric }: { dimensions: ChartDimensions, relevantMetric: string }) => {
     const governanceGDP = getWorldAvg('government_gdp')
     const healtcareGDP = getWorldAvg('2019_health_gdp')
     const educationGDP = getWorldAvg('2021_education_gdp')
@@ -95,7 +95,7 @@ export const StatCardCustom = ({ content, dimensions: { width, height } }: { con
 
 export const CustomTooltip = ({ text, placement, fill }: { text: string | ReactNode, placement?: TooltipPlacement, fill?: string }) =>
     <Tooltip content={<div className='max-w-xs text-center'>{text}</div>} trigger="click" placement={placement ? placement : 'top'}>
-        <InfoIcon className='h-3 w-3 fill-blue-400' />
+        <InfoIcon className='h-3 w-3 fill-[#1088a7bd]' />
     </Tooltip>
 
 

@@ -8,7 +8,7 @@ const RadialBarChart = ({ data, width, height, relevantMetric }: { data: LinearD
     return <RadialBar
         maxValue={100}
         enableTracks={true}
-        tracksColor='#052f42b5' //005066
+        tracksColor='#052f42d5' //005066
         width={width}
         height={height}
         data={data}
@@ -23,7 +23,7 @@ const RadialBarChart = ({ data, width, height, relevantMetric }: { data: LinearD
         theme={NIVO_THEME}
         borderWidth={2}
         borderColor={({ groupId }) => groupId === relevantMetric ? '#a0e5ec' : 'transparent'}
-        colors={({ groupId }) => groupId === relevantMetric ? '#1ddaec' : '#438c9e'}
+        colors={({ groupId }) => groupId === relevantMetric ? '#1ddaec' : '#52b4cc9e'}
         tooltip={({ bar }) => <div className='text-xs text-center text-white p-2 bg-[#073956] rounded-sm opacity-90'><p>{bar.category}<br />Average {bar.formattedValue}% of GDP</p></div>}
     />
 }

@@ -1,4 +1,10 @@
+import { createContext } from "react";
+
 export const BRICS = ["Brazil", "Russia", "India", "China", "South Africa"];
+
+export const DEFAULT_THEME_PROMPT = "Themes";
+
+export const SummitThemeContext = createContext(DEFAULT_THEME_PROMPT);
 
 export const PRE_CONTENT_ICON_SIZE =
 	"self-start md:self-center basis-1/3 lg:basis-1/2 mb-2";

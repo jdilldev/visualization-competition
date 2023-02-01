@@ -1,9 +1,9 @@
 import { FrameCorners } from '@arwes/core';
 import { DefaultPlaceholder } from './Shared';
 import { useContext } from 'react';
-import { SummitThemeContext } from '../app/page';
 import { ChartDimensions } from '../app/data/types';
 import { GovernmentHealthBullet } from './Charts/Themes/AcceleratingGov';
+import { SummitThemeContext } from '../app/constants';
 
 
 const renderChartBasedOnTheme = (selectedTheme: string, width: number, height: number) => {
@@ -28,6 +28,8 @@ const renderChartBasedOnTheme = (selectedTheme: string, width: number, height: n
 export const ChartII = ({ width, height }: ChartDimensions) => {
     const selectedTheme = useContext(SummitThemeContext)
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     return <FrameCorners
         showContentLines
         cornerLength={50}

@@ -3,7 +3,6 @@ import { FrameLines } from '@arwes/core';
 import InsightIcon from '../public/icons/brain.svg'
 import SourceIcon from '../public/icons/source.svg'
 import { ReactNode, useContext } from 'react';
-import { DEFAULT_THEME_PROMPT, SummitThemeContext } from '../app/page';
 import { getWorldAvg, retrieveData } from '../app/data/generateData';
 import RadarChart from './Charts/RadarChart';
 import RadialBarChart from './Charts/RadialBarChart';
@@ -12,10 +11,11 @@ import { GovernmentHDIDifferenceChart, GovernmentIncreaseDecreaseChart, Governme
 import { GdpPercentagesRadialBarChart, StatCard } from './Shared';
 import { AvgGlobalTempChangePerDecade, HappyPlanetIndex, ParisAgreementStatus, ShareOfElectricityFromRenewables, WaterStressByRegion } from './Charts/Themes/GlobalCityDesign';
 import GlobalWarmingIcon from '../public/icons/global-warming.svg'
-import { PRE_CONTENT_ICON_SIZE } from '../app/constants';
+import { DEFAULT_THEME_PROMPT, PRE_CONTENT_ICON_SIZE, SummitThemeContext } from '../app/constants';
 import { AstronautsAndSatellites, CryptoStats, GDPStats, SpaceAgencies } from './Charts/Themes/ExploringtheFrontier';
 import { EconomicGrowthDelta, GINI, InflationChanges, WarningAboutInterdependentEconomies } from './Charts/Themes/EconomicResillience';
 import { string } from 'prop-types';
+import { EmergentDiseases, HealthExpenditurePerPerson, HealthRadialChart, SuicideDeaths, Top10CausesOfDeath } from './Charts/Themes/FutureSocietiesAndHealthcare';
 
 type DefaultStatItem = {
     numeric: string
@@ -35,6 +35,8 @@ const StatBox = ({ item, index, source }: { item: DefaultStatItem, index: number
 
     return <div style={{ backgroundImage: `url(${item.bgImage ? item.bgImage : ''})`, }} className='w-[24%] h-full bg-cover bg-top'>
         <ParentSize className={`backdrop-blur-[0px]  backdrop-invert-0 backdrop-contrast-125  backdrop-brightness-150 backdrop-saturate-100 bg-black/40 `} debounceTime={10}>{({ width, height }) =>
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             <FrameLines
                 hover
                 style={{ width: width, height: height, }}
@@ -45,7 +47,7 @@ const StatBox = ({ item, index, source }: { item: DefaultStatItem, index: number
                 smallLineLength={20}>
                 {/* <MagnifyIcon className='absolute right-0 place-self-end hover:fill-yellow-400 w-4 h-4 fill-[#78cce2]' onClick={() => console.log('yoyo')} />*/}
                 {selectedTheme === DEFAULT_THEME_PROMPT ? <DefaultStatBox item={item} /> : getContentForTheme(width - 5, height - 20, selectedTheme, index)}
-                {source && <a href={source} target="_blank"><SourceIcon className='absolute right-0 bottom-0 default-font-color h-3 w-3' /></a>}
+                {source && <a href={source} target="_blank" rel="noreferrer"><SourceIcon className='absolute right-0 bottom-0 default-font-color h-3 w-3' /></a>}
             </FrameLines>
         }
         </ParentSize>
@@ -106,13 +108,13 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
         case 'Future of Societies and Healthcare':
             switch (position) {
                 case 0:
-                    return <p>acc 1</p>
+                    return <Top10CausesOfDeath dimensions={{ width, height }} />
                 case 1:
-                    return <p>acc 2</p>
+                    return <SuicideDeaths dimensions={{ width, height }} />
                 case 2:
-                    return <p>acc 3</p>
+                    return <EmergentDiseases dimensions={{ width, height }} />
                 case 3:
-                    return <p>acc 4</p>
+                    return <HealthRadialChart dimensions={{ width, height }} />
             }
         case 'Prioritizing Learning and Work':
             switch (position) {
@@ -126,8 +128,6 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
                     return <p>acc 4</p>
             }
     }
-
-
 }
 
 const sourceMap: { [key: string]: { [key: number]: string } } = {
@@ -141,7 +141,11 @@ const sourceMap: { [key: string]: { [key: number]: string } } = {
         3: "https://www.civitas-stl.com/civ1819/Government-space-agencies.pdf",
     },
     'Governing Economic Resilience and Connectivity': {},
-    'Future of Societies and Healthcare': {},
+    'Future of Societies and Healthcare': {
+        0: 'https://ourworldindata.org/causes-of-death#:~:text=Cardiovascular%20diseases%20are%20the%20leading,second%20biggest%20cause%20are%20cancers.',
+        1: 'https://www.who.int/news-room/fact-sheets/detail/suicide',
+        2: 'https://www.bcm.edu/departments/molecular-virology-and-microbiology/emerging-infections-and-biodefense/emerging-infectious-diseases'
+    },
     'Prioritizing Learning and Work': {}
 }
 
@@ -155,7 +159,7 @@ export const StatBoxes = () => {
     const selectedTheme = useContext(SummitThemeContext)
     return <Grid className='flex justify-between h-1/6 lg:h-1/5'>
         {defaultStatBoxes.map((item, index) =>
-            <StatBox item={item} index={index} source={checkForSource(selectedTheme, index)} />
+            <StatBox key={'statBox' + index} item={item} index={index} source={checkForSource(selectedTheme, index)} />
         )}
     </Grid>
 }

@@ -36,7 +36,7 @@ export type LinearData = {
 // sunburst, circle packing
 export type HierarchicalData = {
 	id: string;
-	value: number;
+	value?: number;
 	children: HierarchicalData[];
 };
 

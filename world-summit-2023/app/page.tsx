@@ -18,6 +18,7 @@ import Development from '../public/icons/009-overpopulation.svg'
 import { ButtonGroup } from '../components/Shared';
 import { ChartI } from '../components/ChartI';
 import { ChartII } from '../components/ChartII';
+import { DEFAULT_THEME_PROMPT, SummitThemeContext } from './constants';
 
 const bag2 = 'https://api.mapbox.com/styles/v1/jdilldev/clcmbx409004c14qrslh0z9la/static/[-94.0749,-64.3648,117.0407,75.2404]/1150x1100?access_token=pk.eyJ1IjoiamRpbGxkZXYiLCJhIjoiY2xjbHR0MXNtOXE3ZTN2cGx1YWwxYmE4cyJ9.UKQMbbf2Q4revc3Nz9ws3g'
 
@@ -29,10 +30,6 @@ const worldSummitThemes: { name: string, icon: any }[] = [
   { name: 'Future of Societies and Healthcare', icon: Health },
   { name: 'Prioritizing Learning and Work', icon: Education }
 ]
-
-export const DEFAULT_THEME_PROMPT = 'Themes'
-
-export const SummitThemeContext = createContext(DEFAULT_THEME_PROMPT)
 
 
 const Home = () => {
