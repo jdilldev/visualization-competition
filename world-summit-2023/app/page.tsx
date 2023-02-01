@@ -91,7 +91,7 @@ const Home = () => {
                   {!isDesktop && <RegionalInfo />}
                   <div className='w-2/3 lg:w-full'>
                     <ParentSize debounceTime={10}>{({ width, height }) =>
-                      <ChartII width={width - 1} height={height - 1} />
+                      <ChartII width={width - 1} height={height - 5} />
                     }
                     </ParentSize>
                   </div>
