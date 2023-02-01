@@ -1,5 +1,7 @@
 export const BRICS = ["Brazil", "Russia", "India", "China", "South Africa"];
 
+export const PRE_CONTENT_ICON_SIZE = "self-start md:self-center basis-1/3 mb-2";
+
 export const UN_PERMANENT = [
 	"China",
 	"France",
@@ -11,8 +13,8 @@ export const UN_PERMANENT = [
 export const NIVO_THEME = {
 	background: "transparent",
 	textColor: "#9fd0dcb1",
-	fontSize: 13,
-	fontFamily: "avenir",
+	fontSize: 12,
+	fontFamily: "equinox",
 	axis: {
 		domain: {
 			line: {

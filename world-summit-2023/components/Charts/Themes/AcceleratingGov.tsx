@@ -2,7 +2,7 @@ import { getWorldAvg } from "../../../app/data/generateData"
 import { ChartDimensions } from "../../../app/data/types"
 import BulletChart from "../BulletChart"
 import RadarChart from "../RadarChart"
-import { GdpPercentagesRadialBarChart } from "../../Shared"
+import { GdpPercentagesRadialBarChart, StatCard } from "../../Shared"
 import LegendIcon from '../../../public/icons/rect-vertical.svg'
 import LegendIconII from '../../../public/icons/rect-horizontal.svg'
 import PieChart from "../PieChart"
@@ -110,53 +110,21 @@ export const GovernmentHealthBullet = ({ width, height }: ChartDimensions) => {
 
 
 export const GovernmentHDIDifferenceChart = ({ width, height }: ChartDimensions) => {
-    const isMobile = useMobile()
-    const data = [
-        {
-            id: 'HDI',
-            year1: 2017,
-            year2: 2021,
-            data: [
-                {
-                    x: 'year 1',
-                    y: 17
-                },
-                {
-                    x: 'year 2',
-                    y: 12
-                }
-            ]
-
-        },
-        {
-            id: 'Integrity',
-            year1: 2018,
-            year2: 2022,
-            data: [{ x: 'year 1', y: 15 }, { x: 'year 2', y: 8 }]
-        }
-
-    ]
-
-    return isMobile ? <p>hi</p> : <LineChart data={data} dimensions={{ width, height }} />
+    return <StatCard stat={'50'} dimensions={{ width, height }} />
 }
 
 export const GovernmentIncreaseDecreaseChart = ({ width, height }: ChartDimensions) => {
     const data = [
         {
-            "id": "Increased",
+            "id": "increased",
             "value": 20,
         },
         {
-            "id": "Decreased",
+            "id": "decreased",
             "value": 50,
         },
 
     ]
 
     return <PieChart data={data} width={width} height={height} />
-}
-
-export const GovernmentKeyMetrics = ({ width, height }: ChartDimensions) => {
-    const avgInfantMortalityRate = getWorldAvg('2017_HDI')
-    return <div className='flex flex-col'><GaugeChart avg={20.1} text='Average Infant Mortality' dimensions={{ width, height }} /></div>
 }

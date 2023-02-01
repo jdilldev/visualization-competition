@@ -1,25 +1,65 @@
-export const CryptoStats = () => {
+import { getWorldAvg } from "../../../app/data/generateData"
+import { ChartDimensions } from "../../../app/data/types"
+import { StatCard, StatCardCustom } from "../../Shared"
+import GdpIcon from '../../../public/icons/gdp.svg'
+import SpaceIcon from '../../../public/icons/solar-system.svg'
+import AstronautIcon from '../../../public/icons/astronaut.svg'
+import { PRE_CONTENT_ICON_SIZE } from "../../../app/constants"
 
+export const CryptoStats = ({ dimensions: { width, height } }: { dimensions: ChartDimensions }) => {
+    //https://www.investopedia.com/articles/forex/041515/countries-where-bitcoin-legal-illegal.asp
+    const legal = 2
+    const regulated = 9
+    const banned = 9
 
+    const StatLine = ({ stat, text }: { stat: string | number, text: string }) => (
+        <p className="flex flex-row gap-1"><span>{stat}</span>{text}</p>
+    )
+    const Content = () => (
+        <div className='flex flex-col w-full place-items-center'>
+            <h3 style={{ width }} className="font-equinox font-xs text-center">Crypto</h3>
+            <div className=' capitalize md:font-equinox md:lowercase'>
+                <StatLine stat={2} text={'Legal'} />
+                <StatLine stat={9} text={'Regulated'} />
+                <StatLine stat={9} text={'Banned'} />
+            </div>
+        </div>
+    )
+    return <StatCardCustom content={<Content />} dimensions={{ width, height }} />
 }
 
-export const BrainDrainTextCard = () => {
-
+export const GDPStats = ({ dimensions }: { dimensions: ChartDimensions }) => {
+    const worldGdpAvg_2021 = getWorldAvg('2021_economic_growth')
+    const worldGdpAvg_2018 = getWorldAvg('2018_economic_growth')
+    return <StatCard preContent={<GdpIcon className={PRE_CONTENT_ICON_SIZE + ' fill-green-400'} />} stat={worldGdpAvg_2021.toFixed(1) + ' %'} secondaryText={'GDP Growth'} delta={worldGdpAvg_2021 - worldGdpAvg_2018} dimensions={dimensions} />
 }
 
-export const GlobalInnovationIndex = () => {
-
-}
-
-export const SpaceAgencies = () => {
+export const SpaceAgencies = ({ dimensions: { width, height } }: { dimensions: ChartDimensions }) => {
     //2018 https://www.civitas-stl.com/civ1819/Government-space-agencies.pdf 
-    // 72 countries involved
+    // 72 countries involved, 14 launch ability
+
+    const SplitSpaceStats = () => {
+        return <div style={{ width: width - 20, height }} className='w-full flex flex-col place-items-center'>
+            {/*             <p className="text-center font-dreamscape text-xs md:text-base lg:text-lg">Across the Globe</p>*/}
+            <SpaceIcon className={PRE_CONTENT_ICON_SIZE + ' fill-[#78cce2]'} />
+            <div className="flex flex-row w-full text-white justify-evenly">
+                <p className="flex flex-col items-center font-equinox"><span className='text-lg lg:text-2xl'>72</span><span className='text-xs lg:text-lg text-center text-[#78cce2]'>Space Agencies</span></p>
+                <div className="border-l-2 border-white mt-2 -mb-1 mx-2" />
+                <p className="flex flex-col items-center font-equinox"><span className='text-lg lg:text-2xl'>14</span><span className='text-xs lg:text-lg text-center text-[#78cce2]'>Launch Ability</span></p>
+            </div>
+        </div>
+
+    }
+
+    return <StatCardCustom content={<SplitSpaceStats />} dimensions={{ width, height }} />
 }
 
-export const CountriesWithAstronautsAndSatellites = () => {
-
-}
-
-export const GDPGrowth = () => {
-
+export const AstronautsAndSatellites = ({ dimensions }: { dimensions: ChartDimensions }) => {
+    //https://www.civitas-stl.com/civ1819/Government-space-agencies.pdf (2018)
+    //31 astronauts
+    return <StatCard
+        preContent={<AstronautIcon className={PRE_CONTENT_ICON_SIZE + ' fill-stone-300'} />}
+        stat={'31 Nations'}
+        text={'Have Astronauts'}
+        dimensions={dimensions} />
 }

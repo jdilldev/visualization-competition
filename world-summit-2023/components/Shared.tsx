@@ -6,6 +6,7 @@ import { ChartDimensions } from '../app/data/types';
 import NeutralIndicator from '../public/icons/neutral.svg'
 import IncreaseIndicator from '../public/icons/up-triangle.svg'
 import DecreaseIndicator from '../public/icons/down-triangle.svg'
+import { ReactNode } from 'react';
 
 type DefaultPlaceholderProps = {
     height: number;
@@ -48,43 +49,44 @@ export const GdpPercentagesRadialBarChart = ({ width, height, relevantMetric }: 
 
     return <RadialBarChart relevantMetric={relevantMetric} width={width} height={height} data={data} />
 }
-const getDeltaIndicator = (change: 'increase' | 'decrease' | 'neutral') => {
-    const indicatorClass = 'w-2 h-2 md:w-4 md:h-4 lg:w-6 lg:h-6 '
-    switch (change) {
-        case 'increase':
-            return <IncreaseIndicator className={indicatorClass + 'fill-green-400'} />
-        case 'decrease':
-            return <DecreaseIndicator className={indicatorClass + 'fill-red-400'} />
-        case 'neutral':
-            return <NeutralIndicator className={indicatorClass + 'fill-[gold]'} />
+const getDeltaIndicator = (delta: number) => {
+    const indicatorClass = 'w-2 h-2 md:w-4 md:h-4 lg:w-4 lg:h-4 '
+    if (delta > 0) {
+        return <IncreaseIndicator className={indicatorClass + 'fill-green-400'} />
+    } else if (delta < 0) {
+        return <DecreaseIndicator className={indicatorClass + 'fill-red-400'} />
+    } else {
+        return <NeutralIndicator className={indicatorClass + 'fill-[gold]'} />
     }
 }
 
 type StatCardProps = {
-    stat: string,
+    stat: string | ReactNode,
     dimensions: ChartDimensions
     text?: string,
-    preText?: string,
+    preContent?: ReactNode,
     secondaryText?: string,
-    delta?: { change: 'increase' | 'decrease' | 'neutral'; percent: number }
+    delta?: number
 }
 
-export const StatCard = ({ stat, text, preText, secondaryText, delta, dimensions: { width, height } }: StatCardProps) => {
-    const patternedBg = '../public/scifi-globe.jpg'
-
-    return <div style={{ width: width - 5, height, }} className='div flex flex-col w-full place-content-center items-center justify-between md:pl-1 lg:pl-2 text-[white]'>
-        {preText && <span className='text-center text-xs md:text-base lg:text-lg md:font-agelast uppercase md:tracking-wider md:whitespace-nowrap'>{preText}</span>}
-        <span className='text-sm font-equinox md:text-2xl lg:text-4xl mb-2 lowercase tracking-widest underline underline-offset-8 decoration-2 decoration-solid decoration-[#2a99b7]'>{stat}</span>
-        {text && <span className='text-[.7em] md:text-sm lg:text-base font-nebula md:whitespace-nowrap'>{text}</span>}
+export const StatCard = ({ stat, text, preContent, secondaryText, delta, dimensions: { width, height } }: StatCardProps) => {
+    return <div style={{ width: width - 5, height, }} className={`div flex flex-col w-full md:place-content-center md:items-center justify-between text-[white]`}>
+        {preContent && preContent}
+        <span className='text-sm font-equinox md:text-2xl lg:text-4xl mb-2 lowercase tracking-widest underline underline-offset-8 decoration-2 decoration-solid decoration-[#78cce2]'>{stat}</span>
+        {text && <span className='text-xs md:text-sm lg:text-base lg:tracking-normal font-nebula md:whitespace-nowrap'>{text}</span>}
         {delta &&
             <p className='flex flex-row items-center gap-1 md:gap-2 m-0'>
-                <span>{getDeltaIndicator(delta.change)}</span>
+                <span>{getDeltaIndicator(delta)}</span>
                 <p className='text-xs md:text-base lg:text-xl text-center'>
-                    <span className='font-equinox'>{delta.percent}</span>
+                    <span className='font-equinox'>{delta.toFixed(1)}</span>
                     <span className='font-body text-[.75em] md:text-xs'>{'%  '}</span>
-                    <span className='md:font-equinox'>{secondaryText}</span>
+                    <span className='md:font-equinox md:lowercase'>{secondaryText}</span>
                 </p>
             </p>}
-        {!delta && secondaryText && <span className='text-xs md:text-base lg:text-xl font-nebula'>{secondaryText}</span>}
+        {!delta && secondaryText && <span className='text-xs text-center font-nebula'>{secondaryText}</span>}
     </div>
+}
+
+export const StatCardCustom = ({ content, dimensions: { width, height } }: { content: ReactNode, dimensions: ChartDimensions }) => {
+    return <div style={{ width: width - 5, height, }}>{content}</div>
 }

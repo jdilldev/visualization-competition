@@ -136,4 +136,14 @@ body {
 		font-family: "Axeon";
 		src: url("./fonts/Axeon.otf");
 	}
+
+	@font-face {
+		font-family: "Exodar";
+		src: url("./fonts/Exodar.ttf");
+	}
+
+	@font-face {
+		font-family: "Varino";
+		src: url("./fonts/Varino.otf");
+	}
 }

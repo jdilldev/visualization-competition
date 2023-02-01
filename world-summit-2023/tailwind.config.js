@@ -15,7 +15,9 @@ module.exports = {
       'nebula-hollow': ['Nebula-Hollow'],
       stacker: ['Stacker'],
       progress: ['Progress'],
-      axeon: ['Axeon']
+      axeon: ['Axeon'],
+      exodar: ['Exodar'],
+      varino: ['Varino']
     },
     extend: {
       backgroundImage:
