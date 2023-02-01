@@ -15,7 +15,8 @@ import { DEFAULT_THEME_PROMPT, PRE_CONTENT_ICON_SIZE, SummitThemeContext } from 
 import { AstronautsAndSatellites, CryptoStats, GDPStats, SpaceAgencies } from './Charts/Themes/ExploringtheFrontier';
 import { EconomicGrowthDelta, GINI, InflationChanges, WarningAboutInterdependentEconomies } from './Charts/Themes/EconomicResillience';
 import { string } from 'prop-types';
-import { EmergentDiseases, HealthExpenditurePerPerson, HealthRadialChart, SuicideDeaths, Top10CausesOfDeath } from './Charts/Themes/FutureSocietiesAndHealthcare';
+import { EmergentDiseases, HealthRadialChart, SuicideDeaths, Top10CausesOfDeath } from './Charts/Themes/FutureSocietiesAndHealthcare';
+import { EducatedCountries, EducationPercentOfGDP, KidsOutOfSchool, Stability } from './Charts/Themes/PrioritizingLearningAndWork';
 
 type DefaultStatItem = {
     numeric: string
@@ -77,9 +78,12 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
                 case 0:
                     return <AvgGlobalTempChangePerDecade dimensions={{ width, height }} />
                 case 1:
-                    return <WaterStressByRegion />
+                    return <ShareOfElectricityFromRenewables dimensions={{
+                        width,
+                        height
+                    }} />
                 case 2:
-                    return <ParisAgreementStatus />
+                    return <WaterStressByRegion dimensions={{ width, height }} />
                 case 3:
                     return <HappyPlanetIndex dimensions={{ width, height }} />
             }
@@ -119,13 +123,16 @@ const getContentForTheme = (width: number, height: number, theme: string, positi
         case 'Prioritizing Learning and Work':
             switch (position) {
                 case 0:
-                    return <p>acc 1</p>
+                    return <KidsOutOfSchool dimensions={{
+                        width,
+                        height
+                    }} />
                 case 1:
-                    return <p>acc 2</p>
+                    return <Stability dimensions={{ width, height }} />
                 case 2:
-                    return <p>acc 3</p>
+                    return <EducatedCountries dimensions={{ width, height }} />
                 case 3:
-                    return <p>acc 4</p>
+                    return <EducationPercentOfGDP dimensions={{ width, height }} />
             }
     }
 }
@@ -134,7 +141,10 @@ const sourceMap: { [key: string]: { [key: number]: string } } = {
     'Accelerating Development and Governance': {
 
     },
-    'Global City Design and Sustainability': {},
+    'Global City Design and Sustainability': {
+        0: 'https://www.climate.gov/news-features/understanding-climate/climate-change-global-temperature',
+        2: 'https://sdg6data.org/en/snapshots#demo-wrapper'
+    },
     'Exploring the Frontiers': {
         0: "https://www.investopedia.com/articles/forex/041515/countries-where-bitcoin-legal-illegal.asp",
         2: 'https://www.civitas-stl.com/civ1819/Government-space-agencies.pdf',
@@ -146,7 +156,9 @@ const sourceMap: { [key: string]: { [key: number]: string } } = {
         1: 'https://www.who.int/news-room/fact-sheets/detail/suicide',
         2: 'https://www.bcm.edu/departments/molecular-virology-and-microbiology/emerging-infections-and-biodefense/emerging-infectious-diseases'
     },
-    'Prioritizing Learning and Work': {}
+    'Prioritizing Learning and Work': {
+        2: 'https://worldpopulationreview.com/country-rankings/most-educated-countries'
+    }
 }
 
 const checkForSource = (selectedTheme: string, index: number) =>

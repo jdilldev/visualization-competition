@@ -52,13 +52,14 @@ export const GdpPercentagesRadialBarChart = ({ dimensions: { width, height }, re
     return <RadialBarChart relevantMetric={relevantMetric} width={width} height={height} data={data} />
 }
 const getDeltaIndicator = (delta: number) => {
+
     const indicatorClass = 'w-2 h-2 md:w-4 md:h-4 lg:w-4 lg:h-4 '
-    if (delta > 0) {
+    if (Math.abs(delta).toFixed(1) === '0.0') {
+        return <NeutralIndicator className={indicatorClass + 'fill-[gold]'} />
+    } else if (delta > 0) {
         return <IncreaseIndicator className={indicatorClass + 'fill-green-400'} />
     } else if (delta < 0) {
         return <DecreaseIndicator className={indicatorClass + 'fill-red-400'} />
-    } else {
-        return <NeutralIndicator className={indicatorClass + 'fill-[gold]'} />
     }
 }
 
@@ -98,4 +99,4 @@ export const CustomTooltip = ({ text, placement, fill }: { text: string | ReactN
         <InfoIcon className='h-3 w-3 fill-[#1088a7bd]' />
     </Tooltip>
 
-
+export const ChartTooltip = ({ content }: { content: string }) => <div className='text-xs text-center text-white p-2 bg-[#073956] rounded-sm opacity-90'>{content}</div>

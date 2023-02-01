@@ -64,7 +64,7 @@ export const EconomicGrowthDelta = ({ dimensions: { width, height } }: { dimensi
 export const WarningAboutInterdependentEconomies = ({ dimensions: { width, height } }: { dimensions: ChartDimensions }) => {
     const Warning = () => {
         return <div style={{ width, height }} className='flex flex-col text-xs md:text-sm lg:text-base gap-1 place-content-center items-center font-equinox lowercase default-text-color text-center'>
-            <EconomicCrisisIcon className={'h-10 w-10 fill-[#35a7c3c5]'} />
+            <EconomicCrisisIcon className={'h-10 w-10 lg:h-16 lg:w-16 mb-2 fill-[#35a7c3c5]'} />
             <p>Economic Interdependence is something to be conscientious of</p>
         </div>
     }

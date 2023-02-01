@@ -24,7 +24,7 @@ const RadialBarChart = ({ data, width, height, relevantMetric }: { data: LinearD
         borderWidth={2}
         borderColor={({ groupId }) => groupId === relevantMetric ? '#a0e5ec' : 'transparent'}
         colors={({ groupId }) => groupId === relevantMetric ? '#1ddaec' : '#52b4cc9e'}
-        tooltip={({ bar }) => <div className='text-xs text-center text-white p-2 bg-[#073956] rounded-sm opacity-90'><p>{bar.category}<br />Average {bar.formattedValue}% of GDP</p></div>}
+        tooltip={({ bar }) => <div className='absolute right-0 min-w-[100px] text-xs text-center text-white p-2 bg-[#073956] rounded-sm opacity-90'><p className='z-40'> Countries spent an average {bar.value.toFixed(1)}% of their GDP on {bar.groupId} </p></div>}
     />
 }
 

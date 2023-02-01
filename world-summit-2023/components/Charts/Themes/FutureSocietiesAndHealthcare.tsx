@@ -108,19 +108,6 @@ export const EmergentDiseases = ({ dimensions }: { dimensions: ChartDimensions }
 }
 
 
-export const HealthExpenditurePerPerson = ({ dimensions }: { dimensions: ChartDimensions }) => {
-    const healthExpenditureGDPAvg = getWorldAvg('health_expenditure_per_person')
-    const healthExpenditureGDPAvg_2015 = 1391.3
-    return <StatCard
-        //preContent={<p className="font-equinox text-center">{'varies p/ region'}</p>}
-        stat={healthExpenditureGDPAvg + ' Avg'}
-        text={'p/ capita ($USD)'}
-        delta={1163.6 - 1391.3}
-        //secondaryText={'(varies greatly p/ region)'}
-        dimensions={dimensions} />
-
-}
-
 export const HealthRadialChart = ({ dimensions: { width, height } }: { dimensions: ChartDimensions }) => {
     return <GdpPercentagesRadialBarChart relevantMetric="Healthcare" dimensions={{ width, height }} />
 }
