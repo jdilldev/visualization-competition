@@ -1,7 +1,7 @@
 # Data Viz Competition | Data Conference 2021 Submission
 
 
-You can view the full prototype here: https://visualizationcompetitionsmaste.gatsbyjs.io/
+You can view the full prototype here: https://visualizationcompetitionmain.gatsbyjs.io/
 
 ![J  Dillard Viz Competition](https://user-images.githubusercontent.com/92639901/149605105-12881afa-a17c-4275-9948-bf98bf98ad95.png)
 
