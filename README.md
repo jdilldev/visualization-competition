@@ -1,4 +1,5 @@
 # visualization-competition
+Gatsby no longer hosts for free
 https://visualizationcompetitionmain.gatsbyjs.io/
 
 ![2021-data-viz-competition](https://user-images.githubusercontent.com/92639901/228236882-9c691bd8-1ef1-4cfd-a90e-ddb7a28c07ad.png)
